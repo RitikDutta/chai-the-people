@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Chai ThePeople</title>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="admin_style.css">
+    <!-- <link rel="stylesheet" href="admin_style.css"> -->
 </head>
 <body>
 
@@ -102,15 +107,84 @@ Occasionally" required></textarea>
             <p id="user-action-status" class="status-message"></p>
         </section>
 
-        <!-- NEW: Section for Survey Results -->
-        <section id="survey-results-section">
-            <h3>Survey Results Overview</h3>
-            <div id="results-container">
-                 <p id="loading-results">Loading results...</p>
-                 <!-- Results will be loaded here -->
+
+
+        <!-- REVISED: Dashboard Insights Section -->
+<section id="dashboard-insights-section">
+    <h2>Dashboard Insights</h2>
+    <div id="loading-insights" style="text-align: center; padding: 2rem; font-style: italic; color: #888;">Loading insights...</div>
+
+    <div class="insights-grid" style="display: none;"> <!-- Grid container, hidden initially -->
+
+        <!-- Insight Card: Key Metrics -->
+        <div class="insight-card kpi-card">
+            <h3><i class="fa-solid fa-gauge-high"></i> Key Metrics</h3>
+            <div class="kpi-grid">
+                <div>
+                    <span class="kpi-value" id="insight-total-users">--</span>
+                    <span class="kpi-label">Total Users</span>
+                </div>
+                <div>
+                    <span class="kpi-value" id="insight-total-stalls">--</span>
+                    <span class="kpi-label">Partner Stalls</span>
+                </div>
+                 <div>
+                    <span class="kpi-value" id="insight-total-questions">--</span>
+                    <span class="kpi-label">Active Questions</span>
+                </div>
+                <div>
+                    <span class="kpi-value" id="insight-total-responses">--</span>
+                    <span class="kpi-label">Total Responses</span>
+                </div>
             </div>
-            <p id="no-results-found" style="display: none;">No survey responses found yet.</p>
-        </section>
+        </div>
+
+        <!-- Insight Card: User Activity -->
+        <div class="insight-card user-activity-card">
+            <h3><i class="fa-solid fa-users-line"></i> User Activity</h3>
+            <p>New Users (Last 7 Days): <strong id="insight-new-users">--</strong></p>
+            <p>Responses Today: <strong id="insight-responses-today">--</strong></p>
+             <p>Responses (Last 7 Days): <strong id="insight-responses-week">--</strong></p>
+            <!-- Add a simple chart placeholder -->
+            <div class="chart-container" style="height: 150px; margin-top: 1rem; background-color: #f0f0f0; display:flex; align-items:center; justify-content:center; color:#aaa; border-radius: 5px;">(Response Trend Chart Placeholder)</div>
+            <canvas id="responseTrendChart" style="display: none;"></canvas> <!-- Canvas for Chart.js -->
+        </div>
+
+        <!-- Insight Card: Stall Activity -->
+        <div class="insight-card stall-activity-card">
+            <h3><i class="fa-solid fa-store"></i> Stall Activity</h3>
+            <p>Stalls with Responses Today: <strong id="insight-active-stalls-today">--</strong></p>
+            <div class="list-container">
+                <strong>Top 5 Active Stalls (All Time):</strong>
+                <ol id="insight-top-stalls">
+                    <li>Loading...</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Insight Card: Survey Engagement -->
+        <div class="insight-card survey-engagement-card">
+             <h3><i class="fa-solid fa-clipboard-question"></i> Survey Engagement</h3>
+             <p>Avg. Responses per Question: <strong id="insight-avg-resp-per-q">--</strong></p>
+             <div class="list-container">
+                <strong>Most Answered Questions (Top 5):</strong>
+                <ol id="insight-top-questions">
+                    <li>Loading...</li>
+                 </ol>
+            </div>
+             <div class="list-container" style="margin-top: 1rem;">
+                <strong>Least Answered Questions (Bottom 3):</strong>
+                <ol id="insight-bottom-questions">
+                     <li>Loading...</li>
+                </ol>
+            </div>
+        </div>
+
+    </div> <!-- End of insights-grid -->
+     <p id="insights-error" class="status-message error-message" style="display: none;"></p>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     </main>
 

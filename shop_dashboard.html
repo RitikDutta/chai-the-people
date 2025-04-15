@@ -29,6 +29,18 @@
     </header>
 
     <main class="shop-container">
+        <section id="survey-stats-section">
+            <h3>Recent Activity</h3>
+            <div id="stats-content">
+                <p id="loading-stats">Loading statistics...</p>
+                <div id="stats-display" style="display: none;">
+                    <p>Total Surveys Completed at Your Stalls: <strong id="total-responses-count">0</strong></p>
+                    <p>Surveys Completed Today: <strong id="today-responses-count">0</strong></p>
+                    <!-- Add more stats later (e.g., weekly, popular questions) -->
+                </div>
+                <p id="no-stats-found" style="display: none;">No survey responses found for your stalls yet.</p>
+            </div>
+       </section>
         <h2>Shop Dashboard</h2>
         <p id="shop-welcome-message" style="font-weight: bold; margin-bottom: 20px;"></p>
 

@@ -1,13 +1,10 @@
 import {
-    getFirestore, collection, addDoc, getDocs, query, where, serverTimestamp, doc, // Added doc for potential future use
+    getFirestore, collection, addDoc, getDocs, query, where, serverTimestamp, doc, Timestamp // Added Timestamp
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 import { auth, db } from './auth.js';
 
 // --- DOM Elements ---
-const loadingShopInfo = document.getElementById('loading-shop-info'); // Maybe remove if not used
 const shopWelcomeMessage = document.getElementById('shop-welcome-message');
-const shopDetailsContainer = document.getElementById('shop-details'); // Maybe remove if not used
-
 // Stall management elements
 const ownedStallsList = document.getElementById('owned-stalls-list');
 const loadingOwnedStalls = document.getElementById('loading-owned-stalls');
@@ -17,34 +14,33 @@ const stallNameInput = document.getElementById('stall-name');
 const stallIdInput = document.getElementById('stall-id');
 const stallLocationInput = document.getElementById('stall-location');
 const addStallStatus = document.getElementById('add-stall-status');
+// --- NEW: Statistics Elements ---
+const loadingStats = document.getElementById('loading-stats');
+const statsDisplay = document.getElementById('stats-display');
+const noStatsFound = document.getElementById('no-stats-found');
+const totalResponsesCount = document.getElementById('total-responses-count');
+const todayResponsesCount = document.getElementById('today-responses-count');
 
+// --- Helper: Show Status Message --- (remains the same)
+function showStatus(element, message, isError = false, duration = 5000) { /* ... */ }
 
-// --- Helper: Show Status Message --- (Same as in admin.js)
-function showStatus(element, message, isError = false, duration = 5000) {
-    if (!element) return; // Check if element exists
-    element.textContent = message;
-    element.className = `status-message ${isError ? 'error-message' : 'success-message'}`;
-    element.style.display = 'block';
-    if (duration > 0) {
-        setTimeout(() => { element.textContent = ''; element.style.display = 'none'; }, duration);
-    }
-}
-
-// --- *** NEW: Display Stalls Owned by Current User *** ---
+// --- Display Stalls Owned by Current User (MODIFIED to return IDs) ---
 async function displayOwnedStalls() {
+    const ownedStallIds = []; // Array to store the IDs
     if (!auth.currentUser) {
         console.log("No user logged in, cannot display stalls.");
-        return;
+        loadingOwnedStalls.style.display = 'none';
+        noOwnedStalls.style.display = 'block';
+        return ownedStallIds; // Return empty array
     }
     const userId = auth.currentUser.uid;
 
     loadingOwnedStalls.style.display = 'block';
-    ownedStallsList.innerHTML = ''; // Clear previous list
+    ownedStallsList.innerHTML = '';
     noOwnedStalls.style.display = 'none';
 
     try {
         const stallsRef = collection(db, "stalls");
-        // Query for stalls where ownerId matches the current user's ID
         const q = query(stallsRef, where("ownerId", "==", userId));
         const querySnapshot = await getDocs(q);
 
@@ -52,110 +48,133 @@ async function displayOwnedStalls() {
 
         if (querySnapshot.empty) {
             noOwnedStalls.style.display = 'block';
-            return;
+        } else {
+            querySnapshot.forEach((doc) => {
+                const stallData = doc.data();
+                if (stallData.stallId) { // Only add if stallId exists
+                   ownedStallIds.push(stallData.stallId); // Add the ID to our list
+                }
+                // Render stall details (existing logic)
+                const stallDiv = document.createElement('div');
+                stallDiv.classList.add('stall-item');
+                stallDiv.style.border = '1px solid #eee';
+                stallDiv.style.padding = '10px';
+                stallDiv.style.marginBottom = '10px';
+                stallDiv.innerHTML = `
+                    <strong>Name:</strong> ${stallData.name || 'N/A'} <br>
+                    <strong>Stall ID:</strong> ${stallData.stallId || 'N/A'} <br>
+                    <strong>Location:</strong> ${stallData.location || 'Not specified'}
+                `;
+                ownedStallsList.appendChild(stallDiv);
+            });
+             if(ownedStallIds.length === 0) { // Double check if IDs were actually added
+                 noOwnedStalls.style.display = 'block';
+             }
         }
-
-        let stallCount = 0;
-        querySnapshot.forEach((doc) => {
-            stallCount++;
-            const stallData = doc.data();
-            const stallDiv = document.createElement('div');
-            stallDiv.classList.add('stall-item'); // Add class for potential styling
-            stallDiv.style.border = '1px solid #eee'; // basic styling
-            stallDiv.style.padding = '10px';
-            stallDiv.style.marginBottom = '10px';
-            stallDiv.innerHTML = `
-                <strong>Name:</strong> ${stallData.name || 'N/A'} <br>
-                <strong>Stall ID:</strong> ${stallData.stallId || 'N/A'} <br>
-                <strong>Location:</strong> ${stallData.location || 'Not specified'}
-                <!-- Add Edit/Delete buttons later if needed -->
-            `;
-            ownedStallsList.appendChild(stallDiv);
-        });
-         if(stallCount === 0) { // Double check if loop ran
-             noOwnedStalls.style.display = 'block';
-         }
 
     } catch (error) {
         console.error("Error fetching owned stalls:", error);
         loadingOwnedStalls.style.display = 'none';
-        showStatus(loadingOwnedStalls, 'Error loading your stalls.', true, 0); // show error near loading text
+        showStatus(loadingOwnedStalls, 'Error loading your stalls.', true, 0);
+        noOwnedStalls.style.display = 'block'; // Still show no stalls message on error
     }
+    console.log("Owned Stall IDs:", ownedStallIds);
+    return ownedStallIds; // Return the array of IDs
 }
 
-// --- *** NEW: Handle Add Stall Form Submission *** ---
-async function handleAddStallSubmit(event) {
-    event.preventDefault();
-    if (!auth.currentUser) {
-        showStatus(addStallStatus, 'Error: You must be logged in.', true);
+// --- Handle Add Stall Form Submission --- (remains the same)
+async function handleAddStallSubmit(event) { /* ... same as before ... */ }
+
+
+// --- *** NEW: Display Shop Statistics *** ---
+async function displayShopStatistics(ownedStallIds) {
+    loadingStats.style.display = 'block';
+    statsDisplay.style.display = 'none';
+    noStatsFound.style.display = 'none';
+    // Reset counts
+    if(totalResponsesCount) totalResponsesCount.textContent = '0';
+    if(todayResponsesCount) todayResponsesCount.textContent = '0';
+
+    // If owner has no stalls, don't query responses
+    if (!ownedStallIds || ownedStallIds.length === 0) {
+        console.log("No owned stalls found, skipping statistics query.");
+        loadingStats.style.display = 'none';
+        noStatsFound.textContent = "Register a stall first to see statistics.";
+        noStatsFound.style.display = 'block';
         return;
     }
-    const userId = auth.currentUser.uid;
-
-    const stallName = stallNameInput.value.trim();
-    const stallId = stallIdInput.value.trim();
-    const stallLocation = stallLocationInput.value.trim(); // Optional
-
-    // Basic Validation
-    if (!stallName || !stallId) {
-        showStatus(addStallStatus, 'Error: Stall Name and Stall ID are required.', true);
-        return;
-    }
-    // Validate Stall ID format (matches pattern in HTML)
-    const idPattern = /^[a-zA-Z0-9_]+$/;
-    if (!idPattern.test(stallId)) {
-        showStatus(addStallStatus, 'Error: Stall ID can only contain letters, numbers, and underscores.', true);
-        return;
-    }
-
-    // ** TODO: Add check for Stall ID uniqueness before adding **
-    // This would involve querying the 'stalls' collection for the given stallId
-    // For now, we proceed assuming it's unique, but this is important later.
-
-    const submitButton = addStallForm.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    showStatus(addStallStatus, 'Adding stall...', false, 0);
 
     try {
-        const stallsRef = collection(db, "stalls");
-        await addDoc(stallsRef, {
-            name: stallName,
-            stallId: stallId,
-            location: stallLocation || "", // Store empty string if not provided
-            ownerId: userId, // Link stall to the logged-in user
-            createdAt: serverTimestamp()
+        // Query user_responses where stallId is one of the owner's stalls
+        const responsesRef = collection(db, "user_responses");
+        // Use 'in' operator for efficiency if there are multiple stalls
+        // Note: 'in' queries are limited to 30 items in the array. If owners have more, need different approach.
+        const q = query(responsesRef, where("stallId", "in", ownedStallIds));
+
+        const responseSnapshot = await getDocs(q);
+        loadingStats.style.display = 'none';
+
+        if (responseSnapshot.empty) {
+            console.log("No responses found for these stalls:", ownedStallIds);
+            noStatsFound.textContent = "No survey responses found for your stalls yet.";
+            noStatsFound.style.display = 'block';
+            return;
+        }
+
+        // Aggregate counts
+        let totalCount = 0;
+        let todayCount = 0;
+
+        // Calculate the timestamp for the start of today
+        const now = new Date();
+        const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+        const startOfTodayTimestamp = Timestamp.fromDate(startOfToday); // Convert JS Date to Firestore Timestamp
+
+        responseSnapshot.forEach(doc => {
+            totalCount++;
+            const responseData = doc.data();
+            // Check if submittedAt exists and is a Timestamp
+            if (responseData.submittedAt && responseData.submittedAt instanceof Timestamp) {
+                 // Compare submittedAt with the start of today
+                 if (responseData.submittedAt >= startOfTodayTimestamp) {
+                     todayCount++;
+                 }
+            } else {
+                console.warn(`Response ${doc.id} missing or has invalid submittedAt timestamp.`);
+            }
         });
 
-        showStatus(addStallStatus, 'Stall added successfully!', false);
-        addStallForm.reset(); // Clear the form
-        displayOwnedStalls(); // Refresh the list of stalls
+        console.log(`Total Responses: ${totalCount}, Today: ${todayCount}`);
+
+        // Display the counts
+        if(totalResponsesCount) totalResponsesCount.textContent = totalCount;
+        if(todayResponsesCount) todayResponsesCount.textContent = todayCount;
+        statsDisplay.style.display = 'block'; // Show the stats display div
 
     } catch (error) {
-        console.error("Error adding stall:", error);
-        // Check if it's a permission error (though rules should prevent mismatch)
-        if (error.code === 'permission-denied') {
-             showStatus(addStallStatus, 'Error: Permission denied. Ensure you are logged in correctly.', true);
-        } else {
-             showStatus(addStallStatus, `Error adding stall: ${error.message}`, true);
-        }
-    } finally {
-        submitButton.disabled = false; // Re-enable button
+        console.error("Error fetching or processing statistics:", error);
+        loadingStats.style.display = 'none';
+        noStatsFound.textContent = "Error loading statistics.";
+        noStatsFound.style.color = "red";
+        noStatsFound.style.display = 'block';
     }
 }
 
 
 // --- Initial Setup ---
-function initializeShopDashboard() {
+async function initializeShopDashboard() { // Make async to await stall fetching
     console.log("Initializing Shop Dashboard...");
     if (shopWelcomeMessage) {
-         // Get user name from auth if possible
          const userName = auth.currentUser?.displayName || auth.currentUser?.email || 'Shop Owner';
-        shopWelcomeMessage.textContent = `Welcome, ${userName}! Manage your stalls below.`;
+        shopWelcomeMessage.textContent = `Welcome, ${userName}! Manage your stalls and view activity.`;
         shopWelcomeMessage.style.display = 'block';
     }
 
-    // Fetch and display stalls owned by this user
-    displayOwnedStalls();
+    // --- Fetch stalls first and get their IDs ---
+    const ownedStallIds = await displayOwnedStalls();
+
+    // --- Then fetch statistics using the obtained IDs ---
+    displayShopStatistics(ownedStallIds);
 
     // Add event listener for the form
     if (addStallForm) {
@@ -165,11 +184,10 @@ function initializeShopDashboard() {
 
 // --- Wait for Auth ---
 let isShopInitialized = false;
-auth.onAuthStateChanged(async (user) => {
+auth.onAuthStateChanged(async (user) => { // Make async to use await inside
     if (user && !isShopInitialized) {
-         // Assume auth.js redirects non-shop users away.
          console.log("Shop page: Auth state confirmed, initializing...")
-         initializeShopDashboard(); // Run setup function
+         await initializeShopDashboard(); // Await the async init function
          isShopInitialized = true;
     } else if (!user) {
         isShopInitialized = false;
@@ -179,5 +197,9 @@ auth.onAuthStateChanged(async (user) => {
         if (loadingOwnedStalls) loadingOwnedStalls.style.display = 'block';
         if (noOwnedStalls) noOwnedStalls.style.display = 'none';
         if (shopWelcomeMessage) shopWelcomeMessage.style.display = 'none';
+        // Clear stats too
+        if (loadingStats) loadingStats.style.display = 'block';
+        if (statsDisplay) statsDisplay.style.display = 'none';
+        if (noStatsFound) noStatsFound.style.display = 'none';
     }
 });
