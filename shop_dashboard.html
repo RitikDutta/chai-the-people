@@ -5,26 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Dashboard - Chai ThePeople</title>
     <link rel="stylesheet" href="style.css">
-    <!-- maybe some specific shop styles later -->
+    <link rel="stylesheet" href="admin_style.css"> <!-- Reuse admin style for forms/tables maybe? -->
     <!-- <link rel="stylesheet" href="shop_style.css"> -->
 </head>
 <body>
 
     <header>
         <h1>Chai ThePeople - Shop Portal</h1>
-        <!-- Consistent navigation -->
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <!-- Auth links managed by auth.js -->
                 <li id="nav-login" style="display: none;"><a href="login.html">Login</a></li>
                 <li id="nav-register" style="display: none;"><a href="register.html">Register</a></li>
-                <!-- Shop specific nav -->
                 <li id="nav-shop-dash" style="display: inline;"><a href="#">Shop Dashboard</a></li>
-                 <!-- Hide other dashboards for shop role -->
                 <li id="nav-dashboard" style="display: none;"><a href="user_dashboard.html">User Dashboard</a></li>
                 <li id="nav-admin-dash" style="display: none;"><a href="admin_dashboard.html">Admin Dashboard</a></li>
-                <!-- Logout link -->
                 <li id="nav-logout" style="display: none;">
                     <a href="#" id="logout-button">Logout</a>
                 </li>
@@ -33,22 +28,46 @@
         </nav>
     </header>
 
-    <main class="shop-container"> <!-- specific container maybe -->
+    <main class="shop-container">
         <h2>Shop Dashboard</h2>
+        <p id="shop-welcome-message" style="font-weight: bold; margin-bottom: 20px;"></p>
 
-        <section id="shop-info-section">
-            <h3>Your Stall Information</h3>
-            <div id="shop-details">
-                <p id="loading-shop-info">Loading shop details...</p>
-                <!-- Shop-specific info will be loaded here later -->
-                 <p id="shop-welcome-message" style="display: none; font-weight: bold; margin-top: 10px;"></p>
+        <!-- Section to View Owner's Stalls -->
+        <section id="view-stalls-section">
+            <h3>Your Registered Stalls</h3>
+            <div id="owned-stalls-list">
+                <p id="loading-owned-stalls">Loading your stalls...</p>
+                <!-- Stall details will be loaded here -->
             </div>
+            <p id="no-owned-stalls" style="display: none;">You haven't registered any stalls yet.</p>
+        </section>
+
+        <!-- Section to Add a New Stall -->
+        <section id="add-stall-section">
+            <h3>Add a New Stall</h3>
+            <form id="add-stall-form">
+                <div class="form-group">
+                    <label for="stall-name">Stall Name:</label>
+                    <input type="text" id="stall-name" name="stallName" required>
+                </div>
+                <div class="form-group">
+                    <label for="stall-id">Unique Stall ID:</label>
+                    <input type="text" id="stall-id" name="stallId" required pattern="[a-zA-Z0-9_]+" title="Use only letters, numbers, and underscores (e.g., RAMESH_TEA_01)">
+                    <small>This ID will be used in QR codes. Make it unique (e.g., YOURNAME_LOCATION_01).</small>
+                </div>
+                 <div class="form-group">
+                    <label for="stall-location">Location (Optional):</label>
+                    <input type="text" id="stall-location" name="stallLocation">
+                    <small>E.g., Address or landmark</small>
+                </div>
+                <button type="submit" class="form-button">Add Stall</button>
+                 <p id="add-stall-status" class="status-message"></p>
+            </form>
         </section>
 
         <section id="survey-stats-section">
              <h3>Recent Activity (Coming Soon)</h3>
              <p>Details about surveys completed at your stall will appear here.</p>
-             <!-- Placeholder for survey counts, etc. -->
         </section>
 
     </main>
@@ -57,9 +76,7 @@
         <p>© 2024 Chai ThePeople. Making a difference, together.</p>
     </footer>
 
-    <!-- Auth logic (handles redirection, nav display) -->
     <script type="module" src="auth.js"></script>
-    <!-- Shop specific logic -->
     <script type="module" src="shop.js"></script>
 
 </body>

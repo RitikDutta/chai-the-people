@@ -5,24 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Chai ThePeople</title>
     <link rel="stylesheet" href="style.css">
-    <!-- maybe some specific admin styles later -->
     <link rel="stylesheet" href="admin_style.css">
 </head>
 <body>
 
     <header>
         <h1>Chai ThePeople - Admin Panel</h1>
-        <!-- Consistent navigation -->
         <nav>
-            <ul>
+             <ul>
                 <li><a href="index.html">Home</a></li>
-                <!-- Auth links managed by auth.js -->
                 <li id="nav-login" style="display: none;"><a href="login.html">Login</a></li>
                 <li id="nav-register" style="display: none;"><a href="register.html">Register</a></li>
-                <!-- Admin specific nav -->
                 <li id="nav-admin-dash" style="display: inline;"><a href="#">Admin Dashboard</a></li>
-                 <!-- User dash link hidden for admin -->
                 <li id="nav-dashboard" style="display: none;"><a href="user_dashboard.html">User Dashboard</a></li>
+                <li id="nav-shop-dash" style="display: none;"><a href="shop_dashboard.html">Shop Dashboard</a></li>
                 <li id="nav-logout" style="display: none;">
                     <a href="#" id="logout-button">Logout</a>
                 </li>
@@ -31,10 +27,10 @@
         </nav>
     </header>
 
-    <main class="admin-container"> <!-- specific container for admin -->
+    <main class="admin-container">
         <h2>Admin Dashboard</h2>
 
-        <!-- Section to Add New Questions -->
+        <!-- Section to Add/Edit Questions -->
         <section id="add-question-section">
             <h3>Add New Survey Question</h3>
             <form id="add-question-form">
@@ -47,12 +43,26 @@
                     <textarea id="new-question-options" name="questionOptions" rows="5" placeholder="Daily
 Few times a week
 Occasionally" required></textarea>
-                    <!-- used 
- for newline hint in placeholder -->
                 </div>
-                 <!-- Maybe add question type later (multiple choice, text...) -->
+                <!-- NEW: Scope Selection -->
+                <div class="form-group">
+                    <label>Scope:</label>
+                    <label><input type="radio" name="scope" value="global" checked> Global (All Stalls)</label>
+                    <label><input type="radio" name="scope" value="specific"> Specific Stalls</label>
+                </div>
+                <!-- NEW: Target Stalls (Hidden by default) -->
+                <div class="form-group" id="target-stalls-group" style="display: none;">
+                    <label for="new-question-target-select">Target Stalls:</label>
+                    <!-- Replace input with select multiple -->
+                    <select multiple id="new-question-target-select" name="questionTargets" size="5">
+                        <!-- Options will be populated by JavaScript -->
+                        <option value="" disabled>Loading stalls...</option>
+                    </select>
+                    <small>Hold Ctrl (or Cmd on Mac) to select multiple stalls.</small>
+                    <small id="no-stalls-message" style="display: none; color: orange;"> No stalls found in the database. Add stalls first.</small>
+               </div>
                 <button type="submit" class="form-button">Add Question</button>
-                <p id="add-question-status" class="status-message"></p> <!-- For feedback -->
+                <p id="add-question-status" class="status-message"></p>
             </form>
         </section>
 
@@ -63,7 +73,43 @@ Occasionally" required></textarea>
                 <p id="loading-existing-questions">Loading questions...</p>
                 <!-- Questions will be loaded here -->
             </div>
-             <p id="no-existing-questions" style="display: none;">No questions found in the database.</p>
+             <p id="no-existing-questions" style="display: none;">No questions found.</p>
+        </section>
+
+        <!-- NEW: Section to Manage Users -->
+        <section id="manage-users-section">
+            <h3>Manage Users</h3>
+             <div id="user-list-controls">
+                 <!-- Maybe add filters later (by role, search) -->
+             </div>
+            <div id="user-list-container">
+                 <p id="loading-users">Loading users...</p>
+                 <table id="user-table" style="width: 100%; display: none;">
+                     <thead>
+                         <tr>
+                             <th>Name</th>
+                             <th>Email</th>
+                             <th>Role</th>
+                             <th>Actions</th>
+                         </tr>
+                     </thead>
+                     <tbody id="user-table-body">
+                         <!-- User rows will be loaded here -->
+                     </tbody>
+                 </table>
+                 <p id="no-users-found" style="display: none;">No users found.</p>
+            </div>
+            <p id="user-action-status" class="status-message"></p>
+        </section>
+
+        <!-- NEW: Section for Survey Results -->
+        <section id="survey-results-section">
+            <h3>Survey Results Overview</h3>
+            <div id="results-container">
+                 <p id="loading-results">Loading results...</p>
+                 <!-- Results will be loaded here -->
+            </div>
+            <p id="no-results-found" style="display: none;">No survey responses found yet.</p>
         </section>
 
     </main>
@@ -72,9 +118,7 @@ Occasionally" required></textarea>
         <p>© 2024 Chai ThePeople. Making a difference, together.</p>
     </footer>
 
-    <!-- Auth logic (handles redirection, nav display) -->
     <script type="module" src="auth.js"></script>
-    <!-- Admin specific logic -->
     <script type="module" src="admin.js"></script>
 
 </body>

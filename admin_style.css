@@ -90,3 +90,125 @@
     background-color: #eafaf1; /* Light green background */
     border: 1px solid #27ae60;
 }
+
+
+#add-question-section,
+#manage-questions-section,
+#manage-users-section,        /* Add new sections */
+#survey-results-section {   /* Add new sections */
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#add-question-section h3,
+#manage-questions-section h3,
+#manage-users-section h3,     /* Add new sections */
+#survey-results-section h3 { /* Add new sections */
+    color: #502a1a;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Existing Question Display Update --- */
+.question-manage-item .question-details strong.scope {
+    display: inline-block; /* Better alignment for scope */
+    margin-top: 5px;
+    font-size: 0.9em;
+    background-color: #eee;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #555;
+}
+.question-manage-item .question-details span.target-stalls {
+     font-size: 0.85em;
+     color: #666;
+     margin-left: 5px;
+}
+
+
+/* --- User Management Table --- */
+#user-table {
+    border-collapse: collapse; /* Removes gaps between cells */
+    margin-top: 15px;
+}
+
+#user-table th, #user-table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px; /* More padding */
+    text-align: left;
+    vertical-align: middle; /* Align button vertically */
+}
+
+#user-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+#user-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Zebra striping */
+}
+
+#user-table tr:hover {
+    background-color: #f1f1f1; /* Hover effect */
+}
+
+/* Action Buttons Styling */
+.action-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin: 0 3px; /* Spacing between buttons */
+    color: white;
+}
+
+.promote-button { background-color: #27ae60; } /* Green */
+.promote-button:hover { background-color: #229954; }
+.demote-button { background-color: #f39c12; } /* Orange */
+.demote-button:hover { background-color: #d68910; }
+.delete-user-button { background-color: #e74c3c; } /* Red */
+.delete-user-button:hover { background-color: #c0392b; }
+
+.action-button:disabled {
+    background-color: #bdc3c7; /* Grey */
+    cursor: not-allowed;
+}
+
+/* --- Survey Results Display --- */
+.result-question-block {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fdfdfd;
+}
+.result-question-block h4 { /* Question Text */
+    margin-bottom: 10px;
+    color: #333;
+}
+.result-question-block ul {
+    list-style: none;
+    padding-left: 0;
+}
+.result-question-block li {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-left: 3px solid #eee;
+    display: flex;
+    justify-content: space-between; /* Align option and count */
+}
+.result-question-block li .option-text {
+    color: #555;
+}
+.result-question-block li .option-count {
+    font-weight: bold;
+    background-color: #eef;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.9em;
+}
