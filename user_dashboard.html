@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Dashboard - Chai ThePeople</title>
+    <link rel="stylesheet" href="style.css"> <!-- shared stylesheet -->
+</head>
+<body>
+
+    <header>
+        <h1>Chai ThePeople</h1>
+        <!-- Consistent navigation across pages -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- These will be shown/hidden by auth.js -->
+                <li id="nav-login" style="display: none;"><a href="login.html">Login</a></li>
+                <li id="nav-register" style="display: none;"><a href="register.html">Register</a></li>
+                <li id="nav-dashboard" style="display: inline;"><a href="#">Dashboard</a></li> <!-- Link to self? or maybe just text -->
+                <li id="nav-logout" style="display: none;">
+                    <a href="#" id="logout-button">Logout</a>
+                </li>
+                 <li id="user-greeting" style="display: none; margin-left: 15px; color: #ffcc99;"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dashboard-container"> <!-- maybe a specific container for styling -->
+            <h2>Available Surveys</h2>
+
+            <!-- Area where questions will be loaded -->
+            <div id="questions-container">
+                <p id="loading-questions">Loading questions...</p>
+                <!-- Questions will be inserted here by JavaScript -->
+            </div>
+
+            <p id="no-questions" style="display: none;">No new surveys available right now. Check back later!</p>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Chai ThePeople. Making a difference, together.</p>
+    </footer>
+
+    <!-- Firebase libs and auth logic -->
+    <script type="module" src="auth.js"></script>
+    <!-- Dashboard specific logic -->
+    <script type="module" src="dashboard.js"></script>
+
+</body>
+</html>
