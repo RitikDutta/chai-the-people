@@ -12,11 +12,18 @@
     <header>
         <h1>Chai ThePeople</h1>
         <!-- main navigation -->
-        <nav>
+                <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="login.html">Login</a></li> <!-- we'll create this later -->
-                <li><a href="register.html">Register</a></li> <!-- and this one -->
+                <li><a href="index.html">Home</a></li>
+                <!-- added ids -->
+                <li id="nav-login" style="display: inline;"><a href="login.html">Login</a></li>
+                <li id="nav-register" style="display: inline;"><a href="register.html">Register</a></li>
+                <!-- added logout link/button, initially hidden -->
+                <li id="nav-logout" style="display: none;">
+                    <a href="#" id="logout-button">Logout</a>
+                </li>
+                 <!-- Added placeholder for user greeting, initially hidden -->
+                 <li id="user-greeting" style="display: none; margin-left: 15px; color: #ffcc99;"></li>
             </ul>
         </nav>
     </header>
@@ -78,6 +85,10 @@
     <footer>
         <p>© 2024 Chai ThePeople. Making a difference, together.</p>
     </footer>
+
+    <!-- Link auth.js -->
+    <script type="module" src="auth.js"></script>
+
 
     <!-- we'll add javascript files later -->
     <!-- <script src="app.js"></script> -->
