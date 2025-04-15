@@ -1,0 +1,165 @@
+/* basic reset kinda thing */
+body, h1, h2, p, ul, ol, li, blockquote {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* makes sizing easier */
+}
+
+body {
+    font-family: sans-serif; /* simple font */
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4; /* light grey background */
+}
+
+header {
+    background: #502a1a; /* brownish color for chai feel */
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline; /* make nav items horizontal */
+    margin: 0 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* center the main content */
+main {
+    max-width: 800px;
+    margin: 20px auto; /* center it and add space top/bottom */
+    padding: 0 20px; /* space on the sides */
+}
+
+section {
+    background: #fff; /* white background for sections */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px; /* slightly rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow */
+}
+
+section h2 {
+    color: #502a1a; /* match header color */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee; /* separator */
+    padding-bottom: 5px;
+}
+
+ul, ol {
+    padding-left: 20px; /* indent lists */
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #e67e22; /* orangey button */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background: #d35400; /* darker orange on hover */
+}
+
+blockquote {
+    border-left: 4px solid #eee;
+    margin: 15px 0;
+    padding-left: 15px;
+    font-style: italic;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: 5px;
+    font-style: normal;
+    font-weight: bold;
+    color: #666;
+}
+
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    background: #ddd;
+    color: #555;
+}
+
+/* basic form styles for register page later */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block; /* labels on their own line */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"] {
+    width: 100%; /* full width input */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-button {
+    display: inline-block;
+    background: #502a1a; /* match header */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.form-button:hover {
+    background: #3d1f11; /* darker brown */
+}
+
+.form-container {
+     max-width: 500px; /* constrain form width */
+     margin: 20px auto;
+     padding: 30px;
+     background: #fff;
+     border-radius: 5px;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #502a1a;
+}
