@@ -1,87 +1,86 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta name="google-signin-client_id" content="533965148281-oboi50ihru7smbjs5ds72ljku7cek8ee.apps.googleusercontent.com">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style type="text/css">
-      .hide{
-        display: none;
-      } 
-    </style>
-  </head>
-  <body>
-    <p>New User?</p>
-    <form action="/action_page.php">
-  <input type="radio" name="new" onclick="myFunction(this.value)" value="yes">Yes<br>
-  <input type="radio" name="new" onclick="myFunction(this.value)" value="no">No<br>
-  
-  <input class="hide" type="text" id="result">
-  <input class="hide" type="submit" value="Submit form">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai ThePeople - Home</title>
+    <!-- link to css file later -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-</form>
+    <header>
+        <h1>Chai ThePeople</h1>
+        <!-- main navigation -->
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="login.html">Login</a></li> <!-- we'll create this later -->
+                <li><a href="register.html">Register</a></li> <!-- and this one -->
+            </ul>
+        </nav>
+    </header>
 
-    <div id="g_id_onload"
-         data-client_id="533965148281-oboi50ihru7smbjs5ds72ljku7cek8ee.apps.googleusercontent.com"
-         data-context="signin"
-         data-auto_prompt="false"
-         data-ux_mode="popup"
-         data-callback="handleCredentialResponse">
-    </div>
+    <main>
+        <!-- explaining the main idea -->
+        <section id="hero">
+            <h2>Get Free Chai, Share Your Voice!</h2>
+            <p>Help shape India's future, one cup of tea at a time. Participate in quick surveys at local tea stalls and enjoy a free chai on us.</p>
+            <a href="register.html" class="cta-button">Join Now!</a>
+        </section>
 
+        <!-- steps to get the tea -->
+        <section id="how-it-works">
+            <h2>How it Works</h2>
+            <ol>
+                <li>Visit your nearest partner tea stall.</li>
+                <li>Open the Chai ThePeople web app (or scan their QR code).</li>
+                <li>Fill out a short survey that appears.</li>
+                <li>Show the confirmation, get your free tea!</li>
+            </ol>
+        </section>
 
-    <div class="g_id_signin"
-         data-type="standard"
-         data-shape="pill"
-         data-theme="filled_blue"
-         data-text="signin_with"
-         data-size="large"
-         data-logo_alignment="left">
-    </div>
+        <!-- why its good -->
+        <section id="benefits">
+            <h2>Why Participate?</h2>
+            <ul>
+                <li>☕ Get a free cup of delicious tea.</li>
+                <li>📈 Help local tea sellers boost their business.</li>
+                <li>🗣️ Provide valuable feedback directly to policymakers.</li>
+                <li>🏆 Earn rewards and climb the leaderboard.</li>
+            </ul>
+        </section>
 
+         <section id="features">
+            <h2>Unique Features</h2>
+            <ul>
+                <li>Fresh surveys every time - no repeats!</li>
+                <li>Track your impact and see your rank.</li>
+            </ul>
+        </section>
 
+        <!-- maybe some nice words from users -->
+         <section id="testimonials">
+             <h2>What People Are Saying</h2>
+             <blockquote>
+                 <p>"Love getting my morning chai for free just by answering a few questions. Feels good to contribute!"</p>
+                 <cite>- Priya, Mumbai</cite>
+             </blockquote>
+             <blockquote>
+                 <p>"My sales have definitely picked up since joining Chai ThePeople. Great initiative."</p>
+                 <cite>- Ramesh, Delhi (Tea Seller)</cite>
+             </blockquote>
+         </section>
 
-    <p>If you don't want to login with your google you can click here to login with demo account</p>
-    <button onclick="demoUser()">Click me</button>
+    </main>
 
-    <script>
-      function myFunction(browser) {
-  document.getElementById("result").value = browser;
-  const chk = document.getElementById("result").value = browser;
-  console.log(chk)
-}
+    <!-- footer stuff -->
+    <footer>
+        <p>© 2024 Chai ThePeople. Making a difference, together.</p>
+    </footer>
 
-function demoUser(){
-  const chk = document.getElementById("result").value;
-  if (chk == 'no') {
-            window.open(`/questions?id=115211234`,"_self")
-          }
-          else{
-            window.open(`/add_user?id=115211234`,"_self")
-          }
-}
+    <!-- we'll add javascript files later -->
+    <!-- <script src="app.js"></script> -->
 
-
-      function handleCredentialResponse(response) {
-        const responcePayload = decodeJwtResponse(response.credential);
-          const name = responcePayload.name
-          const id = responcePayload.sub
-          const chk = document.getElementById("result").value;
-          console.log("ID: " + responcePayload.sub)
-          console.log("Full Name: " + responcePayload.name)
-          console.log(responcePayload)
-          console.log(name)
-          if (chk == 'no') {
-            window.open(`/questions?id=${id}`,"_self")
-          }
-          else{
-            window.open(`/add_user?id=${id}`,"_self")
-          }
-      }
-
-      function decodeJwtResponse(data){
-        var tokens = data.split(".")
-        return JSON.parse(atob(tokens[1]));
-      }
-    </script>
-  </body>
+</body>
 </html>
