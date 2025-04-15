@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Chai ThePeople</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- maybe some specific admin styles later -->
+    <link rel="stylesheet" href="admin_style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Chai ThePeople - Admin Panel</h1>
+        <!-- Consistent navigation -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Auth links managed by auth.js -->
+                <li id="nav-login" style="display: none;"><a href="login.html">Login</a></li>
+                <li id="nav-register" style="display: none;"><a href="register.html">Register</a></li>
+                <!-- Admin specific nav -->
+                <li id="nav-admin-dash" style="display: inline;"><a href="#">Admin Dashboard</a></li>
+                 <!-- User dash link hidden for admin -->
+                <li id="nav-dashboard" style="display: none;"><a href="user_dashboard.html">User Dashboard</a></li>
+                <li id="nav-logout" style="display: none;">
+                    <a href="#" id="logout-button">Logout</a>
+                </li>
+                 <li id="user-greeting" style="display: none; margin-left: 15px; color: #ffcc99;"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="admin-container"> <!-- specific container for admin -->
+        <h2>Admin Dashboard</h2>
+
+        <!-- Section to Add New Questions -->
+        <section id="add-question-section">
+            <h3>Add New Survey Question</h3>
+            <form id="add-question-form">
+                <div class="form-group">
+                    <label for="new-question-text">Question Text:</label>
+                    <textarea id="new-question-text" name="questionText" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="new-question-options">Answer Options (one per line):</label>
+                    <textarea id="new-question-options" name="questionOptions" rows="5" placeholder="Daily
+Few times a week
+Occasionally" required></textarea>
+                    <!-- used 
+ for newline hint in placeholder -->
+                </div>
+                 <!-- Maybe add question type later (multiple choice, text...) -->
+                <button type="submit" class="form-button">Add Question</button>
+                <p id="add-question-status" class="status-message"></p> <!-- For feedback -->
+            </form>
+        </section>
+
+        <!-- Section to Manage Existing Questions -->
+        <section id="manage-questions-section">
+            <h3>Existing Questions</h3>
+            <div id="existing-questions-list">
+                <p id="loading-existing-questions">Loading questions...</p>
+                <!-- Questions will be loaded here -->
+            </div>
+             <p id="no-existing-questions" style="display: none;">No questions found in the database.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2024 Chai ThePeople. Making a difference, together.</p>
+    </footer>
+
+    <!-- Auth logic (handles redirection, nav display) -->
+    <script type="module" src="auth.js"></script>
+    <!-- Admin specific logic -->
+    <script type="module" src="admin.js"></script>
+
+</body>
+</html>

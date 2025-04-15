@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Dashboard - Chai ThePeople</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- maybe some specific shop styles later -->
+    <!-- <link rel="stylesheet" href="shop_style.css"> -->
+</head>
+<body>
+
+    <header>
+        <h1>Chai ThePeople - Shop Portal</h1>
+        <!-- Consistent navigation -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Auth links managed by auth.js -->
+                <li id="nav-login" style="display: none;"><a href="login.html">Login</a></li>
+                <li id="nav-register" style="display: none;"><a href="register.html">Register</a></li>
+                <!-- Shop specific nav -->
+                <li id="nav-shop-dash" style="display: inline;"><a href="#">Shop Dashboard</a></li>
+                 <!-- Hide other dashboards for shop role -->
+                <li id="nav-dashboard" style="display: none;"><a href="user_dashboard.html">User Dashboard</a></li>
+                <li id="nav-admin-dash" style="display: none;"><a href="admin_dashboard.html">Admin Dashboard</a></li>
+                <!-- Logout link -->
+                <li id="nav-logout" style="display: none;">
+                    <a href="#" id="logout-button">Logout</a>
+                </li>
+                 <li id="user-greeting" style="display: none; margin-left: 15px; color: #ffcc99;"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="shop-container"> <!-- specific container maybe -->
+        <h2>Shop Dashboard</h2>
+
+        <section id="shop-info-section">
+            <h3>Your Stall Information</h3>
+            <div id="shop-details">
+                <p id="loading-shop-info">Loading shop details...</p>
+                <!-- Shop-specific info will be loaded here later -->
+                 <p id="shop-welcome-message" style="display: none; font-weight: bold; margin-top: 10px;"></p>
+            </div>
+        </section>
+
+        <section id="survey-stats-section">
+             <h3>Recent Activity (Coming Soon)</h3>
+             <p>Details about surveys completed at your stall will appear here.</p>
+             <!-- Placeholder for survey counts, etc. -->
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2024 Chai ThePeople. Making a difference, together.</p>
+    </footer>
+
+    <!-- Auth logic (handles redirection, nav display) -->
+    <script type="module" src="auth.js"></script>
+    <!-- Shop specific logic -->
+    <script type="module" src="shop.js"></script>
+
+</body>
+</html>

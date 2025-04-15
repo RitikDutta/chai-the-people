@@ -1,0 +1,92 @@
+/* Styles specific to admin dashboard */
+.admin-container {
+    max-width: 900px; /* Wider container maybe */
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#add-question-section, #manage-questions-section {
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#add-question-section h3, #manage-questions-section h3 {
+    color: #502a1a;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Style for each question item in the manage list */
+.question-manage-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    display: flex; /* Use flexbox to align details and button */
+    justify-content: space-between; /* Pushes button to the right */
+    align-items: center; /* Vertically aligns items */
+}
+
+.question-details p {
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+.question-details strong {
+    color: #333;
+}
+.question-details small {
+    color: #777;
+    font-size: 0.85em;
+    display: block; /* Put IDs/timestamps on new lines */
+    margin-top: 5px;
+}
+
+
+/* Style delete button */
+.delete-button {
+    background-color: #e74c3c; /* Red color */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    margin-left: 15px; /* space between details and button */
+}
+
+.delete-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.delete-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* Status message styling */
+.status-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error-message {
+    color: #c0392b; /* Match delete button hover */
+    background-color: #fdd; /* Light red background */
+    border: 1px solid #c0392b;
+}
+
+.success-message {
+    color: #27ae60; /* Green color */
+    background-color: #eafaf1; /* Light green background */
+    border: 1px solid #27ae60;
+}
