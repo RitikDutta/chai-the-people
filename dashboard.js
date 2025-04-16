@@ -1,68 +1,79 @@
-// Import necessary Firebase functions (include 'query' and 'where' if not already there)
 import {
-    getFirestore, collection, getDocs, addDoc, serverTimestamp, query, where, Timestamp
+    getFirestore, collection, getDocs, addDoc, serverTimestamp, query, where, Timestamp,
+    or // Ensure 'or' is imported
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-import { auth, db } from './auth.js'; // Use relative path
+import { auth, db } from './auth.js';
 
-// Get references to DOM elements (remains the same)
+// DOM Elements
 const questionsContainer = document.getElementById('questions-container');
 const loadingIndicator = document.getElementById('loading-questions');
 const noQuestionsMessage = document.getElementById('no-questions');
 
-// --- Helper Function to Get URL Parameters --- (remains the same)
+// Helper Function to Get URL Parameters
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
 
-// --- Store the captured Stall ID --- (remains the same)
+// Store the captured Stall ID
 let currentStallId = null;
 
-// --- *** NEW: Helper to get IDs of answered questions *** ---
+// --- REVISED: Helper to get IDs of answered questions with more logging ---
 async function getAnsweredQuestionIds(userId) {
     const answeredIds = new Set();
-    if (!userId) return answeredIds; // Return empty set if no user ID
+    console.log(`[getAnsweredQuestionIds] Fetching for userId: ${userId}`);
+    if (!userId) {
+        console.warn("[getAnsweredQuestionIds] No userId provided.");
+        return answeredIds; // Return empty set immediately
+    }
 
     try {
         const responsesRef = collection(db, "user_responses");
+        // Ensure the query is specific to the logged-in user
         const q = query(responsesRef, where("userId", "==", userId));
-        const responseSnapshot = await getDocs(q);
+        console.log("[getAnsweredQuestionIds] Executing query for user responses...");
+        // Use { source: 'server' } to try and bypass potential cache issues - might slightly increase reads/latency
+        // const responseSnapshot = await getDocs(q, { source: 'server' }); // Option 1: Force server read
+        const responseSnapshot = await getDocs(q); // Option 2: Standard read (more common)
+        console.log(`[getAnsweredQuestionIds] Query returned ${responseSnapshot.size} response documents.`);
+
         responseSnapshot.forEach(doc => {
-            // Ensure questionId exists before adding
-            if (doc.data().questionId) {
-                answeredIds.add(doc.data().questionId);
+            const responseData = doc.data();
+            const questionId = responseData.questionId; // This is the ID of the QUESTION answered
+            if (questionId) {
+                console.log(`[getAnsweredQuestionIds] Adding questionId to answered set: ${questionId} (from response doc ${doc.id})`);
+                answeredIds.add(questionId);
+            } else {
+                console.warn(`[getAnsweredQuestionIds] Response document ${doc.id} is missing questionId field.`);
             }
         });
-        console.log("User has answered questions:", Array.from(answeredIds));
+        console.log(`[getAnsweredQuestionIds] Final answered set for user ${userId}:`, Array.from(answeredIds));
     } catch (error) {
-        console.error("Error fetching answered questions:", error);
-        // Proceed with empty set if error occurs
+        console.error("[getAnsweredQuestionIds] Error fetching answered questions:", error);
     }
-    return answeredIds;
+    return answeredIds; // Return the Set (potentially empty if error or no answers)
 }
 
-// --- *** NEW: Helper function to render a single question's HTML *** ---
+// Helper function to render a single question's HTML (Keep as is)
 function renderQuestion(questionId, questionData) {
-    if (!questionId || !questionData) return; // Basic check
+    if (!questionId || !questionData || !questionsContainer) return;
 
     const questionDiv = document.createElement('div');
     questionDiv.classList.add('question-item');
-    questionDiv.setAttribute('id', `question-${questionId}`);
+    questionDiv.setAttribute('id', `question-${questionId}`); // Use Question ID for the div ID
 
     const questionText = document.createElement('h3');
-    questionText.textContent = questionData.text || "[No Question Text]"; // Use placeholder if missing
+    questionText.textContent = questionData.text || "[No Question Text]";
     questionDiv.appendChild(questionText);
 
-    // Only proceed if options exist and are an array
     if (questionData.options && Array.isArray(questionData.options)) {
         const optionsList = document.createElement('ul');
         optionsList.classList.add('options-list');
-
         questionData.options.forEach((option, index) => {
             const optionItem = document.createElement('li');
             const input = document.createElement('input');
             input.type = 'radio';
-            input.name = `question_${questionId}`;
+            input.name = `question_${questionId}`; // Group radios by Question ID
             input.value = option;
             input.id = `q_${questionId}_opt_${index}`;
             const label = document.createElement('label');
@@ -77,222 +88,232 @@ function renderQuestion(questionId, questionData) {
         const submitButton = document.createElement('button');
         submitButton.textContent = 'Submit Answer';
         submitButton.classList.add('submit-answer-button');
-        submitButton.dataset.questionId = questionId; // Store question ID on button
+        submitButton.classList.add('button'); // Use general button class from style.css
+        submitButton.dataset.questionId = questionId; // Set dataset attribute correctly
         questionDiv.appendChild(submitButton);
     } else {
-        // Handle questions without proper options (or other types later)
         const noOptionsText = document.createElement('p');
         noOptionsText.textContent = "[Question has no valid options]";
         noOptionsText.style.fontStyle = 'italic';
         noOptionsText.style.color = '#888';
         questionDiv.appendChild(noOptionsText);
     }
-
-    // Append the fully constructed div to the container
     questionsContainer.appendChild(questionDiv);
 }
 
 
-// --- *** REVISED: Function to display questions based on scope and stall context *** ---
+// --- REVISED: Function to display questions (Focus on reliable filtering) ---
 async function displayQuestions() {
-    if (!auth.currentUser) {
-        console.log("No user logged in. Cannot display questions.");
-        loadingIndicator.style.display = 'none'; // Hide loading indicator
+    if (!auth.currentUser || !questionsContainer || !loadingIndicator || !noQuestionsMessage) {
+        console.error("User not logged in or essential dashboard elements missing.");
+        if(loadingIndicator) loadingIndicator.style.display = 'none';
         return;
     }
     const userId = auth.currentUser.uid;
-
-    console.log(`Displaying questions for User: ${userId}, Stall Context ID: ${currentStallId || 'None'}`);
+    console.log(`[displayQuestions] Starting for User: ${userId}, Stall Context ID: ${currentStallId || 'None'}`);
 
     loadingIndicator.style.display = 'block';
-    questionsContainer.innerHTML = ''; // Clear previous questions
+    questionsContainer.innerHTML = ''; // Clear previous questions FIRST
     noQuestionsMessage.style.display = 'none';
 
     try {
-        // 1. Get IDs of questions already answered by this user
+        // --- STEP 1: Await the answered IDs ---
+        console.log("[displayQuestions] Awaiting answered question IDs...");
         const answeredQuestionIds = await getAnsweredQuestionIds(userId);
+        // Log the Set received right after await
+        console.log("[displayQuestions] Received answered IDs set (type: Set):", answeredQuestionIds);
 
-        // 2. Build Firestore query promises based on stall context
+        // --- STEP 2: Build the query for potential questions ---
         const questionsRef = collection(db, "questions");
-        const queryPromises = [];
-
-        // Always add query for 'global' scope questions
-        const globalQuery = query(questionsRef, where("scope", "==", "global"));
-        queryPromises.push(getDocs(globalQuery));
-        console.log("Fetching global questions...");
-
-        // If we have a stall ID, also add query for 'specific' scope matching the stall
+        let finalQuery;
         if (currentStallId) {
-            const specificQuery = query(questionsRef,
-                where("scope", "==", "specific"),
-                where("targetStalls", "array-contains", currentStallId) // Check if stallId is in the array
-            );
-            queryPromises.push(getDocs(specificQuery));
-            console.log(`Fetching specific questions for stall: ${currentStallId}...`);
+            console.log(`[displayQuestions] Building query for scope=global OR targetStalls contains ${currentStallId}`);
+            // --- This OR query might require a specific composite index in Firestore ---
+            // --- Click the link in the console error if it appears! ---
+            finalQuery = query(questionsRef, or( where("scope", "==", "global"), where("targetStalls", "array-contains", currentStallId) ));
         } else {
-             console.log("No stallId provided, fetching only global questions.");
+            console.log("[displayQuestions] Building query for scope=global only");
+            finalQuery = query(questionsRef, where("scope", "==", "global"));
         }
 
-        // 3. Execute all queries concurrently
-        const querySnapshots = await Promise.all(queryPromises);
+        // --- STEP 3: Execute the query ---
+        console.log("[displayQuestions] Executing main question query...");
+        const querySnapshot = await getDocs(finalQuery);
+        console.log(`[displayQuestions] Query returned ${querySnapshot.size} potential questions.`);
 
-        // 4. Process results and filter out answered questions
-        const questionsToDisplay = new Map(); // Use a Map to avoid duplicates if a question somehow matched both queries
+        // --- STEP 4: Filter and Render ---
+        let questionsDisplayed = 0;
+        console.log("[displayQuestions] Filtering potential questions against received answered set...");
+        querySnapshot.forEach(doc => {
+            const questionId = doc.id; // This IS the document ID from the 'questions' collection
+            const questionData = doc.data();
 
-        querySnapshots.forEach(snapshot => {
-            snapshot.forEach(doc => {
-                const questionId = doc.id;
-                // Add to map ONLY if it hasn't been answered yet
-                if (!answeredQuestionIds.has(questionId)) {
-                    questionsToDisplay.set(questionId, doc.data());
-                } else {
-                    console.log(`Skipping answered question: ${questionId}`);
-                }
-            });
+            // --- THE CRITICAL CHECK ---
+            // Check if the Set *actually* contains the ID
+            const hasAnswered = answeredQuestionIds.has(questionId);
+            console.log(`[displayQuestions] Checking questionId: ${questionId}. Is it in the answered set? ${hasAnswered}`);
+
+            if (!hasAnswered) {
+                console.log(`[displayQuestions] Rendering question: ${questionId}`);
+                renderQuestion(questionId, questionData);
+                questionsDisplayed++;
+            } else {
+                 console.log(`[displayQuestions] Skipping already answered question: ${questionId}`);
+            }
         });
 
-        console.log(`Found ${questionsToDisplay.size} questions to display.`);
+        console.log(`[displayQuestions] Finished. Displayed ${questionsDisplayed} questions.`);
 
-        // 5. Render the final list of questions
+        // STEP 5: Handle display of "no questions" message
         loadingIndicator.style.display = 'none';
-
-        if (questionsToDisplay.size === 0) {
+        if (questionsDisplayed === 0) {
             noQuestionsMessage.style.display = 'block';
-            // Provide a more context-aware message
-            if (currentStallId) {
-                 noQuestionsMessage.textContent = "No new surveys available for this stall right now. Check back later!";
+             if (querySnapshot.size > 0 && answeredQuestionIds.size > 0) { // Check if questions existed but were answered
+                 noQuestionsMessage.textContent = "You've answered all available surveys for this context. Great job!";
             } else {
-                 noQuestionsMessage.textContent = "No new global surveys available right now. Scan a stall QR code for more!";
+                if (currentStallId) { noQuestionsMessage.textContent = "No new surveys available for this stall right now."; }
+                else { noQuestionsMessage.textContent = "No new global surveys available right now."; }
             }
-            // Consider also checking if any questions existed at all vs all being answered
         } else {
             noQuestionsMessage.style.display = 'none';
-            questionsToDisplay.forEach((questionData, questionId) => {
-                renderQuestion(questionId, questionData); // Use the helper to render
-            });
         }
 
     } catch (error) {
-        console.error("Error fetching or displaying questions: ", error);
-        loadingIndicator.style.display = 'none';
-        questionsContainer.innerHTML = '<p style="color: red;">Could not load questions. Please try refreshing the page or check console for errors.</p>';
-        // Also display error in the noQuestionsMessage area for visibility
-        noQuestionsMessage.textContent = "Error loading questions.";
-        noQuestionsMessage.style.color = "red";
-        noQuestionsMessage.style.display = "block";
+        console.error("[displayQuestions] Error fetching or displaying questions: ", error);
+        if(loadingIndicator) loadingIndicator.style.display = 'none';
+        if(questionsContainer) questionsContainer.innerHTML = '<p class="error-message">Could not load questions. Please try refreshing.</p>';
+         if(noQuestionsMessage) {
+             noQuestionsMessage.textContent = "Error loading questions.";
+             noQuestionsMessage.style.color = "red";
+             noQuestionsMessage.style.display = "block";
+         }
     }
 }
 
 
-// --- Function to handle answer submission (Will be modified next to add stallId) ---
+// --- Function to handle answer submission ---
 async function handleAnswerSubmit(event) {
-    // Check if the clicked element is a submit button
-    if (!event.target.classList.contains('submit-answer-button')) {
-        return; // Ignore clicks that aren't on our submit buttons
-    }
-
-    event.preventDefault(); // Prevent any default button action
-    const button = event.target;
-    const questionId = button.dataset.questionId;
-
-    // Ensure user is logged in
-    if (!auth.currentUser) {
-        alert("Error: You seem to be logged out. Please log in again.");
+    // Check if the clicked element is a submit button and not disabled
+    if (!event.target.classList.contains('submit-answer-button') || event.target.disabled) {
         return;
     }
+    event.preventDefault();
+    const button = event.target;
+    const questionId = button.dataset.questionId; // Get question ID from button dataset
+
+    // Double-check questionId presence
+    if (!questionId) {
+        console.error("[handleAnswerSubmit] Could not find questionId on the button!", button);
+        alert("An error occurred (cannot identify question). Please refresh.");
+        return;
+    }
+
+    if (!auth.currentUser) { alert("Error: You seem to be logged out."); return; }
     const userId = auth.currentUser.uid;
 
-    // Find the selected radio button for this specific question
-    const selectedOption = document.querySelector(`input[name="question_${questionId}"]:checked`);
-
-    if (!selectedOption) {
-        alert("Please select an answer before submitting.");
-        return;
+    // Find the selected radio button WITHIN the parent question item
+    const questionItemDiv = button.closest('.question-item'); // Find parent div
+    if (!questionItemDiv) {
+         console.error("[handleAnswerSubmit] Could not find parent question item div for button!", button);
+         alert("An error occurred (UI structure issue). Please refresh.");
+         return;
     }
+    const selectedOption = questionItemDiv.querySelector(`input[name="question_${questionId}"]:checked`);
 
+    if (!selectedOption) { alert("Please select an answer."); return; }
     const answerValue = selectedOption.value;
 
-    // Log the context, including the stall ID
-    console.log(`Submitting answer for Q:${questionId}, User:${userId}, Answer: ${answerValue}, Stall ID Context: ${currentStallId || 'None'}`);
-
-    // Disable button to prevent multiple submissions
-    button.disabled = true;
+    console.log(`[handleAnswerSubmit] Submitting answer for Q:${questionId}, User:${userId}, Stall ID: ${currentStallId || 'None'}`);
+    button.disabled = true; // Disable button immediately
     button.textContent = 'Submitting...';
 
     try {
-        // Prepare the data object to save
         const responseData = {
             userId: userId,
-            questionId: questionId,
+            questionId: questionId, // Save the correct question ID
             answer: answerValue,
             submittedAt: serverTimestamp(),
-            // --- *** ADD THE STALL ID HERE *** ---
-            stallId: currentStallId // Add the captured stallId (will be null if no param in URL)
+            stallId: currentStallId
         };
-
-        // Save response to 'user_responses' collection
         const responsesRef = collection(db, "user_responses");
-        await addDoc(responsesRef, responseData); // Save the object with the stallId
+        const docRef = await addDoc(responsesRef, responseData);
+        console.log(`[handleAnswerSubmit] Answer saved successfully! Doc ID: ${docRef.id}, QID: ${questionId}`);
 
-        console.log("Answer saved successfully with stallId:", currentStallId);
-
-        // Provide feedback to the user - hide the answered question or show a success message
-        const questionDiv = document.getElementById(`question-${questionId}`);
+        // UI update: Replace question content with thank you message
+        const questionDiv = document.getElementById(`question-${questionId}`); // Find the specific question div by its ID
         if (questionDiv) {
-            questionDiv.innerHTML = `<h3>${questionDiv.querySelector('h3').textContent}</h3><p style="color: green; font-weight: bold;">Thank you for your feedback!</p>`;
+             // Simple update: just remove the button and options, keep the title
+             const optionsList = questionDiv.querySelector('.options-list');
+             const submitBtn = questionDiv.querySelector('.submit-answer-button');
+             if (optionsList) optionsList.remove();
+             if (submitBtn) submitBtn.remove();
+
+             const feedbackPara = document.createElement('p');
+             feedbackPara.innerHTML = `<strong style="color: var(--color-success);">Thank you for your feedback!</strong>`;
+             questionDiv.appendChild(feedbackPara);
+
+        } else {
+            console.warn(`[handleAnswerSubmit] Could not find question div with ID question-${questionId} to update UI.`);
         }
 
-        // Check if all questions are now answered
-         if (questionsContainer.querySelectorAll('.question-item .submit-answer-button').length === 0) {
-            noQuestionsMessage.textContent = "You've answered all available surveys for this context. Great job!";
-            noQuestionsMessage.style.display = 'block';
+        // Re-check if any questions left (check remaining buttons)
+         if (questionsContainer && questionsContainer.querySelectorAll('.question-item .submit-answer-button').length === 0) {
+            if(noQuestionsMessage){
+                noQuestionsMessage.textContent = "You've answered all available surveys for this context. Great job!";
+                noQuestionsMessage.style.display = 'block';
+            }
          }
 
     } catch (error) {
-        console.error("Error saving answer: ", error);
+        console.error("[handleAnswerSubmit] Error saving answer: ", error);
         alert("There was an error submitting your answer. Please try again.");
-        // Re-enable the button if saving failed
+        // Re-enable button ONLY if saving failed
         button.disabled = false;
         button.textContent = 'Submit Answer';
     }
 }
 
-
-
 // --- Event Listeners & Initialization ---
-let initialAuthCheckComplete = false;
+let pageInitialized = false; // Use a more specific flag name
+
 auth.onAuthStateChanged(user => {
-    if (!initialAuthCheckComplete) {
-        initialAuthCheckComplete = true;
+    // This listener might fire multiple times (initial check, token refresh).
+    // We only want to run the *full page setup* once per effective login session.
 
-        // Capture stallId on page load
-        currentStallId = getQueryParam('stall');
-        console.log(`Page loaded. Captured stallId from URL: ${currentStallId || 'None'}`);
+    if (user) {
+        // User is logged in or state confirmed
+        if (!pageInitialized) { // Only initialize fully the first time user is confirmed
+            pageInitialized = true;
+            console.log("[AuthState] Page Initializing: User confirmed.");
+            const rawStallId = getQueryParam('stall');
+            currentStallId = rawStallId ? rawStallId.toLowerCase() : null;
+            console.log(`[AuthState] Captured stallId: ${currentStallId || 'None'}`);
+            displayQuestions(); // Trigger initial display
 
-        if (user) {
-            // User is logged in, now display questions *based on context*
-            displayQuestions(); // This function now handles filtering
-
-            // Add event listener for answer submissions
-            if (questionsContainer) {
+            // Add event listener
+            if (questionsContainer && !questionsContainer.hasAttribute('data-listener-added')) {
                 questionsContainer.addEventListener('click', handleAnswerSubmit);
+                questionsContainer.setAttribute('data-listener-added', 'true');
+                console.log("[AuthState] Submit listener added.");
             }
         } else {
-             console.log("Dashboard: User not logged in on initial check.");
-             // auth.js handles redirection
+             console.log("[AuthState] Auth state confirmed again, page already initialized.");
+             // Optionally, could re-run displayQuestions() here if needed based on specific app logic
+             // but generally not needed unless context (like stallId) might change dynamically without page reload
         }
-    } else if(user) {
-         // Handle potential edge case: Auth state changes AFTER initial load (rare for simple login)
-         // Might need to re-capture stallId or re-display questions if context changes significantly
-         // For now, we assume stallId remains constant for the page session
-         console.log("Auth state changed after initial load. User logged in.");
-         // Consider if displayQuestions() needs to be called again if relevant state changes
     } else {
-         // Handle user logging out after the page has loaded
-         console.log("Auth state changed after initial load. User logged out.");
-         // Clear the questions display? auth.js should redirect anyway.
-         questionsContainer.innerHTML = '';
-         loadingIndicator.style.display = 'none';
-         noQuestionsMessage.style.display = 'none';
+        // User logged out or initial state is logged out
+        if (pageInitialized) { // Only log/clear if page was previously initialized
+             console.log("[AuthState] User logged out after initialization.");
+             // Clear content
+             if (questionsContainer) questionsContainer.innerHTML = '';
+             if (loadingIndicator) loadingIndicator.style.display = 'none';
+             if (noQuestionsMessage) noQuestionsMessage.style.display = 'none';
+             // Reset flag
+             pageInitialized = false;
+             // Note: auth.js should handle redirection
+        } else {
+            console.log("[AuthState] Initial check: User not logged in.");
+        }
     }
 });

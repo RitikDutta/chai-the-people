@@ -4,83 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Dashboard - Chai ThePeople</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Your Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="admin_style.css"> <!-- Reuse admin style for forms/tables maybe? -->
-    <!-- <link rel="stylesheet" href="shop_style.css"> -->
+    <!-- Removed admin_style.css link, assuming styles are merged into style.css -->
 </head>
 <body>
 
     <header>
-        <h1>Chai ThePeople - Shop Portal</h1>
+        <h1><i class="fa-solid fa-store"></i> Chai ThePeople - Shop Portal</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li id="nav-login" style="display: none;"><a href="login.html">Login</a></li>
-                <li id="nav-register" style="display: none;"><a href="register.html">Register</a></li>
-                <li id="nav-shop-dash" style="display: inline;"><a href="#">Shop Dashboard</a></li>
-                <li id="nav-dashboard" style="display: none;"><a href="user_dashboard.html">User Dashboard</a></li>
-                <li id="nav-admin-dash" style="display: none;"><a href="admin_dashboard.html">Admin Dashboard</a></li>
-                <li id="nav-logout" style="display: none;">
-                    <a href="#" id="logout-button">Logout</a>
-                </li>
-                 <li id="user-greeting" style="display: none; margin-left: 15px; color: #ffcc99;"></li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li id="nav-login" style="display: none;"><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                <li id="nav-register" style="display: none;"><a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a></li>
+                <li id="nav-shop-dash" style="display: inline;"><a href="#"><i class="fa-solid fa-store"></i> Shop Dashboard</a></li>
+                <li id="nav-dashboard" style="display: none;"><a href="user_dashboard.html"><i class="fa-solid fa-table-columns"></i> User Dashboard</a></li>
+                <li id="nav-admin-dash" style="display: none;"><a href="admin_dashboard.html"><i class="fa-solid fa-user-shield"></i> Admin</a></li>
+                <li id="nav-logout" style="display: none;"><a href="#" id="logout-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                <li id="user-greeting" style="display: none;"></li> <!-- Greeting content set by JS -->
             </ul>
         </nav>
     </header>
 
     <main class="shop-container">
-        <section id="survey-stats-section">
-            <h3>Recent Activity</h3>
-            <div id="stats-content">
-                <p id="loading-stats">Loading statistics...</p>
-                <div id="stats-display" style="display: none;">
-                    <p>Total Surveys Completed at Your Stalls: <strong id="total-responses-count">0</strong></p>
-                    <p>Surveys Completed Today: <strong id="today-responses-count">0</strong></p>
-                    <!-- Add more stats later (e.g., weekly, popular questions) -->
-                </div>
-                <p id="no-stats-found" style="display: none;">No survey responses found for your stalls yet.</p>
-            </div>
-       </section>
-        <h2>Shop Dashboard</h2>
-        <p id="shop-welcome-message" style="font-weight: bold; margin-bottom: 20px;"></p>
+        <!-- Welcome message can go here if preferred -->
+        <h2 style="text-align: center; margin-bottom: var(--spacing-md);">Your Dashboard</h2>
+        <p id="shop-welcome-message" style="text-align: center; font-weight: bold; margin-bottom: var(--spacing-xl); font-size: 1.1rem;"></p>
 
-        <!-- Section to View Owner's Stalls -->
-        <section id="view-stalls-section">
-            <h3>Your Registered Stalls</h3>
-            <div id="owned-stalls-list">
-                <p id="loading-owned-stalls">Loading your stalls...</p>
-                <!-- Stall details will be loaded here -->
-            </div>
-            <p id="no-owned-stalls" style="display: none;">You haven't registered any stalls yet.</p>
-        </section>
+        <!-- Combined Stats and Stalls Area -->
+        <div class="shop-layout-grid"> <!-- Optional: Use grid for layout -->
 
-        <!-- Section to Add a New Stall -->
-        <section id="add-stall-section">
-            <h3>Add a New Stall</h3>
-            <form id="add-stall-form">
-                <div class="form-group">
-                    <label for="stall-name">Stall Name:</label>
-                    <input type="text" id="stall-name" name="stallName" required>
+            <!-- Recent Activity / Stats -->
+            <section id="survey-stats-section">
+                <h3><i class="fa-solid fa-chart-simple"></i> Recent Activity</h3>
+                <div id="stats-content">
+                    <p id="loading-stats">Loading statistics...</p>
+                    <div id="stats-display" style="display: none;">
+                        <p>Total Surveys Completed at Your Stalls: <strong id="total-responses-count">0</strong></p>
+                        <p>Surveys Completed Today: <strong id="today-responses-count">0</strong></p>
+                        <!-- Add more stats later -->
+                    </div>
+                    <p id="no-stats-found" style="display: none;">No survey responses found for your stalls yet.</p>
                 </div>
-                <div class="form-group">
-                    <label for="stall-id">Unique Stall ID:</label>
-                    <input type="text" id="stall-id" name="stallId" required pattern="[a-zA-Z0-9_]+" title="Use only letters, numbers, and underscores (e.g., RAMESH_TEA_01)">
-                    <small>This ID will be used in QR codes. Make it unique (e.g., YOURNAME_LOCATION_01).</small>
-                </div>
-                 <div class="form-group">
-                    <label for="stall-location">Location (Optional):</label>
-                    <input type="text" id="stall-location" name="stallLocation">
-                    <small>E.g., Address or landmark</small>
-                </div>
-                <button type="submit" class="form-button">Add Stall</button>
-                 <p id="add-stall-status" class="status-message"></p>
-            </form>
-        </section>
+           </section>
 
-        <section id="survey-stats-section">
-             <h3>Recent Activity (Coming Soon)</h3>
-             <p>Details about surveys completed at your stall will appear here.</p>
-        </section>
+            <!-- View Owner's Stalls -->
+            <section id="view-stalls-section">
+                <h3><i class="fa-solid fa-clipboard-list"></i> Your Registered Stalls</h3>
+                <div id="owned-stalls-list">
+                    <p id="loading-owned-stalls">Loading your stalls...</p>
+                    <!-- Stall details will be loaded here -->
+                </div>
+                <p id="no-owned-stalls" style="display: none;">You haven't registered any stalls yet. Add one below!</p>
+            </section>
+
+             <!-- Add a New Stall -->
+            <!-- ... inside <section id="add-stall-section"> ... -->
+                <section id="add-stall-section">
+                    <h3><i class="fa-solid fa-plus"></i> Add a New Stall</h3>
+                    <form id="add-stall-form">
+                        <div class="form-group">
+                            <label for="stall-name">Stall Name:</label>
+                            <input type="text" id="stall-name" name="stallName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stall-id">Unique Stall ID:</label>
+                            <!-- *** UPDATE PATTERN AND TITLE *** -->
+                            <input type="text" id="stall-id" name="stallId" required
+                                pattern="[a-z0-9_]+"
+                                title="Use only lowercase letters, numbers, and underscores (e.g., ramesh_tea_01)">
+                            <small>Lowercase letters, numbers, underscores only. This ID will be used in QR codes. Make it unique (e.g., yourname_location_01).</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="stall-location">Location (Optional):</label>
+                            <input type="text" id="stall-location" name="stallLocation">
+                            <small>E.g., Address or landmark</small>
+                        </div>
+                        <button type="submit" class="form-button">Add Stall</button>
+                        <p id="add-stall-status" class="status-message"></p>
+                    </form>
+                </section>
+        </div> <!-- End shop-layout-grid -->
+
+         <!-- REMOVED duplicate survey-stats-section -->
 
     </main>
 

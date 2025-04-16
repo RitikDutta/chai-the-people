@@ -195,7 +195,7 @@ section h2, section h3 {
 .promote-button:hover { background-color: #229954; }
 .demote-button { background-color: var(--color-warning); }
 .demote-button:hover { background-color: #d68910; }
-.delete-button, .delete-user-button { background-color: var(--color-error); } /* Consistent delete color */
+.delete-button, .delete-user-button { background-color: rebeccapurple; color: white; border-radius: 20%;} /* Consistent delete color */
 .delete-button:hover, .delete-user-button:hover { background-color: #a0342a; } /* Darker red */
 
 /* Submit Answer Button (User Dashboard) */
@@ -1005,7 +1005,12 @@ nav ul li a i { /* Style icons in nav */
     /* height: 150px; height is set inline for now */
 }
 #responseTrendChart {
-    /* display: none; Controlled by JS */
+    /* Canvas should fill the container once rendered by JS */
+     /* display: none; is handled by JS */
+     position: absolute; /* Position canvas within the container */
+     
+     width: 100%;
+     height: 10%;
 }
 
 /* Responsive Adjustments for Grid */
