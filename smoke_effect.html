@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Stable Smoke</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #050505;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+
+        .scene-container {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Force GPU acceleration for the whole scene */
+            transform: translateZ(0);
+        }
+
+        .tea-cup {
+            position: relative;
+            z-index: 10;
+            width: 200px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .smoke-container {
+            position: absolute;
+            top: -190px;
+            /* Moved upwards as requested */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 320px;
+            z-index: 20;
+            pointer-events: none;
+            /* Smooth fade out at the very top of the container */
+            mask-image: linear-gradient(to top, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
+        }
+
+        .smoke-path {
+            fill: none;
+            stroke: url(#smokeGradient);
+            stroke-linecap: round;
+            stroke-width: 4px;
+            /* Fixed width, we scale the whole line instead */
+            filter: blur(4px);
+            /* Slightly increased blur for softness */
+            opacity: 0;
+            transform-origin: center bottom;
+
+            /* Performance optimizations */
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+
+            animation: riseAndFade 4s ease-out forwards;
+        }
+
+        @keyframes riseAndFade {
+            0% {
+                opacity: 0;
+                /* Start small and low */
+                transform: translateY(160px) scale(0.5);
+            }
+
+            15% {
+                opacity: 0.5;
+                /* Fade in quickly */
+            }
+
+            100% {
+                opacity: 0;
+                /* Move up and scale UP to create the "widening" effect smoothly */
+                transform: translateY(0px) scale(2.5);
+            }
+        }
+
+        .glass-fallback {
+            width: 120px;
+            height: 160px;
+            background: linear-gradient(to bottom, #C67C44, #7A3E10);
+            border-radius: 5px 5px 20px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scene-container">
+        <!-- UNCOMMENT FOR YOUR IMAGE -->
+        <img src="tea_cup.png" alt="Hot Tea" class="tea-cup">
+
+        <!-- <div class="tea-cup glass-fallback">Tea Image</div> -->
+
+        <svg class="smoke-container" id="smokeCanvas" viewBox="0 0 100 200" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <linearGradient id="smokeGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                    <stop offset="0%" style="stop-color:white; stop-opacity:0" />
+                    <stop offset="20%" style="stop-color:white; stop-opacity:0.5" />
+                    <stop offset="100%" style="stop-color:white; stop-opacity:0" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <script>
+        const svgCanvas = document.getElementById('smokeCanvas');
+        let throttle = false;
+
+        function createSmokeCurve() {
+            // Simple throttle to prevent double-firing on slower devices
+            if (document.hidden) return;
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.classList.add('smoke-path');
+
+            // --- CURVE LOGIC ---
+            // We draw narrower curves now for a more elegant look
+            const startX = 50;
+            const startY = 180;
+
+            // Reduced random sway for smoother visual flow
+            const endX = 50 + (Math.random() * 30 - 15);
+            const endY = 0;
+
+            const cp1x = 50 + (Math.random() * 40 - 20);
+            const cp1y = 120;
+
+            const cp2x = 50 + (Math.random() * 60 - 30);
+            const cp2y = 60;
+
+            const d = `M ${startX} ${startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`;
+            path.setAttribute("d", d);
+
+            // Slightly randomized duration
+            const duration = Math.random() * 1.5 + 3.5; // 3.5s to 5s
+            path.style.animationDuration = `${duration}s`;
+
+            svgCanvas.appendChild(path);
+
+            // Cleanup
+            setTimeout(() => {
+                path.remove();
+            }, duration * 1000);
+        }
+
+        // 300ms is a sweet spot for performance vs visual density
+        setInterval(createSmokeCurve, 300);
+    </script>
+
+</body>
+
+</html>
