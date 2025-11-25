@@ -43,3 +43,32 @@ function createSmokeCurve() {
 if (svgCanvas) {
     setInterval(createSmokeCurve, 300);
 }
+
+// Scroll Effects
+document.addEventListener('DOMContentLoaded', () => {
+    const teaCupContainer = document.querySelector('.tea-cup-container');
+    const scrollTexts = document.querySelectorAll('.scroll-text');
+
+    // Parallax for Tea Cup
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        // Move cup down slightly as we scroll to give a parallax feel
+        // Adjust the multiplier (0.2) to control speed
+        teaCupContainer.style.transform = `translateY(${scrollY * 0.15}px)`;
+    });
+
+    // Intersection Observer for Text
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.2 // Trigger when 20% visible
+    });
+
+    scrollTexts.forEach(text => {
+        observer.observe(text);
+    });
+});
