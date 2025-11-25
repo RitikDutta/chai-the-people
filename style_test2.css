@@ -374,6 +374,7 @@ body {
 .development-text span:first-child {
     font-size: 4rem;
     background: linear-gradient(45deg, #D97736, #E68A4A);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -408,4 +409,74 @@ body {
     .development-text span:first-child {
         font-size: 3rem;
     }
+}
+
+/* Join Section */
+.join-section {
+    background-color: #000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: relative;
+    z-index: 5;
+    padding: 4rem;
+}
+
+.join-container {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.join-section h2 {
+    font-size: 3.5rem;
+    color: #D97736;
+    margin-bottom: 1rem;
+}
+
+.join-section p {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.join-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.join-form input {
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.join-form input:focus {
+    outline: none;
+    border-color: #D97736;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.join-form button {
+    padding: 1rem;
+    border-radius: 50px;
+    border: none;
+    background-color: #D97736;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.join-form button:hover {
+    background-color: #c06020;
+    transform: translateY(-2px);
 }

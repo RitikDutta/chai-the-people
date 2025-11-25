@@ -83,65 +83,31 @@ document.addEventListener('DOMContentLoaded', () => {
             // 0 = at startTransition (bottom of screen)
             // 1 = at endTransition (center of screen)
             let progress = (startTransition - placeholderTop) / (startTransition - endTransition);
-            progress = Math.min(Math.max(progress, 0), 1); // Clamp between 0 and 1
 
-            // Ease the progress for smoother movement
+            // If we scroll PAST the docking point (progress > 1), we want the cup to STAY docked.
+            // So we don't clamp to 1 if we want it to stay there relative to the viewport?
+            // Wait, if it's fixed, and we set transform, it stays fixed on screen.
+            // If we want it to scroll AWAY with Section 3, we need to change strategy.
+            // But the user said "use the same teacup which get scrolled on the section 2, then it will get fixed and get on section 3".
+            // This implies it lands on Section 3 and STAYS there (moves up with the page as you scroll past Section 3).
+
+            // To make it move UP with the page (stick to Section 3), we need to switch from 'fixed' to 'absolute' or manually adjust transform to counteract scroll.
+            // Or simpler: Once progress >= 1 (docked), we calculate the transform such that it matches the placeholder's screen position exactly.
+            // Since placeholder moves up as we scroll, the cup should too.
+
+            // If progress > 1, placeholderTop decreases (goes up).
+            // We want cup to follow placeholderTop.
+            // Our logic `finalTranslateY = placeholderTop - currentVisualY` ALREADY does this!
+            // `placeholderTop` is dynamic based on scroll.
+            // So if we just unclamp progress (or handle progress > 1 same as 1 but keep updating targetY with new placeholderTop), it should work.
+
+            // Let's allow progress to go above 1, but keep the interpolation at "end state" logic, just updating coordinates.
+
+            progress = Math.max(progress, 0); // Only clamp bottom
+
+            let effectiveProgress = Math.min(progress, 1); // For scale and easing
             const ease = t => t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-            const easedProgress = ease(progress);
-
-            // Calculate Target Position (relative to the fixed container's origin at bottom-left)
-            // The container is width: 100%, bottom: 0. The cup img is inside.
-            // We need to move the *container* or the *img*. 
-            // The container is fixed. Let's move the container.
-
-            // Current Fixed Position (visual start point):
-            // X: 0 (actually it has some padding/margin in CSS? Let's check. .tea-cup-img has margin-left: 3rem)
-            // Y: 0 (bottom aligned)
-
-            // Target Position (visual end point):
-            // X: placeholderLeft
-            // Y: placeholderTop - (windowHeight - cupHeight) ... wait.
-            // The fixed container is at bottom: 0.
-            // So Y=0 means bottom of screen.
-            // If placeholder is at top: 100px.
-            // We need to translate Y by -(windowHeight - placeholderTop - cupHeight).
-            // Actually simpler: translateY = placeholderTop - (windowHeight - cupHeightOffset)
-
-            // Let's assume the cup sits on the bottom edge initially.
-            // The placeholder top is `placeholderTop`.
-            // The cup height is approx 150px.
-            // So the cup's top should be at `placeholderTop`.
-            // The container's top is `windowHeight - containerHeight`.
-
-            // Let's use getBoundingClientRect of the cup to be precise if we could, but we are transforming it.
-            // Instead, let's just calculate offsets.
-
-            // Initial State (Progress 0):
-            // X = 0
-            // Y = scrollY * 0.15 (Parallax)
-
-            // Final State (Progress 1):
-            // X = placeholderLeft - (3rem margin offset approx, or better: 0 and we move container to match)
-            // The .tea-cup-img has `margin-left: 5rem` (from CSS check? No, let's check CSS).
-            // CSS: .tea-cup-img { width: 120px; margin-left: 5%; margin-bottom: 2rem; }
-            // So visual X start is 5%. Visual Y start is bottom 2rem.
-
-            // We need to cancel out the CSS margins in our target calculation or account for them.
-            // Let's calculate the delta needed.
-
-            // Target X (screen coordinate) = placeholderLeft
-            // Start X (screen coordinate) = window.innerWidth * 0.05 (5%)
-            // Delta X = placeholderLeft - (window.innerWidth * 0.05)
-
-            // Target Y (screen coordinate top) = placeholderTop
-            // Start Y (screen coordinate top) = windowHeight - 150px (approx cup height) - 2rem (margin)
-            // Delta Y = placeholderTop - (windowHeight - 150 - 32)
-
-            // But wait, the parallax `scrollY * 0.15` is already applied.
-            // We should interpolate from `parallaxY` to `TargetY`.
-
-            const startX = 0;
-            const startY = scrollY * 0.15;
+            const easedProgress = ease(effectiveProgress);
 
             // We need to know the cup's dimensions/margins dynamically for robustness
             const cupImg = document.querySelector('.tea-cup-img');
@@ -156,21 +122,34 @@ document.addEventListener('DOMContentLoaded', () => {
             // We want the cup's top-left to be at placeholderLeft, placeholderTop.
             // Currently cup's top-left is at: marginLeft, windowHeight - cupHeight - marginBottom.
 
+            // Recalculate these every frame
             const currentVisualX = marginLeft;
-            const currentVisualY = windowHeight - cupHeight - marginBottom; // Top edge of cup
+            const currentVisualY = windowHeight - cupHeight - marginBottom;
 
             const finalTranslateX = placeholderLeft - currentVisualX;
-            const finalTranslateY = placeholderTop - currentVisualY;
+            const finalTranslateY = placeholderTop - currentVisualY; // placeholderTop changes with scroll!
 
-            targetX = startX + (finalTranslateX - startX) * easedProgress;
-            targetY = startY + (finalTranslateY - startY) * easedProgress;
-
-            // Scale interpolation if sizes differ
-            // Placeholder is 150px. Cup is 120px (from CSS).
-            // We might want to scale up.
+            // Scale interpolation
             const startScale = 1;
             const endScale = 150 / 120; // 1.25
-            scale = startScale + (endScale - startScale) * easedProgress;
+
+            // If progress >= 1, we are fully docked. We should just stick to finalTranslateY.
+            // If progress < 1, we interpolate.
+
+            if (progress >= 1) {
+                targetX = finalTranslateX;
+                targetY = finalTranslateY;
+                scale = endScale;
+            } else {
+                targetX = 0 + (finalTranslateX - 0) * easedProgress; // startX is 0
+                targetY = scrollY * 0.15 + (finalTranslateY - scrollY * 0.15) * easedProgress; // startY is scrollY * 0.15
+                scale = startScale + (endScale - startScale) * easedProgress;
+            }
+        } else {
+            // Reset if we scroll back up
+            targetX = 0;
+            targetY = scrollY * 0.15;
+            scale = 1;
         }
 
         teaCupContainer.style.transform = `translate(${targetX}px, ${targetY}px) scale(${scale})`;
