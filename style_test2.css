@@ -123,6 +123,8 @@ body {
     line-height: 1.6;
     max-width: 700px;
     margin-bottom: 2.5rem;
+    margin-left: 30rem;
+    text-align: left;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -292,25 +294,77 @@ body {
 
     .hero-title-img img {
         max-width: 90%;
+        margin-top: 8rem;
+        /* More space from top on mobile */
     }
 
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 1.2rem;
         padding: 0 1rem;
+        margin-left: 0;
+        /* Reset margin */
+        text-align: center;
+        /* Center align */
+        margin-bottom: 2rem;
+    }
+
+    .cta-button {
+        margin-left: 0;
+        /* Reset margin */
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+    }
+
+    .cta-button svg {
+        width: 30px;
+        height: 30px;
     }
 
     .tea-cup-img {
-        width: 150px;
+        width: 100px;
+        /* Smaller cup on mobile */
         margin-left: 1rem;
         margin-bottom: 1rem;
     }
 
-    .info-section h2 {
+    .info-section,
+    .impact-section,
+    .join-section {
+        padding: 2rem 1rem;
+        /* Reduced padding */
+    }
+
+    .info-section h2,
+    .impact-section h2,
+    .join-section h2 {
         font-size: 2rem;
     }
 
-    .info-section p {
-        font-size: 1.1rem;
+    .info-section p,
+    .join-section p {
+        font-size: 1rem;
+    }
+
+    .equation-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    #tea-cup-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+
+    .development-text {
+        align-items: center;
+    }
+
+    .development-text span:first-child {
+        font-size: 2.5rem;
+    }
+
+    .join-container {
+        width: 100%;
     }
 }
 
