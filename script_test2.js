@@ -10,19 +10,24 @@ function createSmokeCurve() {
     path.classList.add('smoke-path');
 
     // --- CURVE LOGIC ---
-    // We draw narrower curves now for a more elegant look
-    const startX = 50;
-    const startY = 180;
+    // Dynamic center based on container width
+    const container = document.querySelector('.tea-cup-container');
+    const width = container ? container.offsetWidth : 120; // Fallback
+    const center = width / 2;
+
+    const startX = center;
+    const startY = 200; // Bottom of smoke canvas
 
     // Reduced random sway for smoother visual flow
-    const endX = 50 + (Math.random() * 60 - 30); // Increased spread (was 30-15)
+    // Widened spread as per user request
+    const endX = center + (Math.random() * 120 - 60); // Spread: -60 to +60
     const endY = 0;
 
-    const cp1x = 50 + (Math.random() * 60 - 30); // Increased spread (was 40-20)
-    const cp1y = 120;
+    const cp1x = center + (Math.random() * 100 - 50); // Spread: -50 to +50
+    const cp1y = 140;
 
-    const cp2x = 50 + (Math.random() * 80 - 40); // Increased spread (was 60-30)
-    const cp2y = 60;
+    const cp2x = center + (Math.random() * 160 - 80); // Spread: -80 to +80
+    const cp2y = 80;
 
     const d = `M ${startX} ${startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`;
     path.setAttribute("d", d);
@@ -55,7 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTeaCupPosition() {
         const scrollY = window.scrollY;
         const placeholderRect = placeholder.getBoundingClientRect();
+        const containerRect = teaCupContainer.getBoundingClientRect(); // Current position (might be transformed)
+        // We need the *initial* position (untouched by transform) to calculate delta.
+        // Since it's fixed, initial position relative to viewport is constant (unless resized).
+        // Let's calculate it based on CSS values or reset transform to measure?
+        // Better: Calculate from window dimensions since we know CSS (left: 5%, bottom: 2rem).
+
+        const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
+
+        // Initial Fixed Position (CSS: left: 5%, bottom: 2rem)
+        // Note: On mobile it's left: 1rem, bottom: 1rem.
+        // We should parse computed style to be safe.
+        const computedStyle = window.getComputedStyle(teaCupContainer);
+        const initialLeft = parseFloat(computedStyle.left);
+        const initialBottom = parseFloat(computedStyle.bottom);
+        const initialTop = windowHeight - initialBottom - teaCupContainer.offsetHeight;
 
         // Default Parallax State (Section 1 & 2)
         // Cup is fixed at bottom: 0, left: 0
@@ -109,29 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const ease = t => t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
             const easedProgress = ease(effectiveProgress);
 
-            // We need to know the cup's dimensions/margins dynamically for robustness
-            const cupImg = document.querySelector('.tea-cup-img');
-            const cupStyle = window.getComputedStyle(cupImg);
-            const marginLeft = parseFloat(cupStyle.marginLeft);
-            const marginBottom = parseFloat(cupStyle.marginBottom);
-            const cupHeight = cupImg.offsetHeight;
-
-            // Target translation relative to the fixed container's original position
-            // The fixed container is at 0,0. The cup is at marginLeft, windowHeight - cupHeight - marginBottom.
-
-            // We want the cup's top-left to be at placeholderLeft, placeholderTop.
-            // Currently cup's top-left is at: marginLeft, windowHeight - cupHeight - marginBottom.
-
-            // Recalculate these every frame
-            const currentVisualX = marginLeft;
-            const currentVisualY = windowHeight - cupHeight - marginBottom;
-
-            const finalTranslateX = placeholderLeft - currentVisualX;
-            const finalTranslateY = placeholderTop - currentVisualY; // placeholderTop changes with scroll!
+            // Target: Align Top-Left of Container with Top-Left of Placeholder
+            const finalTranslateX = placeholderLeft - initialLeft;
+            const finalTranslateY = placeholderTop - initialTop;
 
             // Scale interpolation
+            // Container width is 120px (or 100px mobile). Placeholder is 200px.
             const startScale = 1;
-            const endScale = 150 / 120; // 1.25
+            const endScale = placeholder.offsetWidth / teaCupContainer.offsetWidth;
 
             // If progress >= 1, we are fully docked. We should just stick to finalTranslateY.
             // If progress < 1, we interpolate.
@@ -141,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetY = finalTranslateY;
                 scale = endScale;
             } else {
-                targetX = 0 + (finalTranslateX - 0) * easedProgress; // startX is 0
-                targetY = scrollY * 0.15 + (finalTranslateY - scrollY * 0.15) * easedProgress; // startY is scrollY * 0.15
+                targetX = 0 + (finalTranslateX - 0) * easedProgress;
+                targetY = scrollY * 0.15 + (finalTranslateY - scrollY * 0.15) * easedProgress;
                 scale = startScale + (endScale - startScale) * easedProgress;
             }
         } else {
