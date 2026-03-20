@@ -1,4 +1,0 @@
-cassandra-driver
-numpy
-pandas
-tabulate
