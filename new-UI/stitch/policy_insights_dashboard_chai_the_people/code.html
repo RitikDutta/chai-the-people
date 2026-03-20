@@ -86,51 +86,53 @@
     background: linear-gradient(90deg, #cdee94 0%, #3e580e 100%)
     }</style>
 </head>
-<body class="bg-background text-on-background font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed" data-requires-auth="true" data-role="admin">
+<body class="bg-background text-on-background font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
 <!-- TopNavBar -->
 <header class="flex justify-between items-center px-12 py-6 w-full sticky top-0 z-50 bg-[#F4EDE5] dark:bg-stone-900/50 backdrop-blur-md shadow-[0_20px_40px_rgba(30,27,23,0.04)]">
 <div class="flex items-center gap-8">
 <span class="font-['Newsreader'] font-bold text-[#6F4627] dark:text-[#F4EDE5] text-2xl tracking-tight">Civic Insights</span>
 <nav class="hidden md:flex gap-8">
-<a class="text-[#6F4627] dark:text-white border-b-2 border-[#99461C] pb-1 font-semibold hover:text-[#99461C] transition-colors duration-300" href="#insights-section">Live Data</a>
-<a class="text-[#2F241F]/70 dark:text-stone-400 font-['Manrope'] hover:text-[#99461C] transition-colors duration-300" href="#question-management">Questions</a>
-<a class="text-[#2F241F]/70 dark:text-stone-400 font-['Manrope'] hover:text-[#99461C] transition-colors duration-300" href="#user-management">Users</a>
+<a class="text-[#6F4627] dark:text-white border-b-2 border-[#99461C] pb-1 font-semibold hover:text-[#99461C] transition-colors duration-300" href="#">Live Data</a>
+<a class="text-[#2F241F]/70 dark:text-stone-400 font-['Manrope'] hover:text-[#99461C] transition-colors duration-300" href="#">Reports</a>
+<a class="text-[#2F241F]/70 dark:text-stone-400 font-['Manrope'] hover:text-[#99461C] transition-colors duration-300" href="#">Methodology</a>
 </nav>
 </div>
 <div class="flex items-center gap-6">
-<button class="material-symbols-outlined text-[#6F4627] scale-95 active:scale-90 transition-transform" data-toast-message="The admin dashboard updates live from Firestore. There is no separate notification center yet." type="button">notifications</button>
-<button class="material-symbols-outlined text-[#6F4627] scale-95 active:scale-90 transition-transform" data-logout type="button">logout</button>
+<button class="material-symbols-outlined text-[#6F4627] scale-95 active:scale-90 transition-transform">notifications</button>
+<button class="material-symbols-outlined text-[#6F4627] scale-95 active:scale-90 transition-transform">account_circle</button>
 </div>
 </header>
 <div class="flex min-h-screen">
 <!-- SideNavBar -->
 <aside class="fixed left-0 top-0 h-full flex flex-col py-8 gap-4 h-screen w-72 bg-[#F4EDE5] dark:bg-stone-900 pt-24 z-40">
 <div class="px-8 mb-6">
-<h2 class="font-['Newsreader'] text-xl text-[#6F4627] font-bold">Admin Tools</h2>
-<p class="font-['Manrope'] font-medium text-xs text-[#2F241F]/60">Manage prompts, stalls, and users</p>
+<h2 class="font-['Newsreader'] text-xl text-[#6F4627] font-bold">Filters</h2>
+<p class="font-['Manrope'] font-medium text-xs text-[#2F241F]/60">Refine Civic Data</p>
 </div>
 <nav class="flex flex-col gap-2">
-<a class="flex items-center gap-4 py-3 px-6 bg-[#8B5E3C] text-white rounded-xl mx-2 shadow-sm hover:translate-x-1 transition-all duration-200" href="#insights-section">
+<button class="flex items-center gap-4 py-3 px-6 bg-[#8B5E3C] text-white rounded-xl mx-2 shadow-sm hover:translate-x-1 transition-all duration-200">
 <span class="material-symbols-outlined">map</span>
-<span class="font-['Manrope'] font-medium text-sm">Insights</span>
-</a>
-<a class="flex items-center gap-4 py-3 px-6 text-[#2F241F]/60 dark:text-stone-400 hover:bg-[#E8E1DA] dark:hover:bg-stone-800 rounded-xl mx-2 hover:translate-x-1 transition-all duration-200" href="#question-management">
+<span class="font-['Manrope'] font-medium text-sm">Region</span>
+</button>
+<button class="flex items-center gap-4 py-3 px-6 text-[#2F241F]/60 dark:text-stone-400 hover:bg-[#E8E1DA] dark:hover:bg-stone-800 rounded-xl mx-2 hover:translate-x-1 transition-all duration-200">
 <span class="material-symbols-outlined">category</span>
-<span class="font-['Manrope'] font-medium text-sm">Questions</span>
-</a>
-<a class="flex items-center gap-4 py-3 px-6 text-[#2F241F]/60 dark:text-stone-400 hover:bg-[#E8E1DA] dark:hover:bg-stone-800 rounded-xl mx-2 hover:translate-x-1 transition-all duration-200" href="#user-management">
+<span class="font-['Manrope'] font-medium text-sm">Topic</span>
+</button>
+<button class="flex items-center gap-4 py-3 px-6 text-[#2F241F]/60 dark:text-stone-400 hover:bg-[#E8E1DA] dark:hover:bg-stone-800 rounded-xl mx-2 hover:translate-x-1 transition-all duration-200">
 <span class="material-symbols-outlined">groups</span>
-<span class="font-['Manrope'] font-medium text-sm">Users</span>
-</a>
+<span class="font-['Manrope'] font-medium text-sm">Demographics</span>
+</button>
 </nav>
 <div class="mt-auto px-6">
-<a class="block w-full rounded-xl bg-gradient-to-br from-primary to-primary-container py-4 text-center font-bold tracking-wide text-on-primary shadow-lg transition-all hover:shadow-xl" href="index.html">Back to Site</a>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-4 rounded-xl font-bold tracking-wide shadow-lg hover:shadow-xl transition-all">
+                    Apply Filters
+                </button>
 </div>
 </aside>
 <!-- Main Content -->
 <main class="ml-72 flex-1 p-12 bg-surface">
 <!-- Hero Header -->
-<section class="mb-12 max-w-5xl" id="insights-section">
+<section class="mb-12 max-w-5xl">
 <h1 class="font-headline text-5xl text-primary font-bold tracking-tight mb-4">Policy &amp; Strategic Insights</h1>
 <p class="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
                     Deciphering the pulse of the community through direct digital dialogue. Anonymized data harvested from tea stall hubs across the region.
@@ -142,24 +144,26 @@
 <div class="absolute inset-0 bg-grain pointer-events-none"></div>
 <p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-2">Total Responses</p>
 <div class="flex items-baseline gap-2">
-<span class="font-headline text-4xl font-bold text-primary" id="insight-total-responses">0</span>
-<span class="text-tertiary text-sm font-bold flex items-center"><span class="material-symbols-outlined text-xs">arrow_upward</span> live</span>
+<span class="font-headline text-4xl font-bold text-primary">48,291</span>
+<span class="text-tertiary text-sm font-bold flex items-center"><span class="material-symbols-outlined text-xs">arrow_upward</span> 12%</span>
 </div>
 </div>
 <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
 <div class="absolute inset-0 bg-grain pointer-events-none"></div>
-<p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-2">Active Questions</p>
+<p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-2">Active Surveys</p>
 <div class="flex items-baseline gap-2">
-<span class="font-headline text-4xl font-bold text-primary" id="insight-total-questions">0</span>
-<span class="text-on-surface-variant text-sm font-medium">Prompt Bank</span>
+<span class="font-headline text-4xl font-bold text-primary">14</span>
+<span class="text-on-surface-variant text-sm font-medium">Live Nodes</span>
 </div>
 </div>
 <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
 <div class="absolute inset-0 bg-grain pointer-events-none"></div>
-<p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-2">Network Reach</p>
+<p class="font-label text-sm text-on-surface-variant uppercase tracking-widest mb-2">Satisfaction Index</p>
 <div class="flex items-baseline gap-2">
-<span class="font-headline text-4xl font-bold text-primary"><span id="insight-total-stalls">0</span><span class="text-2xl opacity-50"> stalls</span></span>
-<span class="text-on-surface-variant text-sm font-medium"><span id="insight-total-users">0</span> users</span>
+<span class="font-headline text-4xl font-bold text-primary">72<span class="text-2xl opacity-50">/100</span></span>
+<div class="ml-4 w-24 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[72%] bg-tertiary"></div>
+</div>
 </div>
 </div>
 </section>
@@ -194,12 +198,18 @@
 <!-- Top Concerns (Word Cloud/List) -->
 <div class="col-span-12 lg:col-span-4 bg-primary text-on-primary-container p-8 rounded-xl shadow-xl">
 <h3 class="font-headline text-2xl text-white font-bold mb-6">Trending Discourse</h3>
-<div class="flex flex-wrap gap-3" id="trending-discourse">
-<span class="px-4 py-2 bg-white/10 rounded-full text-lg font-headline italic">Loading...</span>
+<div class="flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-white/10 rounded-full text-lg font-headline italic">Public Transport Delay</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-sm font-body">Park Lighting</span>
+<span class="px-4 py-2 bg-white/20 rounded-full text-xl font-headline font-bold">Clean Water Access</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-base font-body">School Zones</span>
+<span class="px-4 py-2 bg-white/10 rounded-full text-sm font-body">Waste Collection</span>
+<span class="px-4 py-2 bg-white/15 rounded-full text-lg font-headline italic">Night Safety</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-sm font-body">Community Gardens</span>
 </div>
 <div class="mt-12 pt-12 border-t border-white/10">
 <p class="text-xs uppercase tracking-widest opacity-60 mb-4">Priority Action Alert</p>
-<p class="font-headline text-xl leading-snug">Live question activity and response volume update this view automatically.</p>
+<p class="font-headline text-xl leading-snug">"Infrastructure concerns in West Hub have risen 34% this week."</p>
 </div>
 </div>
 </div>
@@ -226,88 +236,33 @@
 <!-- Recent Signals -->
 <div class="col-span-12 lg:col-span-5 flex flex-col gap-6">
 <h3 class="font-headline text-2xl text-primary font-bold">The Citizens' Voice</h3>
-<div class="space-y-4" id="recent-signals-list">
+<div class="space-y-4">
 <div class="bg-white p-6 rounded-xl border-l-4 border-tertiary shadow-sm">
-<p class="font-body italic text-on-surface mb-2">Loading latest responses...</p>
+<p class="font-body italic text-on-surface mb-2">"The bus timings for the 42B route make it impossible for evening shifts. We need better lighting at the terminal too."</p>
+<div class="flex justify-between items-center text-[10px] uppercase tracking-tighter text-on-surface-variant">
+<span>Signal #8821 • Anonymous</span>
+<span class="text-tertiary font-bold">Verified Sentiment</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border-l-4 border-secondary shadow-sm">
+<p class="font-body italic text-on-surface mb-2">"More trees needed along the Market Road. It's too hot to walk during the afternoon meetings."</p>
+<div class="flex justify-between items-center text-[10px] uppercase tracking-tighter text-on-surface-variant">
+<span>Signal #8819 • Anonymous</span>
+<span class="text-secondary font-bold">Trending Need</span>
 </div>
 </div>
 </div>
 </div>
-<section class="mt-16 grid grid-cols-1 gap-8 xl:grid-cols-2" id="question-management">
-<div class="rounded-xl bg-surface-container-low p-8">
-<h3 class="font-headline text-3xl font-bold text-primary">Add a Question</h3>
-<p class="mt-2 text-sm text-on-surface-variant">Create a new prompt for everyone or target it to specific stalls.</p>
-<form class="mt-6 space-y-4" id="add-question-form">
-<div>
-<label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="new-question-text">Question Text</label>
-<textarea class="min-h-[110px] w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="new-question-text"></textarea>
 </div>
-<div>
-<label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="new-question-options">Options</label>
-<textarea class="min-h-[140px] w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="new-question-options" placeholder="Option 1&#10;Option 2&#10;Option 3"></textarea>
-</div>
-<div class="space-y-3">
-<label class="block text-xs font-bold uppercase tracking-widest text-outline">Scope</label>
-<label class="flex items-center gap-3 text-sm text-on-surface"><input checked name="scope" type="radio" value="global"/> Global</label>
-<label class="flex items-center gap-3 text-sm text-on-surface"><input name="scope" type="radio" value="specific"/> Specific stalls</label>
-</div>
-<div class="space-y-2" hidden id="target-stalls-group">
-<label class="block text-xs font-bold uppercase tracking-widest text-outline" for="new-question-target-select">Target Stalls</label>
-<select class="min-h-[140px] w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="new-question-target-select" multiple></select>
-<p class="text-sm text-on-surface-variant" hidden id="no-stalls-message">No stalls are available yet.</p>
-</div>
-<button class="w-full rounded-xl bg-gradient-to-r from-primary to-primary-container py-4 font-bold text-white" type="submit">Save Question</button>
-<p class="hidden" id="add-question-status"></p>
-</form>
-</div>
-<div class="rounded-xl bg-surface-container-low p-8">
-<div class="mb-6 flex items-center justify-between">
-<h3 class="font-headline text-3xl font-bold text-primary">Existing Questions</h3>
-<span class="text-xs font-bold uppercase tracking-widest text-outline">Live prompt bank</span>
-</div>
-<div class="space-y-4" id="existing-questions-list"></div>
-<p class="mt-4 text-sm text-on-surface-variant" hidden id="no-existing-questions">No questions created yet.</p>
-</div>
-</section>
-<section class="mt-16 rounded-xl bg-surface-container-low p-8" id="user-management">
-<div class="mb-6 flex items-center justify-between">
-<div>
-<h3 class="font-headline text-3xl font-bold text-primary">User Management</h3>
-<p class="mt-2 text-sm text-on-surface-variant">Promote, demote, or remove users from the app database.</p>
-</div>
-</div>
-<div class="overflow-x-auto rounded-xl bg-white">
-<table class="min-w-full text-left">
-<thead class="border-b border-outline-variant/15 bg-surface-container-high">
-<tr>
-<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Name</th>
-<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Email</th>
-<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Role</th>
-<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-outline">Actions</th>
-</tr>
-</thead>
-<tbody id="user-table-body">
-<tr>
-<td class="px-6 py-4 text-sm text-on-surface-variant" colspan="4">Loading users...</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p class="mt-4 text-sm text-on-surface-variant" hidden id="no-users-found">No users found.</p>
-<p class="hidden" id="user-action-status"></p>
-</section>
 </main>
 </div>
 <!-- Mobile Navigation Suppressed as per Destination Rule (Dashboard View) -->
 <!-- FAB Suppressed as per Shell Visibility Rule (Dashboard context prioritized) -->
 <!-- Ghost Borders & Depth Overlay Elements -->
 <div class="fixed bottom-8 right-8 z-[60]">
-<button class="bg-gradient-to-br from-secondary to-primary-container text-white p-4 rounded-full shadow-2xl flex items-center gap-3 pr-6 hover:scale-105 transition-transform active:scale-95" data-toast-message="The live brief is represented by the metrics and signal cards on this page. Export automation is not wired yet." type="button">
+<button class="bg-gradient-to-br from-secondary to-primary-container text-white p-4 rounded-full shadow-2xl flex items-center gap-3 pr-6 hover:scale-105 transition-transform active:scale-95">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
 <span class="font-bold text-sm tracking-wide">Generate Brief</span>
 </button>
 </div>
-<script type="module" src="site.js"></script>
-<script type="module" src="auth.js"></script>
-<script type="module" src="admin.js"></script>
 </body></html>

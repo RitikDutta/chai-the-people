@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chai The People | Trust Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: "#6f4627",
+          secondary: "#99461c",
+          tertiary: "#3e580e",
+          background: "#fff8f1",
+          surface: "#ffffff",
+          outline: "#d5c3b8",
+          ink: "#1e1b17",
+        },
+        fontFamily: {
+          headline: ["Newsreader", "serif"],
+          body: ["Manrope", "sans-serif"],
+        },
+      },
+    },
+  };
+</script>
+</head>
+<body class="min-h-screen bg-background font-body text-ink">
+<header class="sticky top-0 z-50 border-b border-outline/70 bg-background/95 backdrop-blur">
+<div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+<a class="font-headline text-3xl font-bold italic text-primary" href="index.html">Chai The People</a>
+<div class="flex items-center gap-3">
+<a class="hidden rounded-full border border-outline px-4 py-2 text-sm font-bold text-primary transition-colors hover:bg-white" data-auth-visible="in" data-dashboard-link href="user_dashboard.html">Dashboard</a>
+<a class="rounded-full border border-outline px-4 py-2 text-sm font-bold text-primary transition-colors hover:bg-white" data-auth-link="login" data-auth-visible="out" href="login.html">Sign In</a>
+<a class="rounded-full bg-primary px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-secondary" data-auth-link="register" data-auth-visible="out" href="register.html">Join</a>
+<button class="hidden rounded-full border border-outline px-4 py-2 text-sm font-bold text-primary transition-colors hover:bg-white" data-auth-visible="in" data-logout type="button">Logout</button>
+</div>
+</div>
+</header>
+<main class="mx-auto max-w-6xl px-6 py-12">
+<section class="grid gap-8 rounded-[2rem] bg-white p-8 shadow-[0_24px_80px_rgba(30,27,23,0.08)] md:grid-cols-[1.2fr_0.8fr] md:p-12">
+<div>
+<p class="text-xs font-bold uppercase tracking-[0.28em] text-secondary">Trust Center</p>
+<h1 class="mt-4 font-headline text-5xl font-bold text-primary md:text-6xl">Clear rules for a civic chai network.</h1>
+<p class="mt-6 max-w-2xl text-lg leading-8 text-[#51443c]">
+          Chai The People keeps participation lightweight, but it still needs clear commitments around privacy,
+          respectful use, and accessibility. This page covers the main operating rules for the current web app.
+        </p>
+</div>
+<div class="rounded-[1.5rem] bg-[#f4ede5] p-6">
+<p class="text-xs font-bold uppercase tracking-[0.28em] text-[#83746b]">Quick Links</p>
+<div class="mt-4 flex flex-col gap-3">
+<a class="rounded-2xl bg-white px-4 py-3 font-bold text-primary transition-colors hover:bg-[#fff8f1]" href="#privacy">Privacy</a>
+<a class="rounded-2xl bg-white px-4 py-3 font-bold text-primary transition-colors hover:bg-[#fff8f1]" href="#terms">Terms</a>
+<a class="rounded-2xl bg-white px-4 py-3 font-bold text-primary transition-colors hover:bg-[#fff8f1]" href="#accessibility">Accessibility</a>
+</div>
+<p class="mt-6 text-sm leading-6 text-[#51443c]">Last updated: March 20, 2026.</p>
+</div>
+</section>
+
+<section class="mt-10 grid gap-8">
+<article class="rounded-[2rem] bg-white p-8 shadow-[0_18px_60px_rgba(30,27,23,0.06)]" id="privacy">
+<p class="text-xs font-bold uppercase tracking-[0.28em] text-secondary">Privacy</p>
+<h2 class="mt-3 font-headline text-4xl font-bold text-primary">What the app stores</h2>
+<div class="mt-6 grid gap-4 text-base leading-8 text-[#3f362f]">
+<p>User accounts store a name, email address, optional age, and app role so the right dashboard can load.</p>
+<p>Survey responses store the user ID, question ID, selected answer, submission timestamp, and stall ID when a response came from a specific partner stall.</p>
+<p>Stall records store the stall name, stall ID, location, owning account, and creation timestamp so QR-based participation can be routed correctly.</p>
+<p>The site does not present public profile pages, public response histories, or a public user directory.</p>
+</div>
+</article>
+
+<article class="rounded-[2rem] bg-white p-8 shadow-[0_18px_60px_rgba(30,27,23,0.06)]" id="terms">
+<p class="text-xs font-bold uppercase tracking-[0.28em] text-secondary">Terms</p>
+<h2 class="mt-3 font-headline text-4xl font-bold text-primary">How the current platform should be used</h2>
+<div class="mt-6 grid gap-4 text-base leading-8 text-[#3f362f]">
+<p>Use one account per participant. Role changes are handled from the admin dashboard rather than through self-service registration.</p>
+<p>Partner stalls should use unique stall IDs. That ID becomes part of the survey and reward flow, so collisions break attribution.</p>
+<p>Responses are intended for real civic participation. Spam submissions, fake stalls, and impersonation are grounds for account removal from the app database.</p>
+<p>Rewards shown on completion are app-generated participation tokens tied to the most recently completed prompt.</p>
+</div>
+</article>
+
+<article class="rounded-[2rem] bg-white p-8 shadow-[0_18px_60px_rgba(30,27,23,0.06)]" id="accessibility">
+<p class="text-xs font-bold uppercase tracking-[0.28em] text-secondary">Accessibility</p>
+<h2 class="mt-3 font-headline text-4xl font-bold text-primary">Current accessibility approach</h2>
+<div class="mt-6 grid gap-4 text-base leading-8 text-[#3f362f]">
+<p>The app uses semantic forms, visible labels, high-contrast action states, and responsive layouts for mobile and desktop routes.</p>
+<p>Interactive survey and dashboard actions are available through standard buttons, links, and form controls instead of canvas-only interfaces.</p>
+<p>If a QR code cannot render, the reward and shop routes fall back to readable text content so the flow still remains usable.</p>
+<p>Support requests can be sent to <a class="font-bold text-secondary underline decoration-secondary/30 underline-offset-4" href="mailto:support@chaithepeople.app">support@chaithepeople.app</a>.</p>
+</div>
+</article>
+</section>
+
+<section class="mt-10 rounded-[2rem] bg-primary p-8 text-white shadow-[0_24px_80px_rgba(111,70,39,0.22)] md:flex md:items-center md:justify-between">
+<div>
+<p class="text-xs font-bold uppercase tracking-[0.28em] text-[#ffdcc5]">Next Step</p>
+<h2 class="mt-3 font-headline text-4xl font-bold">Join the network or return to the live site.</h2>
+</div>
+<div class="mt-6 flex flex-col gap-3 md:mt-0 md:flex-row">
+<a class="rounded-full bg-white px-6 py-3 text-center font-bold text-primary transition-colors hover:bg-[#f4ede5]" href="register.html">Create Account</a>
+<a class="rounded-full border border-white/30 px-6 py-3 text-center font-bold text-white transition-colors hover:bg-white/10" href="index.html">Back Home</a>
+</div>
+</section>
+</main>
+<script type="module" src="auth.js"></script>
+<script type="module" src="site.js"></script>
+</body>
+</html>

@@ -108,25 +108,22 @@
     }
   </style>
   </head>
-<body class="bg-background text-on-surface font-body min-h-screen selection:bg-primary-fixed" data-requires-auth="true" data-role="user">
+<body class="bg-background text-on-surface font-body min-h-screen selection:bg-primary-fixed">
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-[#FFF8F1] dark:bg-stone-950 shadow-[0_20px_40px_rgba(30,27,23,0.04)]">
 <div class="flex justify-between items-center px-6 py-4 w-full">
 <div class="flex items-center gap-3">
-<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-container font-headline text-lg font-bold italic text-on-primary-container ring-2 ring-primary/20" data-user-initial>
-                C
+<div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
+<img alt="Harish profile" class="w-full h-full object-cover" data-alt="Close up portrait of a smiling Indian man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5y6bVc2DBqQuQNSMcRQSfIebCE0cot9niuOxJeJApQaoN-kwfjbarcsyf4UrJR6hoTEWjRllF4L2gPuO05QFSeXmM13_kC_TTNXQLBz8oj5LZN3rGt5IvzDvtuik1UX1VuHmDqaM9O6XlgXKex2mIetPh-Jk4fatdKR9sCs7QyuDTH45E3eNrmRSi7KYVpkKWJLgar_nGMFOKaEXNzNhJYSbChKYZvmmzT7UzcQkUfY3vpyZhHL-_vIZVdQhoR6XgYvpaWm7HHjfx"/>
 </div>
 <div>
 <h1 class="text-2xl font-headline italic tracking-tight text-stone-900 dark:text-stone-50 leading-tight">CivicHospitality</h1>
-<p class="text-[10px] font-label font-bold uppercase tracking-widest text-secondary">Welcome, <span data-user-name>friend</span>!</p>
+<p class="text-[10px] font-label font-bold uppercase tracking-widest text-secondary">Welcome, Harish!</p>
 </div>
 </div>
 <div class="flex items-center gap-2">
-<a class="rounded-xl p-2 text-stone-800 transition-colors hover:bg-stone-200/50" href="index.html">
-<span class="material-symbols-outlined" data-icon="home">home</span>
-</a>
-<button class="rounded-xl p-2 text-stone-800 transition-colors hover:bg-stone-200/50" data-logout type="button">
-<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<button class="p-2 rounded-xl text-stone-800 dark:text-stone-100 hover:bg-stone-200/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
 </div>
 </div>
@@ -137,9 +134,9 @@
 <div class="flex items-center justify-between px-1">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-sm" data-icon="location_on">location_on</span>
-<span class="text-sm font-semibold text-on-surface-variant">Current context</span>
+<span class="text-sm font-semibold text-on-surface-variant">At: The Steeping Room</span>
 </div>
-<div class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter" id="current-stall-status">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">
                     Checked In
                 </div>
 </div>
@@ -147,8 +144,8 @@
 <div class="custom-grain bg-surface-container rounded-xl p-5 relative overflow-hidden group">
 <div class="relative z-10 flex justify-between items-start">
 <div>
-<h2 class="font-headline text-2xl text-on-surface leading-tight" id="current-stall-name">Community Prompts</h2>
-<p class="text-on-surface-variant text-sm mt-1" id="current-stall-details">Browse live public questions from the network.</p>
+<h2 class="font-headline text-2xl text-on-surface leading-tight">The Steeping Room</h2>
+<p class="text-on-surface-variant text-sm mt-1">ID: #42 • Local Park Central</p>
 </div>
 <div class="bg-primary/10 p-3 rounded-2xl">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="tea_set">set_meal</span>
@@ -167,14 +164,14 @@
 </div>
 <div class="relative z-10">
 <div class="flex items-center justify-between mb-4">
-<h3 class="font-headline text-xl leading-snug">Live prompts<br/>waiting for you.</h3>
+<h3 class="font-headline text-xl leading-snug">One step away from<br/>your free Chai.</h3>
 <span class="material-symbols-outlined text-4xl animate-bounce-short" data-icon="coffee">coffee</span>
 </div>
 <!-- Infusion Bar -->
 <div class="w-full bg-white/20 h-4 rounded-full overflow-hidden mb-3">
-<div class="bg-tertiary h-full rounded-full transition-all duration-1000" id="reward-progress-bar" style="width: 10%;"></div>
+<div class="bg-tertiary h-full rounded-full transition-all duration-1000" style="width: 75%;"></div>
 </div>
-<p class="text-xs font-medium text-primary-fixed/80" id="reward-progress-text">Start with your first prompt and begin earning your chai rewards.</p>
+<p class="text-xs font-medium text-primary-fixed/80">Complete 1 more survey to claim your reward!</p>
 </div>
 </div>
 </section>
@@ -184,47 +181,74 @@
 <div class="bg-surface-container-low rounded-xl p-6 shadow-sm border-b-4 border-secondary/20">
 <div class="flex items-start justify-between mb-4">
 <div class="space-y-1">
-<h4 class="font-headline text-2xl text-on-surface" id="featured-question-title">No new prompts right now</h4>
-<div class="flex gap-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-wider" id="featured-question-meta">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="quiz">quiz</span> Stay tuned</span>
+<h4 class="font-headline text-2xl text-on-surface">Local Park Improvements</h4>
+<div class="flex gap-3 text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="quiz">quiz</span> 3 Questions</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 1 Min</span>
 </div>
 </div>
 </div>
-<p class="text-on-surface-variant text-sm leading-relaxed mb-6" id="featured-question-description">You have answered everything currently available in this context.</p>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Help us decide on the new seating arrangements and green zones in our central park area.</p>
 <!-- Question Preview -->
 <div class="bg-surface-container rounded-lg p-4 mb-6">
 <p class="text-xs font-bold text-primary uppercase mb-3 tracking-widest">Question Preview</p>
-<div class="grid grid-cols-2 gap-2" id="featured-question-preview">
-<span class="rounded-full bg-surface-container-highest px-3 py-2 text-xs font-bold text-on-surface">You are fully up to date.</span>
+<p class="text-on-surface font-semibold text-sm mb-4">How often do you visit this park?</p>
+<div class="grid grid-cols-2 gap-2">
+<button class="text-xs font-bold p-3 bg-surface-container-highest rounded-lg text-center hover:bg-primary-fixed transition-colors">Daily</button>
+<button class="text-xs font-bold p-3 bg-surface-container-highest rounded-lg text-center hover:bg-primary-fixed transition-colors">Weekly</button>
 </div>
 </div>
-<a class="pointer-events-none flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-primary-container py-4 font-bold text-on-primary opacity-50 shadow-lg transition-all group active:scale-95" id="featured-start-link">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 group active:scale-95 transition-all">
 <span>Start Survey</span>
 <span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-</a>
+</button>
 </div>
 </section>
 <!-- Available Surveys List -->
 <section class="space-y-4">
 <div class="flex items-center justify-between px-1">
 <h3 class="font-headline text-xl">More for You</h3>
-<span class="text-xs font-bold text-secondary uppercase tracking-widest"><span id="pending-question-count">0</span> live</span>
+<button class="text-xs font-bold text-secondary uppercase tracking-widest">View All</button>
 </div>
-<div class="space-y-3" id="available-questions-list">
-<div class="rounded-xl bg-surface-container-high p-4 text-sm text-on-surface-variant">No additional prompts are waiting after the featured one.</div>
+<div class="space-y-3">
+<!-- Survey Card 1 -->
+<div class="bg-surface-container-high rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-tertiary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="public">public</span>
 </div>
-<p class="hidden rounded-xl bg-surface-container-high p-4 text-sm text-on-surface-variant" id="dashboard-empty-state">All available prompts are completed for now.</p>
+<div>
+<h5 class="font-bold text-on-surface text-sm">Global Civic Health</h5>
+<span class="text-[10px] bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded font-bold uppercase tracking-tighter">Global</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Survey Card 2 -->
+<div class="bg-surface-container-high rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-secondary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="security">security</span>
+</div>
+<div>
+<h5 class="font-bold text-on-surface text-sm">Community Safety</h5>
+<span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded font-bold uppercase tracking-tighter">Community</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
 </section>
 <!-- Achievement Stats -->
 <footer class="pt-4 pb-8 text-center border-t border-outline-variant/20">
 <div class="grid grid-cols-2 gap-4">
 <div class="p-3">
-<p class="text-2xl font-headline text-primary" id="user-total-responses">0</p>
+<p class="text-2xl font-headline text-primary">4</p>
 <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Surveys Done</p>
 </div>
 <div class="p-3">
-<p class="text-2xl font-headline text-tertiary" id="user-reward-count">0</p>
-<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Rewards Earned</p>
+<p class="text-2xl font-headline text-tertiary">3</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Rewards Claimed</p>
 </div>
 </div>
 <p class="text-xs italic text-on-surface-variant mt-4 opacity-60">"Your voice matters. Answer &amp; Sip."</p>
@@ -233,31 +257,29 @@
 <!-- BottomNavBar -->
 <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#F4EDE5]/70 dark:bg-stone-900/70 backdrop-blur-xl rounded-t-[2rem] z-50 shadow-[0_-10px_40px_rgba(30,27,23,0.05)]">
 <!-- Home (Active) -->
-<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#6F4627] to-[#8B5E3C] text-white rounded-2xl px-5 py-2 shadow-lg animate-bounce-short" href="user_dashboard.html" data-dashboard-link>
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#6F4627] to-[#8B5E3C] text-white rounded-2xl px-5 py-2 shadow-lg animate-bounce-short" href="#">
 <span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
 <span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-wider mt-0.5">Home</span>
 </a>
 <!-- Surveys -->
-<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="survey.html">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
 <span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-wider mt-0.5">Surveys</span>
 </a>
 <!-- Rewards -->
-<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="user_dashboard.html" data-dashboard-link>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="redeem">redeem</span>
 <span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-wider mt-0.5">Rewards</span>
 </a>
 <!-- Activity -->
-<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="how_it_works.html">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="history">history</span>
 <span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-wider mt-0.5">Activity</span>
 </a>
 <!-- Profile -->
-<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="index.html">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 hover:text-stone-800 transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="person">person</span>
 <span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-wider mt-0.5">Profile</span>
 </a>
 </nav>
-<script type="module" src="auth.js"></script>
-<script type="module" src="dashboard.js"></script>
 </body></html>

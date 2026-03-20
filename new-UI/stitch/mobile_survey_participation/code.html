@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chai The People - Local Park Improvements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#e8e1da",
+              "surface-container": "#f4ede5",
+              "on-primary-fixed": "#301400",
+              "on-secondary-container": "#762c02",
+              "surface-container-high": "#eee7df",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1e1b17",
+              "on-tertiary-fixed": "#131f00",
+              "outline": "#83746b",
+              "surface-tint": "#805533",
+              "on-error": "#ffffff",
+              "inverse-on-surface": "#f7f0e8",
+              "surface-container-highest": "#e8e1da",
+              "primary": "#6f4627",
+              "on-tertiary-fixed-variant": "#354e04",
+              "primary-fixed": "#ffdcc5",
+              "on-secondary": "#ffffff",
+              "on-error-container": "#93000a",
+              "primary-fixed-dim": "#f4bb92",
+              "primary-container": "#8b5e3c",
+              "secondary-fixed-dim": "#ffb596",
+              "secondary-fixed": "#ffdbcd",
+              "on-surface-variant": "#51443c",
+              "error": "#ba1a1a",
+              "surface-bright": "#fff8f1",
+              "surface-dim": "#dfd9d1",
+              "tertiary-fixed": "#cdee94",
+              "on-tertiary": "#ffffff",
+              "outline-variant": "#d5c3b8",
+              "on-primary-container": "#ffe3d1",
+              "background": "#fff8f1",
+              "tertiary-container": "#557126",
+              "on-background": "#1e1b17",
+              "inverse-surface": "#33302b",
+              "on-secondary-fixed": "#360f00",
+              "surface": "#fff8f1",
+              "secondary": "#99461c",
+              "tertiary": "#3e580e",
+              "on-tertiary-container": "#d3f499",
+              "inverse-primary": "#f4bb92",
+              "on-primary-fixed-variant": "#653d1e",
+              "tertiary-fixed-dim": "#b1d27b",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f9f3eb",
+              "secondary-container": "#ff9564",
+              "on-secondary-fixed-variant": "#7b2f04"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FFF8F1;
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-[#FFF8F1]">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#E8E1DA]/50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#6F4627]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Newsreader'] italic text-2xl tracking-tight text-[#6F4627]">Chai The People</h1>
+</div>
+<div class="h-10 w-10 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPhunqpUVBBk5tZAMacsdlf_K6ikDuld09_F4ln0c43cgV-ziaZ37Vu8TKwFs0PvBQAF1hc50wJgn32MS6zYLOPeVw1CXRpfELLPC4KYqsOWKWg4EKZ-bF-sIXlg_4pwFqWlTcMpPvjxqE0inCdwB6rhYV6xZh-SovfmBL_Hcjj6EqZgxFPj-Wv5wiNaZl7fK0PHyftfvumqMKUpO4D8HbFkEUHKvUlzkFxQ5NEVY77ruyTsM-CHkC_fbbengdz2dbRK2ay2O_sA5w"/>
+</div>
+<div class="absolute bottom-0 left-0 bg-[#F4EDE5] h-[1px] w-full"></div>
+</header>
+<main class="flex-1 mt-20 px-6 pb-32 max-w-lg mx-auto w-full">
+<!-- Progress & Reward Section -->
+<div class="mt-8 mb-10">
+<div class="flex justify-between items-end mb-4">
+<div>
+<span class="font-label text-xs font-extrabold uppercase tracking-widest text-secondary mb-1 block">Survey Infusion</span>
+<h2 class="font-headline text-3xl text-on-surface leading-tight">Local Park Improvements</h2>
+</div>
+<!-- Reward Indicator: The Cup Icon Filling Up -->
+<div class="flex flex-col items-center">
+<div class="relative w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full overflow-hidden shadow-sm">
+<!-- Simulated Liquid Fill -->
+<div class="absolute bottom-0 left-0 w-full h-1/3 bg-primary-container opacity-40"></div>
+<span class="material-symbols-outlined text-primary text-2xl relative z-10" data-icon="coffee" style="font-variation-settings: 'FILL' 1;">coffee</span>
+</div>
+<span class="text-[10px] font-bold mt-1 text-primary tracking-tighter">EARNING CHAI</span>
+</div>
+</div>
+<!-- The Infusion Bar (Custom Progress Tracker) -->
+<div class="w-full h-3 bg-tertiary-fixed rounded-full overflow-hidden mb-2">
+<div class="h-full bg-tertiary w-1/3 rounded-full transition-all duration-500"></div>
+</div>
+<div class="flex justify-between items-center">
+<p class="font-body text-sm font-semibold text-on-surface-variant italic">Question 1 of 3</p>
+<p class="font-body text-xs font-bold text-tertiary">33% Steeping...</p>
+</div>
+</div>
+<!-- Question Section -->
+<div class="mb-12">
+<h3 class="font-headline text-2xl text-on-surface mb-8 pr-8">How often do you visit this park?</h3>
+<div class="space-y-4">
+<!-- Survey Option: Daily -->
+<button class="w-full text-left p-6 rounded-[1.5rem] bg-surface-container-low hover:bg-surface-container-high active:scale-[0.98] transition-all duration-200 group flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="font-body text-lg font-bold text-on-surface">Daily</span>
+</div>
+</button>
+<!-- Survey Option: Weekly (Active State Simulation) -->
+<button class="w-full text-left p-6 rounded-[1.5rem] bg-surface-container-highest shadow-sm scale-[1.02] transition-all duration-200 group flex items-center justify-between ring-2 ring-primary">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+<span class="font-body text-lg font-bold text-on-surface">Weekly</span>
+</div>
+<span class="material-symbols-outlined text-tertiary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<!-- Survey Option: Rarely -->
+<button class="w-full text-left p-6 rounded-[1.5rem] bg-surface-container-low hover:bg-surface-container-high active:scale-[0.98] transition-all duration-200 group flex items-center">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="font-body text-lg font-bold text-on-surface">Rarely</span>
+</div>
+</button>
+<!-- Survey Option: First Time -->
+<button class="w-full text-left p-6 rounded-[1.5rem] bg-surface-container-low hover:bg-surface-container-high active:scale-[0.98] transition-all duration-200 group flex items-center">
+<div class="flex items-center gap-4">
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<span class="font-body text-lg font-bold text-on-surface">First Time</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Descriptive Callout for Community Impact -->
+<div class="p-6 rounded-[1.5rem] bg-tertiary/5 border border-tertiary/10 mb-8 relative overflow-hidden">
+<div class="relative z-10 flex gap-4">
+<span class="material-symbols-outlined text-tertiary shrink-0" data-icon="info">info</span>
+<p class="font-body text-sm text-on-surface-variant italic">Your input directly influences the allocation of park maintenance funds for the upcoming monsoon season.</p>
+</div>
+<!-- Grain Texture Overlay -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/p6-mini.png')]"></div>
+</div>
+</main>
+<!-- Navigation/Action Shell -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<!-- Main Primary Action -->
+<div class="px-6 pb-12 pt-4 bg-gradient-to-t from-background via-background to-transparent">
+<button class="w-full py-5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white font-bold text-lg shadow-[0_12px_40px_-12px_rgba(111,70,39,0.3)] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 group">
+                Next Question
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- BottomNavBar (Hidden on Survey for Focus, but included for structure reference) -->
+<nav class="hidden md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#F4EDE5]/70 backdrop-blur-xl rounded-t-[2rem] shadow-[0_-4px_40px_rgba(30,27,23,0.06)]">
+<div class="flex flex-col items-center justify-center text-[#8B5E3C] opacity-70">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-wider">Progress</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#8B5E3C] text-white rounded-full px-5 py-2 scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="database" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-wider">Rewards</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#8B5E3C] opacity-70">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-wider">Community</span>
+</div>
+</nav>
+</div>
+</body></html>

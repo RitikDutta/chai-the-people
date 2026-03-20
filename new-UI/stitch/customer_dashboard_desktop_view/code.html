@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CivicHospitality - Desktop Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#f4bb92",
+              "outline-variant": "#d5c3b8",
+              "on-secondary-fixed": "#360f00",
+              "on-primary-fixed-variant": "#653d1e",
+              "surface-variant": "#e8e1da",
+              "on-primary-container": "#ffe3d1",
+              "on-secondary-container": "#762c02",
+              "on-primary-fixed": "#301400",
+              "on-error-container": "#93000a",
+              "secondary-container": "#ff9564",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#d3f499",
+              "surface-tint": "#805533",
+              "inverse-surface": "#33302b",
+              "on-tertiary-fixed": "#131f00",
+              "tertiary-fixed": "#cdee94",
+              "on-tertiary": "#ffffff",
+              "surface-container-highest": "#e8e1da",
+              "on-background": "#1e1b17",
+              "secondary": "#99461c",
+              "secondary-fixed": "#ffdbcd",
+              "outline": "#83746b",
+              "surface-container-low": "#f9f3eb",
+              "primary-container": "#8b5e3c",
+              "surface-dim": "#dfd9d1",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed-dim": "#b1d27b",
+              "error": "#ba1a1a",
+              "primary": "#6f4627",
+              "on-surface-variant": "#51443c",
+              "surface-container-high": "#eee7df",
+              "primary-fixed": "#ffdcc5",
+              "surface": "#fff8f1",
+              "on-tertiary-fixed-variant": "#354e04",
+              "background": "#fff8f1",
+              "secondary-fixed-dim": "#ffb596",
+              "on-secondary-fixed-variant": "#7b2f04",
+              "tertiary": "#3e580e",
+              "on-primary": "#ffffff",
+              "on-error": "#ffffff",
+              "inverse-primary": "#f4bb92",
+              "surface-container": "#f4ede5",
+              "surface-bright": "#fff8f1",
+              "surface-container-lowest": "#ffffff",
+              "inverse-on-surface": "#f7f0e8",
+              "on-surface": "#1e1b17",
+              "tertiary-container": "#557126"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+        .custom-grain {
+            position: relative
+        }
+        .custom-grain::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC2ckUWp9XdglHNHA90gcfSxixjyYQ_-XHfOfa6qixbAMCf55pGtN2IxqQtZYpVYgiq54d3xBIP2SXIXsT2HcVsE4pI4n6jfdIFfvRzyZwSUnyZKpAqQwcau8q6M5W9ytB9rqObLevRyCB3G063HJA-QKVpXqhhGNBBBWLlQG1mAlz3jo8Y6e8o3isezS_Y7GhOLqTcxZ9vrO24MEtAAt4-fxMCwYlywIgWCpO0gN3ykGM5YnKPTspHdHvxdvA5KZ7yTvCpfNJoLxt6)
+        }
+        .animate-bounce-short {
+            animation: bounce-short 1s ease-in-out infinite
+        }
+        @keyframes bounce-short {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        body { min-height: 100vh; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FFF8F1]/80 backdrop-blur-md dark:bg-stone-950/80 border-b border-outline-variant/30">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<h1 class="text-3xl font-headline italic tracking-tight text-stone-900 dark:text-stone-50 leading-tight">CivicHospitality</h1>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-bold uppercase tracking-widest text-primary flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">home</span>
+<span>Dashboard</span>
+</a>
+<a class="text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+<span>Surveys</span>
+</a>
+<a class="text-sm font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-xl">redeem</span>
+<span>Rewards</span>
+</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 pr-6 border-r border-outline-variant/30">
+<div class="text-right">
+<p class="text-[10px] font-label font-bold uppercase tracking-widest text-secondary">Welcome back,</p>
+<p class="text-sm font-bold text-on-surface">Harish Profile</p>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
+<img alt="Harish profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5y6bVc2DBqQuQNSMcRQSfIebCE0cot9niuOxJeJApQaoN-kwfjbarcsyf4UrJR6hoTEWjRllF4L2gPuO05QFSeXmM13_kC_TTNXQLBz8oj5LZN3rGt5IvzDvtuik1UX1VuHmDqaM9O6XlgXKex2mIetPh-Jk4fatdKR9sCs7QyuDTH45E3eNrmRSi7KYVpkKWJLgar_nGMFOKaEXNzNhJYSbChKYZvmmzT7UzcQkUfY3vpyZhHL-_vIZVdQhoR6XgYvpaWm7HHjfx"/>
+</div>
+</div>
+<button class="p-2 rounded-xl text-stone-800 dark:text-stone-100 hover:bg-stone-200/50 transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-28 pb-16 px-6 max-w-7xl mx-auto">
+<!-- Stats Row -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/20 flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-xl">
+<span class="material-symbols-outlined text-primary" data-icon="quiz">quiz</span>
+</div>
+<div>
+<p class="text-2xl font-headline text-primary">4</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Surveys Completed</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/20 flex items-center gap-4">
+<div class="bg-tertiary/10 p-3 rounded-xl">
+<span class="material-symbols-outlined text-tertiary" data-icon="redeem">redeem</span>
+</div>
+<div>
+<p class="text-2xl font-headline text-tertiary">3</p>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Rewards Claimed</p>
+</div>
+</div>
+<div class="md:col-span-2 bg-surface-container rounded-2xl p-6 border border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-secondary/10 p-3 rounded-xl">
+<span class="material-symbols-outlined text-secondary" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h4 class="font-headline text-lg text-on-surface">The Steeping Room</h4>
+<p class="text-xs text-on-surface-variant">Local Park Central • ID: #42</p>
+</div>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Checked In</span>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Sidebar / Info -->
+<aside class="lg:col-span-3 space-y-6">
+<!-- Stall Card Re-styled -->
+<div class="custom-grain bg-surface-container-high rounded-2xl p-6 relative overflow-hidden group">
+<div class="relative z-10">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest bg-secondary-fixed/30 px-2 py-0.5 rounded inline-block mb-3">Current Location</span>
+<h2 class="font-headline text-xl text-on-surface leading-tight mb-4">The Steeping Room</h2>
+<div class="bg-primary/5 p-4 rounded-xl flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="tea_set">set_meal</span>
+</div>
+<p class="text-xs text-on-surface-variant italic">"Scan, respond, sip"</p>
+</div>
+</div>
+<!-- Reward Progress Card -->
+<div class="bg-gradient-to-br from-primary to-primary-container rounded-2xl p-6 text-on-primary shadow-xl relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-9xl" data-icon="redeem">redeem</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline text-lg leading-snug">One step away<br/>from free Chai.</h3>
+<span class="material-symbols-outlined text-3xl animate-bounce-short" data-icon="coffee">coffee</span>
+</div>
+<div class="w-full bg-white/20 h-3 rounded-full overflow-hidden mb-3">
+<div class="bg-tertiary h-full rounded-full transition-all duration-1000" style="width: 75%;"></div>
+</div>
+<p class="text-[10px] font-medium text-primary-fixed/80">Complete 1 more survey to claim!</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="lg:col-span-6 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-2xl">Active Civic Survey</h3>
+</div>
+<div class="bg-white dark:bg-stone-900 rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-outline-variant/10">
+<div class="flex items-start justify-between mb-6">
+<div class="space-y-2">
+<h4 class="font-headline text-3xl text-on-surface">Local Park Improvements</h4>
+<div class="flex gap-4 text-[11px] font-bold text-on-surface-variant uppercase tracking-widest">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-primary" data-icon="quiz">quiz</span> 3 Questions</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base text-primary" data-icon="schedule">schedule</span> 1 Min Completion</span>
+</div>
+</div>
+</div>
+<p class="text-on-surface-variant text-base leading-relaxed mb-8">Help us decide on the new seating arrangements and green zones in our central park area. Your feedback directly impacts our community planning.</p>
+<!-- Question Preview -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl p-6 mb-8">
+<p class="text-xs font-bold text-primary uppercase mb-4 tracking-widest flex items-center gap-2">
+<span class="w-4 h-px bg-primary/30"></span> Question Preview
+                        </p>
+<p class="text-on-surface font-semibold text-lg mb-6">How often do you visit this park?</p>
+<div class="grid grid-cols-2 gap-4">
+<button class="text-sm font-bold py-4 px-6 bg-surface-container rounded-xl text-center hover:bg-primary-fixed hover:text-on-primary-fixed transition-all">Daily</button>
+<button class="text-sm font-bold py-4 px-6 bg-surface-container rounded-xl text-center hover:bg-primary-fixed hover:text-on-primary-fixed transition-all">Weekly</button>
+</div>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold py-5 rounded-2xl shadow-xl flex items-center justify-center gap-3 group active:scale-[0.98] transition-all text-lg">
+<span>Start Survey Now</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Right Sidebar / Recommended -->
+<aside class="lg:col-span-3 space-y-6">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline text-xl">More for You</h3>
+<button class="text-xs font-bold text-secondary uppercase tracking-widest hover:underline">View All</button>
+</div>
+<div class="space-y-4">
+<!-- Survey Card 1 -->
+<div class="bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer border border-outline-variant/10 rounded-2xl p-5 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="bg-tertiary/10 p-2.5 rounded-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-tertiary" data-icon="public">public</span>
+</div>
+<div>
+<h5 class="font-bold text-on-surface text-sm">Global Civic Health</h5>
+<span class="text-[9px] bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded font-bold uppercase tracking-tighter">Global Initiative</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Survey Card 2 -->
+<div class="bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer border border-outline-variant/10 rounded-2xl p-5 flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="bg-secondary/10 p-2.5 rounded-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary" data-icon="security">security</span>
+</div>
+<div>
+<h5 class="font-bold text-on-surface text-sm">Community Safety</h5>
+<span class="text-[9px] bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded font-bold uppercase tracking-tighter">Community Hub</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Quote/Footer small -->
+<div class="pt-6 border-t border-outline-variant/20">
+<p class="text-xs italic text-on-surface-variant opacity-60 text-center">"Your voice matters. Answer &amp; Sip."</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Desktop Footer -->
+<footer class="mt-12 py-8 border-t border-outline-variant/20 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs font-medium text-on-surface-variant uppercase tracking-widest">© 2024 CivicHospitality. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="text-xs font-bold text-on-surface-variant hover:text-primary transition-colors uppercase tracking-widest" href="#">Help Center</a>
+<a class="text-xs font-bold text-on-surface-variant hover:text-primary transition-colors uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-xs font-bold text-on-surface-variant hover:text-primary transition-colors uppercase tracking-widest" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+<!-- Mobile-only Bottom Bar (Hidden on desktop) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#F4EDE5]/90 backdrop-blur-xl rounded-t-[2rem] z-50 shadow-[0_-10px_40px_rgba(30,27,23,0.05)] border-t border-white/20">
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#6F4627] to-[#8B5E3C] text-white rounded-2xl px-5 py-2 shadow-lg" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 p-2" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 p-2" href="#">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 p-2" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</a>
+</nav>
+</body></html>

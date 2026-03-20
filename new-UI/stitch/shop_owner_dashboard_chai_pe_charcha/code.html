@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chai Pe Charcha - Shop Owner Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-background": "#1e1b17",
+                        "surface": "#fff8f1",
+                        "on-tertiary-fixed-variant": "#354e04",
+                        "surface-variant": "#e8e1da",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#131f00",
+                        "outline-variant": "#d5c3b8",
+                        "primary-fixed": "#ffdcc5",
+                        "on-secondary-fixed": "#360f00",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#653d1e",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e8e1da",
+                        "outline": "#83746b",
+                        "on-surface": "#1e1b17",
+                        "tertiary-fixed": "#cdee94",
+                        "tertiary-container": "#557126",
+                        "secondary-container": "#ff9564",
+                        "inverse-surface": "#33302b",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#ffe3d1",
+                        "inverse-on-surface": "#f7f0e8",
+                        "tertiary-fixed-dim": "#b1d27b",
+                        "on-primary": "#ffffff",
+                        "primary": "#6f4627",
+                        "secondary-fixed": "#ffdbcd",
+                        "surface-tint": "#805533",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#51443c",
+                        "primary-container": "#8b5e3c",
+                        "background": "#fff8f1",
+                        "tertiary": "#3e580e",
+                        "surface-dim": "#dfd9d1",
+                        "primary-fixed-dim": "#f4bb92",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f4ede5",
+                        "on-primary-fixed": "#301400",
+                        "secondary": "#99461c",
+                        "on-secondary-fixed-variant": "#7b2f04",
+                        "surface-container-high": "#eee7df",
+                        "on-secondary-container": "#762c02",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f9f3eb",
+                        "secondary-fixed-dim": "#ffb596",
+                        "inverse-primary": "#f4bb92",
+                        "surface-bright": "#fff8f1",
+                        "on-tertiary-container": "#d3f499"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.grain-overlay {
+    position: relative
+    }
+.grain-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDhfR20O0oQPPirKIQ1LwTS3pLMtAwvCRCKVMTF4cY4zI30vtSpJjnrlB4odR9lMePHN5hlklPyYtDD9m0Qot3d4292uXnlRK8p5CuF0e1i_8z-Ao5pI5pet5PISY1EJYqqgJY2JNvgzRrRboEzcT2Nj1EwFN3k-tVC_jqFrjyrNGr9yz9sBX2rpHLHBxJt9HLnNYzRq_Mj-LGtuwoBKnjjpiSQN983GzZ808L6FKObA-yZSt1kxccolQfqD0BPBHTcA14nDgR-ORmP);
+    opacity: 0.05;
+    pointer-events: none;
+    border-radius: inherit
+    }</style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 w-64 h-full flex flex-col p-6 gap-8 bg-surface-container rounded-r-3xl z-40 transition-all duration-300">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">coffee</span>
+</div>
+<div>
+<h2 class="font-headline font-bold text-xl leading-tight text-primary">The Steeping Room</h2>
+<p class="text-xs font-medium text-on-surface-variant">Civic Hub #42</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<!-- Active State: Stalls -->
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-variant text-secondary font-bold rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span>Stalls</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-medium hover:bg-surface-variant/50 hover:translate-x-1 rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span>Activity</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-medium hover:bg-surface-variant/50 hover:translate-x-1 rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Payouts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-medium hover:bg-surface-variant/50 hover:translate-x-1 rounded-xl transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:translate-y-[-2px] transition-all duration-300">
+<span class="material-symbols-outlined">add</span>
+<span>New Discussion</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-30 flex justify-between items-center w-full px-12 py-6 bg-surface/70 backdrop-blur-md">
+<div>
+<h1 class="font-headline italic text-3xl font-serif text-primary">Chai Pe Charcha</h1>
+<p class="text-on-surface-variant text-sm font-medium">Empowering citizen voices, one cup at a time.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="w-[1.5px] h-8 bg-outline-variant/30"></div>
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Stall Owner Profile Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT49u-Yfy5fkY7TbcHMpp7dsNVAmR-B4bHCZDDZDpXXQKAN3FiJQL7D651fsBu233QM9cOeqOZwmQeZYMfiSf4Y_muwK4pJvdbuse4nhMWqq-4R5kMlw8hcKxAGen8-LHN0b77IORWJka4FJo549Yu4MeV442n8M4THK830RAvpp_sYWlTrJnBj-LmkudI6oZ97JvEGUTQkoj2kGiRDWs8UltxsAvd6kB_oBaqwHqysDoygY7nIK36I5z_dKFbqM0ljwp5HCoe2qMk"/>
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface">Harish Kumar</p>
+<p class="text-xs text-on-surface-variant">Master Brewer</p>
+</div>
+</div>
+</div>
+</header>
+<section class="px-12 pb-12 pt-4">
+<!-- Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="grain-overlay bg-surface-container-low p-6 rounded-3xl shadow-[0_20px_40px_rgba(30,27,23,0.04)] border-b-4 border-primary">
+<p class="text-on-surface-variant text-sm font-bold mb-1">Total Chai Served</p>
+<div class="flex items-end justify-between">
+<h3 class="font-headline text-4xl font-bold text-primary">542</h3>
+<span class="material-symbols-outlined text-primary/40 text-3xl">local_cafe</span>
+</div>
+</div>
+<div class="grain-overlay bg-surface-container-low p-6 rounded-3xl shadow-[0_20px_40px_rgba(30,27,23,0.04)] border-b-4 border-secondary">
+<p class="text-on-surface-variant text-sm font-bold mb-1">Citizen Voices</p>
+<div class="flex items-end justify-between">
+<h3 class="font-headline text-4xl font-bold text-secondary">489</h3>
+<span class="material-symbols-outlined text-secondary/40 text-3xl">record_voice_over</span>
+</div>
+</div>
+<div class="grain-overlay bg-surface-container-low p-6 rounded-3xl shadow-[0_20px_40px_rgba(30,27,23,0.04)] border-b-4 border-primary-container">
+<p class="text-on-surface-variant text-sm font-bold mb-1">Total Payouts</p>
+<div class="flex items-end justify-between">
+<h3 class="font-headline text-4xl font-bold text-on-surface">₹10,840</h3>
+<span class="material-symbols-outlined text-on-surface/40 text-3xl">payments</span>
+</div>
+</div>
+<div class="grain-overlay bg-surface-container-low p-6 rounded-3xl shadow-[0_20px_40px_rgba(30,27,23,0.04)] border-b-4 border-tertiary">
+<p class="text-on-surface-variant text-sm font-bold mb-1">Community Impact</p>
+<div class="flex items-end justify-between">
+<h3 class="font-headline text-4xl font-bold text-tertiary">High</h3>
+<span class="material-symbols-outlined text-tertiary/40 text-3xl">volunteer_activism</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Stall Management & QR Card -->
+<div class="lg:col-span-1 space-y-8">
+<div class="grain-overlay bg-surface-container-highest p-8 rounded-3xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16"></div>
+<h4 class="font-headline text-2xl font-bold text-primary mb-6">Stall Management</h4>
+<div class="bg-surface-container-lowest p-6 rounded-2xl flex flex-col items-center justify-center text-center shadow-sm">
+<div class="w-48 h-48 mb-6 border-4 border-surface-container-highest rounded-xl p-2">
+<img class="w-full h-full opacity-80" data-alt="QR Code for The Steeping Room Stall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCdu9Y3c0bmt2-eXZJ6q4WnSJj1o3QQDE8MNkGvZ2rUadz7A4_zwNrW4ibgrRA3NJFWNzfsOaHPlHNJJb0Bg_2UmhWoTeJelPq02q8a2tNDHo6HR2X6djIDyDznd15CN8uTZsSJAR3N7xQPJ1ljMQ8dDHu5ZsSMAwQCWgOvWZeC8RKuPewP8tmJZ4rhT0Hl8nJKreKDC_1vyuh9CG7Mmr3eiTu_i3KxoxfVbYCViWCbVxVNkPS6oHsrGH1q-zZyL5Df6thionZKBO-"/>
+</div>
+<p class="text-on-surface font-bold text-lg mb-1">The Steeping Room</p>
+<p class="text-on-surface-variant text-sm mb-6 uppercase tracking-widest font-bold">Civic Hub #42</p>
+<div class="flex gap-3 w-full">
+<button class="flex-grow bg-surface-container text-on-surface font-bold py-3 rounded-xl hover:bg-surface-variant transition-colors">Print QR</button>
+<button class="p-3 bg-surface-container text-on-surface rounded-xl hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Insights Chart Area (Visual Representation) -->
+<div class="grain-overlay bg-surface-container p-8 rounded-3xl">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline text-xl font-bold text-on-surface">Weekly Insights</h4>
+<span class="text-xs font-bold text-secondary bg-secondary-fixed px-2 py-1 rounded-full">+12% vs LW</span>
+</div>
+<div class="relative h-32 flex items-end gap-2">
+<div class="flex-grow bg-primary/10 rounded-t-lg h-1/2 relative group">
+<div class="absolute bottom-full mb-2 hidden group-hover:block bg-primary text-white text-[10px] px-2 py-1 rounded">Mon</div>
+</div>
+<div class="flex-grow bg-primary/20 rounded-t-lg h-2/3"></div>
+<div class="flex-grow bg-primary/40 rounded-t-lg h-3/4"></div>
+<div class="flex-grow bg-primary/30 rounded-t-lg h-1/2"></div>
+<div class="flex-grow bg-primary/60 rounded-t-lg h-4/5"></div>
+<div class="flex-grow bg-primary/80 rounded-t-lg h-full"></div>
+<div class="flex-grow bg-secondary rounded-t-lg h-5/6"></div>
+</div>
+<div class="mt-4 flex items-center justify-between text-xs font-bold text-on-surface-variant uppercase tracking-tighter">
+<span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+</div>
+<p class="mt-6 text-sm text-on-surface-variant leading-relaxed">
+                            Your <span class="text-primary font-bold">Voices Captured</span> peak was on Sunday, following the Civic Town Hall.
+                        </p>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="lg:col-span-2">
+<div class="grain-overlay bg-surface-container-low p-8 rounded-3xl h-full shadow-[0_20px_40px_rgba(30,27,23,0.02)]">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="font-headline text-2xl font-bold text-on-surface">Recent Activity</h4>
+<p class="text-sm text-on-surface-variant">Real-time engagement from Hub #42</p>
+</div>
+<button class="text-secondary font-bold text-sm hover:underline">View All Records</button>
+</div>
+<div class="space-y-4">
+<!-- Activity Item 1 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-2xl hover:translate-x-1 transition-transform duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">User #A8492 — Local Park Survey</p>
+<p class="text-xs text-on-surface-variant font-medium">Today at 10:24 AM</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-extrabold uppercase rounded-full mb-1">Chai Claimed</span>
+<p class="text-[10px] text-on-surface-variant">Verification ID: CV-904</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-2xl hover:translate-x-1 transition-transform duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">User #B2210 — Traffic Feedback</p>
+<p class="text-xs text-on-surface-variant font-medium">Today at 09:15 AM</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-extrabold uppercase rounded-full mb-1">Chai Claimed</span>
+<p class="text-[10px] text-on-surface-variant">Verification ID: CV-882</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-2xl border-l-4 border-secondary/30 hover:translate-x-1 transition-transform duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-secondary-fixed rounded-full flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">pending</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">User #D7731 — Waste Mgmt. Poll</p>
+<p class="text-xs text-on-surface-variant font-medium">Today at 08:42 AM</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-block px-3 py-1 bg-surface-variant text-on-surface-variant text-[10px] font-extrabold uppercase rounded-full mb-1">Pending Claim</span>
+<p class="text-[10px] text-on-surface-variant">Verification ID: CV-850</p>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-2xl hover:translate-x-1 transition-transform duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">User #X3304 — Health Clinic Review</p>
+<p class="text-xs text-on-surface-variant font-medium">Yesterday at 06:55 PM</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-extrabold uppercase rounded-full mb-1">Chai Claimed</span>
+<p class="text-[10px] text-on-surface-variant">Verification ID: CV-821</p>
+</div>
+</div>
+<!-- Activity Item 5 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-2xl hover:translate-x-1 transition-transform duration-300 opacity-60">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="text-on-surface font-bold">User #E1129 — Public Transport Poll</p>
+<p class="text-xs text-on-surface-variant font-medium">Yesterday at 04:30 PM</p>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-extrabold uppercase rounded-full mb-1">Chai Claimed</span>
+<p class="text-[10px] text-on-surface-variant">Verification ID: CV-798</p>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-tertiary/5 rounded-2xl border border-tertiary/10 flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary mt-1">info</span>
+<p class="text-xs text-tertiary font-medium leading-relaxed">
+                                Payouts for activities marked as "Chai Claimed" are processed every Tuesday. Ensure all QR scans are finalized before 11:59 PM Sunday.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Fixed Infusion Bar (Custom Progress) -->
+<div class="fixed bottom-6 right-12 w-64 p-4 bg-surface-container shadow-2xl rounded-2xl z-50">
+<div class="flex justify-between items-center mb-2">
+<p class="text-[10px] font-bold text-on-surface uppercase tracking-widest">Daily Goal Progress</p>
+<p class="text-[10px] font-bold text-primary">82%</p>
+</div>
+<div class="h-4 bg-tertiary-fixed rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[82%] rounded-full shadow-[0_0_10px_rgba(62,88,14,0.3)]"></div>
+</div>
+<p class="mt-2 text-[10px] text-on-surface-variant font-medium">11 more voices to unlock bonus payout.</p>
+</div>
+</main>
+</body></html>

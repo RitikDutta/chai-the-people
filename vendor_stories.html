@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#557126",
+              "inverse-primary": "#f4bb92",
+              "primary-fixed": "#ffdcc5",
+              "outline": "#83746b",
+              "tertiary": "#3e580e",
+              "error-container": "#ffdad6",
+              "secondary": "#99461c",
+              "secondary-container": "#ff9564",
+              "on-secondary-container": "#762c02",
+              "surface-tint": "#805533",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-fixed-variant": "#653d1e",
+              "tertiary-fixed-dim": "#b1d27b",
+              "inverse-surface": "#33302b",
+              "on-surface": "#1e1b17",
+              "on-background": "#1e1b17",
+              "on-error-container": "#93000a",
+              "surface-variant": "#e8e1da",
+              "surface-dim": "#dfd9d1",
+              "on-secondary-fixed-variant": "#7b2f04",
+              "surface-container-high": "#eee7df",
+              "primary-fixed-dim": "#f4bb92",
+              "on-primary-fixed": "#301400",
+              "surface": "#fff8f1",
+              "on-tertiary-container": "#d3f499",
+              "inverse-on-surface": "#f7f0e8",
+              "surface-container-highest": "#e8e1da",
+              "on-primary-container": "#ffe3d1",
+              "outline-variant": "#d5c3b8",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffdbcd",
+              "secondary-fixed-dim": "#ffb596",
+              "on-tertiary": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-secondary-fixed": "#360f00",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#f9f3eb",
+              "primary-container": "#8b5e3c",
+              "tertiary-fixed": "#cdee94",
+              "surface-container": "#f4ede5",
+              "background": "#fff8f1",
+              "on-tertiary-fixed-variant": "#354e04",
+              "on-tertiary-fixed": "#131f00",
+              "primary": "#6f4627",
+              "surface-bright": "#fff8f1",
+              "on-surface-variant": "#51443c",
+              "error": "#ba1a1a"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.grainy-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCTFR3j37AJiEELluC0XzIaSUJrbMgcbOFLZUqmScnyqwF9_E6xfgGZ6UMDhgwmOWtDdsALF34tsJF1cvKVPRdEIQ05WyeWWJ5QLK-V3TfWR9EJotDJGewJy17llMHLEZTN9gZaQybw_gha9ytFGxj3Jh_ZrDpj4tHIkPgXZif9rHqm8eWSH0iF25_-zeg7emWlRMJIkKLrj7731zeVgvb8mkNu2BiCGTfgjKbLvmRcQrvpoxiBz1iYJvBvwgbkT400Q-YjMtD-1LLS);
+    opacity: 0.05;
+    pointer-events: none
+    }
+.editorial-asymmetry:nth-child(even) {
+    margin-top: 3rem
+    }</style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky z-50 bg-[#FFF8F1] dark:bg-[#1E1B17] shadow-[0_20px_40px_rgba(30,27,23,0.04)]">
+<nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<a class="text-2xl font-bold text-[#6F4627] dark:text-[#E8E1DA] font-['Newsreader'] italic tracking-tight" href="index.html">
+                Chai The People
+            </a>
+<div class="hidden md:flex items-center space-x-10">
+<a class="text-[#6F4627] dark:text-[#E8E1DA] border-b-1.5 border-[#D5C3B8]/15 font-['Newsreader'] italic tracking-tight hover:text-[#99461C] transition-colors duration-300" href="vendor_stories.html">Stories</a>
+<a class="text-[#8B5E3C] dark:text-[#D5C3B8] opacity-80 font-['Newsreader'] italic tracking-tight hover:text-[#99461C] transition-colors duration-300" href="how_it_works.html">Impact</a>
+<a class="text-[#8B5E3C] dark:text-[#D5C3B8] opacity-80 font-['Newsreader'] italic tracking-tight hover:text-[#99461C] transition-colors duration-300" href="index.html">Communities</a>
+<a class="text-[#8B5E3C] dark:text-[#D5C3B8] opacity-80 font-['Newsreader'] italic tracking-tight hover:text-[#99461C] transition-colors duration-300" href="register.html">About</a>
+</div>
+<div class="flex items-center space-x-6">
+<a class="material-symbols-outlined text-primary scale-98 active:opacity-90 transition-all" data-icon="search" href="#stories-grid">search</a>
+<a class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label font-bold text-sm tracking-wide scale-98 active:opacity-90 transition-all hover:bg-primary-container" href="register.html">
+                    Join Us
+                </a>
+</div>
+</nav>
+</header>
+<main class="relative">
+<div class="absolute inset-0 grainy-texture"></div>
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 pt-24 pb-16 md:flex items-end gap-12">
+<div class="md:w-3/5">
+<h1 class="font-headline text-5xl md:text-7xl italic text-primary leading-tight mb-8">
+                    The Hearts Behind <br/> the Steeping.
+                </h1>
+<p class="font-body text-xl text-on-surface-variant max-w-xl leading-relaxed">
+                    Meet the tea stall vendors who are turning a daily ritual into a neighborhood feedback network. Through every cup poured, stories are told and communities are built.
+                </p>
+</div>
+<div class="hidden md:block md:w-2/5 pb-4">
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-3/4 rounded-full"></div>
+</div>
+<p class="text-sm font-label text-tertiary-fixed-dim mt-3 uppercase tracking-widest font-bold">Community Infusion: 75% Steeping</p>
+</div>
+</section>
+<!-- Bento Story Grid -->
+<section class="max-w-7xl mx-auto px-8 pb-32" id="stories-grid">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 items-start">
+<!-- Story Card 1 -->
+<div class="editorial-asymmetry group">
+<div class="relative overflow-hidden rounded-[2rem] bg-surface-container-low transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+<div class="aspect-[4/5] relative">
+<img alt="Vendor smiling at tea stall" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Elderly vendor smiling warmly at his tea stall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlVCKf_OncoAimEx6y9gsN7b_1OnEYekpqxxzeZA-3yWNhd8yWp8E3gkPhhTBMdlKaSPaNpXuTWMY9xf07dHzOeBfuTLpUiJ-yxfbaYyNqxDi-Gakr1Br4WFt5hWfcjBf6Y_EXGu2d2Gx9FXF9rg2-hIPd2UmbroIaKV-Psw5buxbm8TSTAdCjF1p0RviJRXkV14FxosudNmzNFYxZa2z3Yg340zqnMCih2-lNSWEdzjDyr7amDQBu8ojQGiR9UHATwxyXhfK2FhGq"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold tracking-widest uppercase rounded-full mb-3">Community Pillar</span>
+<h3 class="font-headline text-2xl text-on-primary italic">Harish K. from Central Park Hub</h3>
+</div>
+</div>
+<div class="p-8">
+<p class="text-on-surface-variant font-body leading-relaxed mb-8 italic">
+                                "I've brewed tea here for 30 years. People don't just come for the spice, they come to talk about the park, the roads, and their dreams."
+                            </p>
+<div class="flex items-center justify-between mb-8">
+<div>
+<div class="text-2xl font-headline italic text-primary">12.4k</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Voices Captured</div>
+</div>
+<div class="w-px h-8 bg-outline-variant/30"></div>
+<div>
+<div class="text-2xl font-headline italic text-secondary">45k+</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Chai Served</div>
+</div>
+</div>
+<button aria-expanded="false" class="w-full py-4 rounded-xl bg-surface-container-highest text-primary font-bold tracking-wide flex items-center justify-center gap-2 hover:bg-primary hover:text-on-primary transition-all group/btn" data-label-close="Hide Story" data-label-open="Read Full Story" data-story-toggle="#story-detail-1" type="button">
+<span data-story-toggle-label>Read Full Story</span>
+                                <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="mt-4 rounded-2xl border border-outline-variant/20 bg-white/80 p-5 text-sm leading-7 text-on-surface-variant" hidden id="story-detail-1">
+<p>Harish started using Chai The People to capture small but repeated complaints about broken park lighting and unsafe crossings near his stall. Those answers now arrive as a steady stream instead of one-off conversations.</p>
+<p class="mt-3">His stall operates as a daily check-in point for regulars, joggers, and parents on school pickup routes, which makes the response pattern unusually consistent and useful for neighborhood-level planning.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Story Card 2 -->
+<div class="group">
+<div class="relative overflow-hidden rounded-[2rem] bg-surface-container-low transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+<div class="aspect-[4/5] relative">
+<img alt="Woman pouring chai with precision" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Young woman vendor pouring chai into a glass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVMQCTSGltRMIlLNqCy2Kz3izTkcgV_MCELPVHOJyPuRccl6bwlb9zf6goQyp45yv_zp8_QIUzOsM5ZGL1bQaVwLOUR42qEROAz5BnL1aW3lPeArde8tjooimmpfASk9b73jvXdcJRoBsblLQaDqSZfswCVJ0lqeYVoJy5YUEllj1CCGrhELEWCH_4nJ_m3xoR1XczKyWBmbuOztDhtBR6KWW_ZuUIZXOAyp4BII8tah69xXZZmhUuAh2yXLXZ6oG3xsJFVA22br1L"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<span class="inline-block px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold tracking-widest uppercase rounded-full mb-3">Innovator</span>
+<h3 class="font-headline text-2xl text-on-primary italic">Amara S. from Metro Lane</h3>
+</div>
+</div>
+<div class="p-8">
+<p class="text-on-surface-variant font-body leading-relaxed mb-8 italic">
+                                "My stall is the office for the street vendors. We talk policy between pours. Chai is the ink we use to write our future."
+                            </p>
+<div class="flex items-center justify-between mb-8">
+<div>
+<div class="text-2xl font-headline italic text-primary">8.2k</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Voices Captured</div>
+</div>
+<div class="w-px h-8 bg-outline-variant/30"></div>
+<div>
+<div class="text-2xl font-headline italic text-secondary">28k+</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Chai Served</div>
+</div>
+</div>
+<button aria-expanded="false" class="w-full py-4 rounded-xl bg-surface-container-highest text-primary font-bold tracking-wide flex items-center justify-center gap-2 hover:bg-primary hover:text-on-primary transition-all group/btn" data-label-close="Hide Story" data-label-open="Read Full Story" data-story-toggle="#story-detail-2" type="button">
+<span data-story-toggle-label>Read Full Story</span>
+                                <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="mt-4 rounded-2xl border border-outline-variant/20 bg-white/80 p-5 text-sm leading-7 text-on-surface-variant" hidden id="story-detail-2">
+<p>Amara’s lane has a dense network of informal sellers, so her stall became the place where licensing, rain shelters, and policing patterns kept coming up. The survey flow gave those recurring conversations a trackable structure.</p>
+<p class="mt-3">She now uses the dashboard to see how many participants engage through her QR posters, which helps her explain the value of the program to other nearby vendors.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Story Card 3 -->
+<div class="editorial-asymmetry group">
+<div class="relative overflow-hidden rounded-[2rem] bg-surface-container-low transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+<div class="aspect-[4/5] relative">
+<img alt="Vendor arranging cups on a cart" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Vendor meticulously arranging earthen cups at a street cart" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzB_g7JfziFUyJnJhEXlIlo-QgKmwrZ5pfbfkf1pKIzEEwwxBo-U2WbMqJPR4v_E0VoWqg9VuWwWHLjyYL_xn1491XDNu-CkUfQAwPhtZhzIc_gE5SatyLL8LdMWJHhLGYX4tJbpRRu7fCfsJdR6Y9AnCw3ZAjB_zaoTGaLXeEYA1aiZo5r1LgUM_2QTjNBHqETdICBZD3grcMSbbPsDlTOf0GcF5jQ81kiRBpSPDl4JYzv3O8i5hKCDYfATEApkqsDKrP53zrLUTh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold tracking-widest uppercase rounded-full mb-3">Cultural Hero</span>
+<h3 class="font-headline text-2xl text-on-primary italic">Rajat V. from Old Market Yard</h3>
+</div>
+</div>
+<div class="p-8">
+<p class="text-on-surface-variant font-body leading-relaxed mb-8 italic">
+                                "The market never sleeps, and neither do the opinions. I'm just the curator of the local pulse, served hot with extra ginger."
+                            </p>
+<div class="flex items-center justify-between mb-8">
+<div>
+<div class="text-2xl font-headline italic text-primary">15.9k</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Voices Captured</div>
+</div>
+<div class="w-px h-8 bg-outline-variant/30"></div>
+<div>
+<div class="text-2xl font-headline italic text-secondary">62k+</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Chai Served</div>
+</div>
+</div>
+<button aria-expanded="false" class="w-full py-4 rounded-xl bg-surface-container-highest text-primary font-bold tracking-wide flex items-center justify-center gap-2 hover:bg-primary hover:text-on-primary transition-all group/btn" data-label-close="Hide Story" data-label-open="Read Full Story" data-story-toggle="#story-detail-3" type="button">
+<span data-story-toggle-label>Read Full Story</span>
+                                <span class="material-symbols-outlined text-sm group-hover/btn:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="mt-4 rounded-2xl border border-outline-variant/20 bg-white/80 p-5 text-sm leading-7 text-on-surface-variant" hidden id="story-detail-3">
+<p>Rajat’s market crowd changes by the hour, so his contribution is breadth rather than repetition. The responses tied to his stall show what concerns dominate during wholesale hours versus evening neighborhood traffic.</p>
+<p class="mt-3">That difference helps the admin dashboard separate market logistics from resident priorities, while still keeping the stall itself central to the participation ritual.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-5xl mx-auto px-8 mb-24">
+<div class="relative bg-primary-container rounded-[3rem] p-12 md:p-20 overflow-hidden shadow-2xl">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary opacity-20 rounded-full blur-3xl -mr-20 -mt-20"></div>
+<div class="relative z-10 text-center max-w-2xl mx-auto">
+<h2 class="font-headline text-4xl md:text-5xl text-on-primary-container italic mb-6">Your Stall. Your Voice. <br/> Our Collective Future.</h2>
+<p class="text-on-primary-container opacity-90 font-body text-lg mb-10 leading-relaxed">
+                        Are you a tea vendor looking to empower your neighborhood? Join our platform to turn your daily conversations into actionable civic data.
+                    </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<a class="px-10 py-5 bg-white text-primary rounded-full font-bold shadow-lg hover:scale-105 transition-transform text-center" href="register.html">
+                            Join as a Vendor
+                        </a>
+<a class="px-10 py-5 border border-on-primary-container text-on-primary-container rounded-full font-bold hover:bg-on-primary-container/10 transition-colors text-center" href="how_it_works.html">
+                            How it works
+                        </a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[2rem] mt-20 bg-[#F4EDE5] dark:bg-[#2F241F]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full max-w-7xl mx-auto">
+<div class="mb-10 md:mb-0">
+<div class="font-['Newsreader'] text-lg italic text-[#6F4627] dark:text-[#E8E1DA] mb-4">Chai The People</div>
+<p class="font-['Manrope'] text-sm tracking-wide leading-relaxed text-[#8B5E3C] opacity-70">© 2024 Chai The People. Steeped in Community.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 md:gap-12">
+<a class="font-['Manrope'] text-sm tracking-wide leading-relaxed text-[#8B5E3C] opacity-70 hover:opacity-100 hover:text-[#99461C] transition-all" href="index.html">Home</a>
+<a class="font-['Manrope'] text-sm tracking-wide leading-relaxed text-[#8B5E3C] opacity-70 hover:opacity-100 hover:text-[#99461C] transition-all" href="how_it_works.html">How It Works</a>
+<a class="font-['Manrope'] text-sm tracking-wide leading-relaxed text-[#8B5E3C] opacity-70 hover:opacity-100 hover:text-[#99461C] transition-all" href="login.html">Sign In</a>
+<a class="font-['Manrope'] text-sm tracking-wide leading-relaxed text-[#8B5E3C] opacity-70 hover:opacity-100 hover:text-[#99461C] transition-all" href="register.html">Join</a>
+</div>
+</div>
+</footer>
+<script type="module" src="site.js"></script>
+<script type="module" src="auth.js"></script>
+</body></html>

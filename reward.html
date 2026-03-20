@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed-variant": "#354e04",
+              "error": "#ba1a1a",
+              "primary": "#6f4627",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#131f00",
+              "on-background": "#1e1b17",
+              "primary-container": "#8b5e3c",
+              "on-surface": "#1e1b17",
+              "on-secondary-fixed": "#360f00",
+              "secondary-fixed-dim": "#ffb596",
+              "error-container": "#ffdad6",
+              "surface-tint": "#805533",
+              "surface": "#fff8f1",
+              "on-secondary-fixed-variant": "#7b2f04",
+              "surface-container-highest": "#e8e1da",
+              "tertiary": "#3e580e",
+              "on-primary-fixed-variant": "#653d1e",
+              "surface-container": "#f4ede5",
+              "outline": "#83746b",
+              "outline-variant": "#d5c3b8",
+              "on-error": "#ffffff",
+              "inverse-on-surface": "#f7f0e8",
+              "inverse-primary": "#f4bb92",
+              "surface-container-high": "#eee7df",
+              "primary-fixed-dim": "#f4bb92",
+              "surface-variant": "#e8e1da",
+              "primary-fixed": "#ffdcc5",
+              "surface-dim": "#dfd9d1",
+              "tertiary-container": "#557126",
+              "surface-container-low": "#f9f3eb",
+              "secondary-fixed": "#ffdbcd",
+              "on-tertiary": "#ffffff",
+              "background": "#fff8f1",
+              "on-tertiary-container": "#d3f499",
+              "on-primary-fixed": "#301400",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "tertiary-fixed": "#cdee94",
+              "surface-bright": "#fff8f1",
+              "secondary": "#99461c",
+              "tertiary-fixed-dim": "#b1d27b",
+              "on-secondary-container": "#762c02",
+              "inverse-surface": "#33302b",
+              "secondary-container": "#ff9564",
+              "on-primary-container": "#ffe3d1",
+              "on-surface-variant": "#51443c"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grainy-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen flex flex-col" data-requires-auth="true" data-role="user">
+<!-- Top Navigation Anchor -->
+<header class="bg-[#FFF8F1] dark:bg-stone-950 shadow-[0_20px_40px_rgba(30,27,23,0.04)] fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4">
+<div class="flex items-center gap-4">
+<a class="text-[#6F4627] dark:text-[#E8E1DA] hover:bg-[#E8E1DA]/50 transition-colors p-2 rounded-full scale-95 active:scale-90 transition-transform" href="user_dashboard.html" id="reward-back-link">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<h1 class="font-['Newsreader'] font-bold text-[#6F4627] dark:text-[#E8E1DA] text-xl">Chai The People</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<span class="font-['Newsreader'] serif italic text-[#1E1B17]/60">Steeping Progress</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-32 px-6 flex flex-col items-center max-w-2xl mx-auto w-full relative">
+<div class="grainy-bg"></div>
+<!-- Celebratory Header Section -->
+<section class="text-center mb-10 w-full">
+<div class="inline-flex items-center justify-center bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1.5 rounded-full mb-6 gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="text-xs font-bold tracking-widest uppercase">Contribution Verified</span>
+</div>
+<h2 class="font-headline italic text-4xl md:text-5xl text-primary mb-4 leading-tight">Your Chai is Steeping!</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-md mx-auto">
+                Thank you for your insights. Your voice is now a part of the blend that improves our community's future.
+            </p>
+</section>
+<!-- The Reward Token (Digital Receipt) -->
+<div class="w-full relative">
+<!-- Decorative "Festive" motifs behind card -->
+<div class="absolute -top-6 -left-6 w-24 h-24 bg-secondary-container/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-tertiary-container/10 rounded-full blur-3xl"></div>
+<article class="bg-surface-container-lowest rounded-3xl shadow-[0_-10px_40px_rgba(30,27,23,0.06)] overflow-hidden relative border-[1.5px] border-outline-variant/15">
+<!-- Top Notch for Receipt Look -->
+<div class="h-4 w-full bg-surface-container flex justify-between px-4 overflow-hidden">
+<div class="flex gap-2">
+<div class="w-4 h-4 rounded-full bg-background -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-background -mt-2"></div>
+<div class="w-4 h-4 rounded-full bg-background -mt-2"></div>
+</div>
+</div>
+<div class="p-8 md:p-10 flex flex-col items-center">
+<!-- Status Badge -->
+<div class="flex items-center gap-2 bg-tertiary/10 text-tertiary px-3 py-1 rounded-lg self-end mb-4 border border-tertiary/20">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-sm font-bold">Valid Reward</span>
+</div>
+<!-- Illustration -->
+<div class="w-24 h-24 mb-6 relative">
+<img alt="Steaming Cup" class="w-full h-full object-cover rounded-2xl shadow-sm rotate-3 border-2 border-surface-container-highest" data-alt="A steaming clay cup of spiced chai" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFl_onh1DKmnzqNRYJUuhk7KgSRdPLY6v1NENV164As0rBOlUa2oPUIgxRJ8_c3KbRuh8kXTgSbMv2yjFch9lpHibrXLvbA4gWQCkAMcAd2gy7FMs_Cp1gPtWNOMyF4Ze1Bqgc1AdRXnknjyqDOFQo1jy8WOg9egNHXsN_GXXq0mhJS71OPJh-UouKoxdgAhO-EmE_XSa2mAy16rb9aYGtDRrb8diy2E9kuG8ia6aCzs5tdaBzyETTzG_aerqoPJrnOb-dQhGBwMlI"/>
+<div class="absolute -top-2 -right-2 bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-sm">redeem</span>
+</div>
+</div>
+<!-- Reward Detail -->
+<div class="text-center mb-8">
+<p class="text-on-surface-variant text-sm font-medium uppercase tracking-[0.2em] mb-1">Your Benefit</p>
+<h3 class="text-3xl font-bold text-primary">1 Free Cutting Chai</h3>
+<p class="text-secondary font-semibold italic">Premium Masala Blend</p>
+</div>
+<!-- QR Code Section -->
+<div class="w-full bg-surface-container-low rounded-2xl p-6 border-[1.5px] border-outline-variant/10 flex flex-col items-center gap-4">
+<div class="bg-white p-4 rounded-xl shadow-inner border border-outline-variant/20">
+<!-- Placeholder for QR Code -->
+<div class="w-40 h-40 flex items-center justify-center rounded-lg" id="reward-qr">
+<span class="material-symbols-outlined text-on-surface text-6xl opacity-20">qr_code_2</span>
+</div>
+</div>
+<p class="text-[11px] text-on-surface-variant font-medium tracking-widest uppercase" id="reward-code">ID: Loading...</p>
+</div>
+<!-- Instructions -->
+<div class="mt-8 text-center space-y-4">
+<div class="flex items-start gap-3 text-left bg-surface-container rounded-xl p-4">
+<span class="material-symbols-outlined text-primary-container mt-0.5">storefront</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                Show this QR code to the vendor at <strong class="text-on-surface" id="reward-stall-name">your participating stall</strong> to claim your reward.
+                            </p>
+</div>
+<p class="text-xs text-on-surface-variant/60 italic" id="reward-validity">Valid for the latest completed prompt.</p>
+<p class="text-xs text-on-surface-variant/60 italic" id="reward-question-text">Loading reward details...</p>
+</div>
+</div>
+<!-- Bottom Perforation Look -->
+<div class="h-4 w-full bg-surface-container-high flex justify-around px-2 overflow-hidden items-center border-t border-dashed border-outline-variant/30">
+<div class="w-3 h-3 rounded-full bg-background -mb-2"></div>
+<div class="w-3 h-3 rounded-full bg-background -mb-2"></div>
+<div class="w-3 h-3 rounded-full bg-background -mb-2"></div>
+<div class="w-3 h-3 rounded-full bg-background -mb-2"></div>
+<div class="w-3 h-3 rounded-full bg-background -mb-2"></div>
+<div class="w-3 h-3 rounded-full bg-background -mb-2"></div>
+</div>
+</article>
+</div>
+<!-- Primary Actions -->
+<div class="mt-10 w-full space-y-4">
+<a class="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-primary to-primary-container py-4 text-lg font-bold text-white shadow-[0_10px_20px_rgba(111,70,39,0.2)] transition-all group active:scale-95" href="user_dashboard.html" id="reward-progress-link">
+                View My Community Progress
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+ </a>
+<a class="block w-full rounded-2xl bg-surface-container-highest py-4 text-center font-bold text-on-surface transition-all hover:bg-surface-container-high active:scale-95" href="survey.html" id="reward-next-link">
+                Take Another Survey
+            </a>
+<p class="hidden" id="reward-status"></p>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#F4EDE5]/70 dark:bg-stone-900/70 backdrop-blur-xl border-t-[1.5px] border-[#D5C3B8]/15 shadow-[0_-10px_40px_rgba(30,27,23,0.06)] rounded-t-[2rem]">
+<a class="flex flex-col items-center justify-center text-[#2F241F]/70 dark:text-stone-400 px-4 py-2 hover:text-[#6F4627] transition-all" href="survey.html" id="reward-next-link-mobile">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-['Manrope'] font-medium text-[11px] tracking-wide">Survey</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#2F241F]/70 dark:text-stone-400 px-4 py-2 hover:text-[#6F4627] transition-all" data-dashboard-link href="user_dashboard.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Manrope'] font-medium text-[11px] tracking-wide">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#8B5E3C] text-white rounded-2xl px-4 py-2 animate-bounce-subtle" href="reward.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-['Manrope'] font-medium text-[11px] tracking-wide">Rewards</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#2F241F]/70 dark:text-stone-400 px-4 py-2 hover:text-[#6F4627] transition-all" href="index.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Manrope'] font-medium text-[11px] tracking-wide">Profile</span>
+</a>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module" src="auth.js"></script>
+<script type="module" src="reward.js"></script>
+</body></html>

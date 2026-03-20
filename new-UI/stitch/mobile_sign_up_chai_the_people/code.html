@@ -99,32 +99,32 @@
 <div class="absolute inset-0 grain-overlay pointer-events-none"></div>
 <div class="p-6 md:p-8 space-y-8">
 <nav class="flex p-1 bg-surface-container rounded-full w-full">
-<a class="flex-1 rounded-full py-2 text-center text-sm font-semibold text-on-surface-variant transition-all duration-300" data-auth-link="login" href="login.html">
+<button class="flex-1 py-2 text-sm font-semibold rounded-full text-on-surface-variant transition-all duration-300">
                             Sign In
-                        </a>
-<a class="flex-1 rounded-full bg-surface-container-lowest py-2 text-center text-sm font-semibold text-primary shadow-sm ring-1 ring-outline-variant/10 transition-all duration-300" href="register.html">
+                        </button>
+<button class="flex-1 py-2 text-sm font-semibold rounded-full bg-surface-container-lowest text-primary shadow-sm ring-1 ring-outline-variant/10 transition-all duration-300">
                             Create Account
-                        </a>
+                        </button>
 </nav>
 <div class="space-y-2">
 <h2 class="font-headline text-2xl text-primary font-medium">Join the Steeping Room</h2>
 <p class="text-on-surface-variant body-lg leading-relaxed">Join, answer surveys, and claim your free chai.</p>
 </div>
-<form class="space-y-6" id="registration-form">
+<form class="space-y-6">
 <div class="space-y-5">
 <div class="group">
 <label class="block text-xs font-bold text-on-surface-variant/70 uppercase tracking-widest mb-1 ml-1" for="name">Full Name</label>
-<input class="w-full bg-surface-container-low border-0 border-b-1.5 border-outline-variant/15 focus:ring-0 focus:border-secondary focus:bg-surface-container-lowest transition-all duration-300 py-3 px-1 text-on-surface placeholder:text-on-surface-variant/40" id="name" name="name" placeholder="Arjun Singh" type="text"/>
+<input class="w-full bg-surface-container-low border-0 border-b-1.5 border-outline-variant/15 focus:ring-0 focus:border-secondary focus:bg-surface-container-lowest transition-all duration-300 py-3 px-1 text-on-surface placeholder:text-on-surface-variant/40" id="name" placeholder="Arjun Singh" type="text"/>
 </div>
 <div class="group">
 <label class="block text-xs font-bold text-on-surface-variant/70 uppercase tracking-widest mb-1 ml-1" for="email">Email</label>
-<input class="w-full bg-surface-container-low border-0 border-b-1.5 border-outline-variant/15 focus:ring-0 focus:border-secondary focus:bg-surface-container-lowest transition-all duration-300 py-3 px-1 text-on-surface placeholder:text-on-surface-variant/40" id="email" name="email" placeholder="arjun@example.com" type="email"/>
+<input class="w-full bg-surface-container-low border-0 border-b-1.5 border-outline-variant/15 focus:ring-0 focus:border-secondary focus:bg-surface-container-lowest transition-all duration-300 py-3 px-1 text-on-surface placeholder:text-on-surface-variant/40" id="email" placeholder="arjun@example.com" type="email"/>
 </div>
 <div class="group">
 <label class="block text-xs font-bold text-on-surface-variant/70 uppercase tracking-widest mb-1 ml-1" for="password">Password</label>
 <div class="relative">
-<input class="w-full bg-surface-container-low border-0 border-b-1.5 border-outline-variant/15 focus:ring-0 focus:border-secondary focus:bg-surface-container-lowest transition-all duration-300 py-3 px-1 text-on-surface placeholder:text-on-surface-variant/40" id="password" name="password" placeholder="••••••••" type="password"/>
-<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant/60" data-password-toggle="#password" type="button">
+<input class="w-full bg-surface-container-low border-0 border-b-1.5 border-outline-variant/15 focus:ring-0 focus:border-secondary focus:bg-surface-container-lowest transition-all duration-300 py-3 px-1 text-on-surface placeholder:text-on-surface-variant/40" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant/60" type="button">
 <span class="material-symbols-outlined text-[20px]">visibility</span>
 </button>
 </div>
@@ -132,7 +132,7 @@
 </div>
 <div class="flex items-start gap-3 px-1">
 <div class="relative flex items-center mt-1">
-<input class="peer h-5 w-5 rounded-lg border-outline-variant/30 text-secondary focus:ring-secondary/20 transition-all cursor-pointer bg-surface-container-low" id="terms" name="terms" type="checkbox"/>
+<input class="peer h-5 w-5 rounded-lg border-outline-variant/30 text-secondary focus:ring-secondary/20 transition-all cursor-pointer bg-surface-container-low" id="terms" type="checkbox"/>
 </div>
 <label class="text-sm text-on-surface-variant leading-snug cursor-pointer" for="terms">
                                 I agree to the <span class="text-secondary font-semibold hover:underline decoration-secondary/30">terms</span> and <span class="text-secondary font-semibold hover:underline decoration-secondary/30">privacy policy</span>
@@ -141,7 +141,6 @@
 <button class="w-full steeping-gradient text-on-primary py-4 px-6 rounded-xl font-bold tracking-wide shadow-lg hover:shadow-xl hover:translate-y-[-2px] transition-all duration-300 active:scale-[0.98]" type="submit">
                             Create Account
                         </button>
-<p class="hidden" data-auth-status id="auth-status"></p>
 </form>
 </div>
 </div>
@@ -151,7 +150,7 @@
 <span class="text-xs font-bold text-on-surface-variant/80 tracking-wide uppercase">Secure &amp; Anonymized Participation</span>
 </div>
 <p class="text-sm text-on-surface-variant/60 font-medium">
-                    Already have a cup? <a class="text-secondary underline decoration-secondary/30 underline-offset-4 font-bold" data-auth-link="login" href="login.html">Sign In</a>
+                    Already have a cup? <a class="text-secondary underline decoration-secondary/30 underline-offset-4 font-bold" href="#">Sign In</a>
 </p>
 </div>
 </section>
@@ -162,12 +161,10 @@
 <p class="font-body text-sm tracking-wide text-on-surface-variant/60">© 2024 Chai The People. Steeped in Community.</p>
 </div>
 <div class="flex gap-8 order-1 md:order-2">
-<a class="font-body text-sm tracking-wide text-on-surface-variant/60 hover:text-primary transition-all" href="legal.html#privacy">Privacy</a>
-<a class="font-body text-sm tracking-wide text-on-surface-variant/60 hover:text-primary transition-all" href="legal.html#terms">Terms</a>
-<a class="font-body text-sm tracking-wide text-on-surface-variant/60 hover:text-primary transition-all" href="legal.html#accessibility">Accessibility</a>
+<a class="font-body text-sm tracking-wide text-on-surface-variant/60 hover:text-primary transition-all" href="#">Privacy</a>
+<a class="font-body text-sm tracking-wide text-on-surface-variant/60 hover:text-primary transition-all" href="#">Terms</a>
+<a class="font-body text-sm tracking-wide text-on-surface-variant/60 hover:text-primary transition-all" href="#">Accessibility</a>
 </div>
 </div>
 </footer>
-<script type="module" src="site.js"></script>
-<script type="module" src="auth.js"></script>
 </body></html>
