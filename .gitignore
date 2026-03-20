@@ -1,3 +1,6 @@
 firebase_congig.js
-auth.js
+# auth.js
 .directory
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

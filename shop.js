@@ -123,7 +123,6 @@ async function handleAddStallSubmit(event) {
     if (!stallName || !stallId) {
         showStatus(addStallStatus, 'Error: Stall Name and Stall ID are required.', true);
         return;
-    }return;
     }
     const idPattern = /^[a-z0-9_]+$/;
     if (!idPattern.test(stallId)) {
