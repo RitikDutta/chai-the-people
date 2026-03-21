@@ -95,6 +95,166 @@
         background: #3e580e;
         width: 65%;
       }
+      .hero-video-trigger {
+        position: relative;
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+      .hero-video-preview {
+        position: relative;
+        overflow: hidden;
+        border-radius: 3rem;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.18), transparent 45%),
+          linear-gradient(160deg, rgba(111, 70, 39, 0.2), rgba(62, 88, 14, 0.08)),
+          #e8e1da;
+        box-shadow: 0 30px 70px rgba(111, 70, 39, 0.16);
+        isolation: isolate;
+      }
+      .hero-video-preview video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.02);
+      }
+      .hero-video-badge {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.85rem 1.15rem;
+        border-radius: 999px;
+        background: rgba(255, 248, 241, 0.88);
+        color: #1e1b17;
+        box-shadow: 0 18px 40px rgba(30, 27, 23, 0.1);
+        backdrop-filter: blur(16px);
+      }
+      .hero-video-badge .material-symbols-outlined {
+        font-size: 1.4rem;
+      }
+      .hero-video-pill {
+        position: absolute;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        max-width: 17rem;
+        padding: 1rem 1.15rem;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 1.5rem;
+        background: rgba(30, 27, 23, 0.58);
+        color: #fff8f1;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 24px 60px rgba(30, 27, 23, 0.26);
+      }
+      .hero-video-pill .material-symbols-outlined {
+        font-size: 1.7rem;
+      }
+      .hero-video-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        pointer-events: none;
+      }
+      .hero-video-lightbox.is-visible {
+        pointer-events: auto;
+      }
+      .hero-video-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(30, 27, 23, 0.78);
+        opacity: 0;
+        transition: opacity 420ms ease;
+      }
+      .hero-video-lightbox.is-visible .hero-video-backdrop {
+        opacity: 1;
+      }
+      .hero-video-stage {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        border-radius: 3rem;
+        background: #000;
+        opacity: 0;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3);
+        transition:
+          left 520ms cubic-bezier(0.22, 1, 0.36, 1),
+          top 520ms cubic-bezier(0.22, 1, 0.36, 1),
+          width 520ms cubic-bezier(0.22, 1, 0.36, 1),
+          height 520ms cubic-bezier(0.22, 1, 0.36, 1),
+          border-radius 520ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 520ms ease,
+          opacity 180ms ease;
+      }
+      .hero-video-lightbox.is-visible .hero-video-stage {
+        opacity: 1;
+      }
+      .hero-video-stage video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #000;
+      }
+      .hero-video-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border: 0;
+        border-radius: 999px;
+        background: rgba(30, 27, 23, 0.72);
+        color: #fff8f1;
+        backdrop-filter: blur(14px);
+        cursor: pointer;
+      }
+      .hero-video-trigger:hover .hero-video-badge,
+      .hero-video-trigger:hover .hero-video-pill {
+        transform: translateY(-2px);
+      }
+      .hero-video-badge,
+      .hero-video-pill {
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+      @media (max-width: 767px) {
+        .hero-video-preview {
+          border-radius: 2rem;
+        }
+        .hero-video-badge {
+          top: 1rem;
+          left: 1rem;
+          padding: 0.7rem 0.9rem;
+        }
+        .hero-video-pill {
+          left: 1rem;
+          right: 1rem;
+          bottom: 1rem;
+          max-width: none;
+          padding: 0.9rem 1rem;
+        }
+        .hero-video-stage {
+          border-radius: 1.75rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-video-backdrop,
+        .hero-video-stage,
+        .hero-video-badge,
+        .hero-video-pill {
+          transition: none;
+        }
+      }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
@@ -135,19 +295,28 @@
 </div>
 </div>
 <div class="lg:col-span-5 relative">
-<div class="aspect-square rounded-[3rem] overflow-hidden bg-surface-container-high relative">
-<img alt="Local tea vendor" class="w-full h-full object-cover mix-blend-multiply opacity-80" data-alt="Traditional Indian tea stall with steam rising" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtQHREGV25_j4zQEHfJLhOU-IeMV5tylVY3RTVT7CqR4HM90c5GRY4MNijvy7jsO-f87rbkvRiX44y4rnmKu3IhSvE2XsA9cAm3klIYpq7S7zgUMSlyvu8crtaTV7eyrubgutywAIGKFX_0c71DNb2SEghzxJEuds8N5p-joJFs-ICvW3TFNrwhlptKsjGNwEmYkG0dV1_2FpVArtca_l-uR3zcu2e5Ckgd0j35GCUqaHq__RSMP1N6eAkcGwlkJ4KrftVTaE8Uci1"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
-<div class="absolute bottom-8 right-8 bg-white/90 backdrop-blur p-4 rounded-2xl shadow-2xl flex items-center gap-4 max-w-xs border border-white/20">
-<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-tertiary">qr_code_2</span>
+<button aria-controls="hero-video-lightbox" aria-expanded="false" aria-label="Play project overview video with sound" class="hero-video-trigger" data-hero-video-trigger type="button">
+<div class="aspect-[4/5] md:aspect-square hero-video-preview">
+<video aria-label="Chai The People project overview preview" autoplay class="w-full h-full" data-hero-video-preview loop muted playsinline preload="metadata">
+<source src="https://res.cloudinary.com/dh4fnax0g/video/upload/v1774067804/Chai_ThePeople__Democracy_in_a_Cup_1_ef10wa.mp4" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(30,27,23,0.08),rgba(30,27,23,0.18)_45%,rgba(30,27,23,0.64))]"></div>
+<div class="hero-video-badge">
+<span class="material-symbols-outlined text-primary">play_circle</span>
+<div>
+<p class="font-bold text-sm tracking-[0.2em] uppercase">Overview</p>
+<p class="text-sm text-on-surface-variant">Preview playing silently</p>
 </div>
+</div>
+<div class="hero-video-pill">
+<span class="material-symbols-outlined">volume_up</span>
 <div class="text-sm">
-<p class="font-bold text-on-surface">Scan &amp; Speak</p>
-<p class="text-on-surface-variant opacity-70">Survey active at 45 stalls</p>
+<p class="font-bold">Watch the story unfold</p>
+<p class="opacity-80">Tap to expand the film and turn the sound on.</p>
 </div>
 </div>
 </div>
+</button>
 <!-- Asymmetric background shape -->
 <div class="absolute -z-10 -top-12 -right-12 w-64 h-64 bg-secondary-fixed opacity-30 rounded-full blur-3xl"></div>
 </div>
@@ -431,5 +600,156 @@
 </div>
 </div>
 </footer>
+<div aria-hidden="true" class="hero-video-lightbox" data-hero-video-lightbox id="hero-video-lightbox">
+<button aria-label="Close expanded video" class="hero-video-backdrop" data-hero-video-close type="button"></button>
+<div class="hero-video-stage" data-hero-video-stage>
+<button aria-label="Close expanded video" class="hero-video-close" data-hero-video-close type="button">
+<span class="material-symbols-outlined">close</span>
+</button>
+<video controls data-hero-video-player playsinline preload="metadata">
+<source src="https://res.cloudinary.com/dh4fnax0g/video/upload/v1774067804/Chai_ThePeople__Democracy_in_a_Cup_1_ef10wa.mp4" type="video/mp4"/>
+</video>
+</div>
+</div>
+<script>
+      (() => {
+        const trigger = document.querySelector("[data-hero-video-trigger]");
+        const previewVideo = document.querySelector("[data-hero-video-preview]");
+        const lightbox = document.querySelector("[data-hero-video-lightbox]");
+        const stage = document.querySelector("[data-hero-video-stage]");
+        const player = document.querySelector("[data-hero-video-player]");
+        const closeButtons = document.querySelectorAll("[data-hero-video-close]");
+        const originalOverflow = document.body.style.overflow;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        if (!trigger || !previewVideo || !lightbox || !stage || !player) {
+          return;
+        }
+
+        let isOpen = false;
+
+        const getTargetRect = () => {
+          const gutter = window.innerWidth < 768 ? 16 : 40;
+          const maxHeight = window.innerHeight - gutter * 2;
+          let width = window.innerWidth - gutter * 2;
+          let height = width * 9 / 16;
+
+          if (height > maxHeight) {
+            height = maxHeight;
+            width = height * 16 / 9;
+          }
+
+          return {
+            left: (window.innerWidth - width) / 2,
+            top: (window.innerHeight - height) / 2,
+            width,
+            height
+          };
+        };
+
+        const applyRect = (rect) => {
+          stage.style.left = rect.left + "px";
+          stage.style.top = rect.top + "px";
+          stage.style.width = rect.width + "px";
+          stage.style.height = rect.height + "px";
+        };
+
+        const getPreviewRect = () => {
+          const rect = previewVideo.getBoundingClientRect();
+          return {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height
+          };
+        };
+
+        const openVideo = async () => {
+          if (isOpen) {
+            return;
+          }
+
+          isOpen = true;
+          trigger.setAttribute("aria-expanded", "true");
+          lightbox.setAttribute("aria-hidden", "false");
+          lightbox.classList.add("is-visible");
+          document.body.style.overflow = "hidden";
+          previewVideo.pause();
+          player.currentTime = 0;
+          player.muted = false;
+          player.volume = 1;
+          applyRect(getPreviewRect());
+
+          requestAnimationFrame(() => {
+            stage.style.borderRadius = window.innerWidth < 768 ? "1.75rem" : "2rem";
+            stage.style.boxShadow = "0 30px 90px rgba(0, 0, 0, 0.38)";
+            applyRect(getTargetRect());
+          });
+
+          try {
+            await player.play();
+          } catch (error) {
+            player.muted = true;
+            player.play().catch(() => {});
+            player.controls = true;
+          }
+        };
+
+        const closeVideo = () => {
+          if (!isOpen) {
+            return;
+          }
+
+          isOpen = false;
+          trigger.setAttribute("aria-expanded", "false");
+          stage.style.borderRadius = window.innerWidth < 768 ? "2rem" : "3rem";
+          stage.style.boxShadow = "0 30px 70px rgba(111, 70, 39, 0.16)";
+          applyRect(getPreviewRect());
+
+          player.muted = true;
+          player.pause();
+
+          const finishClose = () => {
+            document.body.style.overflow = originalOverflow;
+            lightbox.classList.remove("is-visible");
+            lightbox.setAttribute("aria-hidden", "true");
+            previewVideo.currentTime = player.currentTime || previewVideo.currentTime;
+            previewVideo.play().catch(() => {});
+          };
+
+          if (prefersReducedMotion.matches) {
+            finishClose();
+            return;
+          }
+
+          stage.addEventListener("transitionend", (event) => {
+            if (event.target !== stage) {
+              return;
+            }
+            finishClose();
+          }, { once: true });
+        };
+
+        trigger.addEventListener("click", openVideo);
+        closeButtons.forEach((button) => {
+          button.addEventListener("click", closeVideo);
+        });
+
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeVideo();
+          }
+        });
+
+        window.addEventListener("resize", () => {
+          if (!isOpen) {
+            return;
+          }
+          applyRect(getTargetRect());
+        });
+
+        previewVideo.play().catch(() => {});
+      })();
+    </script>
 <script type="module" src="auth.js"></script>
 </body></html>
