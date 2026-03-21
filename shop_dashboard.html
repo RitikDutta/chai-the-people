@@ -1,430 +1,460 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chai The People | Shop Owner Dashboard</title>
-<!-- Tailwind CSS with Plugins -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Google Fonts: Newsreader & Manrope -->
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols Outlined -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>.material-symbols-outlined {
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Chai The People | Shop Owner Dashboard</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
     }
-/* Custom scrollbar for better editorial feel */
-::-webkit-scrollbar {
-    width: 6px
+    ::-webkit-scrollbar {
+      width: 6px;
     }
-::-webkit-scrollbar-track {
-    background: transparent
+    ::-webkit-scrollbar-track {
+      background: transparent;
     }
-::-webkit-scrollbar-thumb {
-    background: #D5C3B8;
-    border-radius: 10px
+    ::-webkit-scrollbar-thumb {
+      background: #D5C3B8;
+      border-radius: 10px;
     }
-.grain-overlay {
-    position: relative
+    .grain-overlay {
+      position: relative;
     }
-.grain-overlay::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDcT0wP-kxLer7fZ2aFwrz8DGEATBDTVnm-EEioYEeGEq6Sk0NqxJtbakWCDsmXsjBD850amXh-uR1damSB--jTpendcmhrv8zTrBhrUIFLPCLA10lipSr9Z5_y6W1K3OX35p5Ejy7emFgntdfP-cY0tZh3Dhd5tZwrFmoEV7mZR1AMP_SEbwJTcmW8bR_rZ80Q5w1nenXvFKbDmfdTKQiRZQo3B-gkDL5-Mq5_a5XFR2tLhM-i6WYoJ0vVlR10neKDXqViXOma0C7R);
-    opacity: 0.05;
-    z-index: 1
-    }</style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "on-secondary-fixed": "#360f00",
-                        "secondary-container": "#ff9564",
-                        "on-error-container": "#93000a",
-                        "inverse-surface": "#33302b",
-                        "on-primary-container": "#ffe3d1",
-                        "on-primary-fixed-variant": "#653d1e",
-                        "on-background": "#1e1b17",
-                        "background": "#fff8f1",
-                        "primary": "#6f4627",
-                        "on-error": "#ffffff",
-                        "outline-variant": "#d5c3b8",
-                        "outline": "#83746b",
-                        "surface-dim": "#dfd9d1",
-                        "surface-container-high": "#eee7df",
-                        "tertiary-container": "#557126",
-                        "surface-container-highest": "#e8e1da",
-                        "on-surface": "#1e1b17",
-                        "on-tertiary-container": "#d3f499",
-                        "error-container": "#ffdad6",
-                        "surface": "#fff8f1",
-                        "primary-container": "#8b5e3c",
-                        "tertiary-fixed-dim": "#b1d27b",
-                        "secondary-fixed": "#ffdbcd",
-                        "tertiary-fixed": "#cdee94",
-                        "on-secondary-fixed-variant": "#7b2f04",
-                        "on-primary-fixed": "#301400",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-container": "#f4ede5",
-                        "surface-tint": "#805533",
-                        "on-secondary-container": "#762c02",
-                        "on-tertiary-fixed-variant": "#354e04",
-                        "secondary-fixed-dim": "#ffb596",
-                        "on-surface-variant": "#51443c",
-                        "tertiary": "#3e580e",
-                        "primary-fixed-dim": "#f4bb92",
-                        "error": "#ba1a1a",
-                        "surface-variant": "#e8e1da",
-                        "surface-bright": "#fff8f1",
-                        "on-tertiary": "#ffffff",
-                        "on-secondary": "#ffffff",
-                        "on-tertiary-fixed": "#131f00",
-                        "secondary": "#99461c",
-                        "inverse-on-surface": "#f7f0e8",
-                        "inverse-primary": "#f4bb92",
-                        "primary-fixed": "#ffdcc5",
-                        "surface-container-low": "#f9f3eb",
-                        "on-primary": "#ffffff"
-                    },
-                    fontFamily: {
-                        "headline": ["Newsreader"],
-                        "body": ["Manrope"],
-                        "label": ["Manrope"]
-                    },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
-                },
-            },
+    .grain-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDcT0wP-kxLer7fZ2aFwrz8DGEATBDTVnm-EEioYEeGEq6Sk0NqxJtbakWCDsmXsjBD850amXh-uR1damSB--jTpendcmhrv8zTrBhrUIFLPCLA10lipSr9Z5_y6W1K3OX35p5Ejy7emFgntdfP-cY0tZh3Dhd5tZwrFmoEV7mZR1AMP_SEbwJTcmW8bR_rZ80Q5w1nenXvFKbDmfdTKQiRZQo3B-gkDL5-Mq5_a5XFR2tLhM-i6WYoJ0vVlR10neKDXqViXOma0C7R);
+      opacity: 0.05;
+      z-index: 1;
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-secondary-fixed": "#360f00",
+            "secondary-container": "#ff9564",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#33302b",
+            "on-primary-container": "#ffe3d1",
+            "on-primary-fixed-variant": "#653d1e",
+            "on-background": "#1e1b17",
+            "background": "#fff8f1",
+            "primary": "#6f4627",
+            "on-error": "#ffffff",
+            "outline-variant": "#d5c3b8",
+            "outline": "#83746b",
+            "surface-dim": "#dfd9d1",
+            "surface-container-high": "#eee7df",
+            "tertiary-container": "#557126",
+            "surface-container-highest": "#e8e1da",
+            "on-surface": "#1e1b17",
+            "on-tertiary-container": "#d3f499",
+            "error-container": "#ffdad6",
+            "surface": "#fff8f1",
+            "primary-container": "#8b5e3c",
+            "tertiary-fixed-dim": "#b1d27b",
+            "secondary-fixed": "#ffdbcd",
+            "tertiary-fixed": "#cdee94",
+            "on-secondary-fixed-variant": "#7b2f04",
+            "on-primary-fixed": "#301400",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#f4ede5",
+            "surface-tint": "#805533",
+            "on-secondary-container": "#762c02",
+            "on-tertiary-fixed-variant": "#354e04",
+            "secondary-fixed-dim": "#ffb596",
+            "on-surface-variant": "#51443c",
+            "tertiary": "#3e580e",
+            "primary-fixed-dim": "#f4bb92",
+            "error": "#ba1a1a",
+            "surface-variant": "#e8e1da",
+            "surface-bright": "#fff8f1",
+            "on-tertiary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed": "#131f00",
+            "secondary": "#99461c",
+            "inverse-on-surface": "#f7f0e8",
+            "inverse-primary": "#f4bb92",
+            "primary-fixed": "#ffdcc5",
+            "surface-container-low": "#f9f3eb",
+            "on-primary": "#ffffff"
+          },
+          fontFamily: {
+            "headline": ["Newsreader"],
+            "body": ["Manrope"],
+            "label": ["Manrope"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "1.5rem",
+            "2xl": "1rem",
+            "3xl": "2rem",
+            "full": "9999px"
+          }
         }
-    </script>
+      }
+    }
+  </script>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed min-h-screen" data-requires-auth="true" data-role="shop">
-<!-- Layout Container -->
-<div class="flex">
-<!-- SideNavBar (Predicted Component) -->
-<aside class="fixed left-0 top-0 h-full flex flex-col py-8 z-40 bg-[#F4EDE5] dark:bg-[#2F241F] h-screen w-72 rounded-r-[2rem] shadow-2xl shadow-[#1E1B17]/5">
-<!-- Brand Section -->
-<div class="px-8 mb-10">
-<h1 class="font-['Newsreader'] text-2xl font-bold text-[#6F4627]">Chai The People</h1>
-<p class="font-['Manrope'] font-medium text-xs text-outline opacity-70 tracking-widest uppercase mt-1">Civic Hospitality</p>
-</div>
-<!-- Profile Snippet -->
-<div class="px-8 mb-8 flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-headline italic font-bold" data-user-initial>H</div>
-<div>
-<p class="font-headline font-bold text-[#6F4627] text-sm" data-user-name>Shop Owner</p>
-<p class="text-[10px] text-outline">Partner dashboard</p>
-</div>
-</div>
-<!-- Navigation Items -->
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 px-6 py-4 text-[#6F4627] dark:text-[#F4EDE5] bg-[#E8E1DA] dark:bg-[#3E342E] rounded-r-full font-bold border-l-4 border-[#6F4627] transition-all" href="shop_dashboard.html">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span>Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-6 py-4 text-[#8B5E3C] dark:text-[#D5C3B8] hover:translate-x-1 transition-all hover:text-[#6F4627] dark:hover:text-[#FFF8F1]" href="index.html">
-<span class="material-symbols-outlined" data-icon="store">store</span>
-<span>Homepage</span>
-</a>
-<a class="flex items-center gap-3 px-6 py-4 text-[#8B5E3C] dark:text-[#D5C3B8] hover:translate-x-1 transition-all hover:text-[#6F4627] dark:hover:text-[#FFF8F1]" href="how_it_works.html">
-<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
-<span>How It Works</span>
-</a>
-<button class="flex w-full items-center gap-3 px-6 py-4 text-left text-[#8B5E3C] dark:text-[#D5C3B8] hover:translate-x-1 transition-all hover:text-[#6F4627] dark:hover:text-[#FFF8F1]" data-logout type="button">
-<span class="material-symbols-outlined" data-icon="description">description</span>
-<span>Logout</span>
-</button>
-</nav>
-<!-- Support Anchor -->
-<div class="px-8 mt-auto pt-8">
-<div class="p-4 bg-surface-container-highest rounded-xl text-xs">
-<p class="font-bold text-primary mb-1">Need help?</p>
-<p class="text-on-surface-variant mb-2 leading-relaxed">Contact the Chai Team for stall support.</p>
-<a class="text-secondary font-bold hover:underline" href="mailto:support@chaithepeople.app">Get in touch →</a>
-</div>
-</div>
-</aside>
-<!-- Main Content Area -->
-<main class="flex-1 ml-72 min-h-screen px-12 py-10 relative">
-<!-- Header Section -->
-<header class="mb-12 flex justify-between items-end">
-<div class="max-w-2xl">
-<h2 class="font-headline text-5xl font-extrabold text-primary tracking-tight mb-2">Namaste, <span data-user-name>Partner</span>!</h2>
-<p class="font-body text-lg text-on-surface-variant italic">Your stall is live and engaging.</p>
-</div>
-<div class="flex items-center gap-4">
-<button class="p-3 rounded-full bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors" data-toast-message="Live notifications are not configured yet. Your latest activity is already visible below." type="button">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-</button>
-<div class="h-10 w-[1px] bg-outline-variant"></div>
-<div class="text-right">
-<label class="text-xs text-outline uppercase tracking-widest font-bold" for="active-stall-select">Active Stall</label>
-<select class="mt-2 rounded-xl border border-outline-variant/20 bg-white px-4 py-2 text-sm font-bold text-primary" id="active-stall-select">
-<option>Loading...</option>
-</select>
-</div>
-</div>
-</header>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-12 gap-8">
-<!-- KPI Summary Row -->
-<section class="col-span-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-<!-- Survey Completions -->
-<div class="grain-overlay bg-surface-container-low p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-<p class="text-xs font-bold text-outline tracking-wider uppercase mb-4">Survey Completions</p>
-<div class="flex items-baseline gap-2">
-<span class="text-3xl font-headline font-black text-primary" id="shop-total-responses">0</span>
-<span class="text-xs text-tertiary font-bold flex items-center">
-<span class="material-symbols-outlined text-[14px] mr-0.5" data-icon="trending_up">trending_up</span>
-                                Live
-                            </span>
-</div>
-<p class="text-[10px] text-on-surface-variant mt-2 opacity-60">Across all your stalls</p>
-</div>
-<!-- Today's Participation -->
-<div class="grain-overlay bg-surface-container-low p-6 rounded-xl shadow-sm border-l-4 border-secondary transition-shadow">
-<p class="text-xs font-bold text-outline tracking-wider uppercase mb-4">Today's Activity</p>
-<div class="flex items-baseline gap-2">
-<span class="text-3xl font-headline font-black text-primary" id="shop-today-responses">0</span>
-<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-[10px] rounded-full font-bold uppercase tracking-tighter">Active Now</span>
-</div>
-</div>
-<!-- Chai Claims -->
-<div class="grain-overlay bg-surface-container-low p-6 rounded-xl shadow-sm transition-shadow">
-<p class="text-xs font-bold text-outline tracking-wider uppercase mb-4">Partner Stalls</p>
-<div class="flex items-baseline gap-2">
-<span class="text-3xl font-headline font-black text-primary" id="shop-stall-count">0</span>
-</div>
-<p class="text-[10px] text-on-surface-variant mt-2 opacity-60">Registered under your account</p>
-</div>
-<!-- Active Surveys -->
-<div class="grain-overlay bg-surface-container-low p-6 rounded-xl shadow-sm transition-shadow">
-<p class="text-xs font-bold text-outline tracking-wider uppercase mb-4">Active Surveys</p>
-<div class="flex items-baseline gap-2">
-<span class="text-3xl font-headline font-black text-primary" id="shop-active-surveys">0</span>
-</div>
-<p class="text-[10px] text-on-surface-variant mt-2 opacity-60">Available at the active stall</p>
-</div>
-<!-- Repeat Visitors -->
-<div class="grain-overlay bg-surface-container-low p-6 rounded-xl shadow-sm transition-shadow">
-<p class="text-xs font-bold text-outline tracking-wider uppercase mb-4">Repeat Visitors</p>
-<div class="flex items-baseline gap-2">
-<span class="text-3xl font-headline font-black text-primary" id="shop-repeat-visitors">0%</span>
-</div>
-<!-- Simple Progress Bar -->
-<div class="mt-4 h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
-<div class="h-full bg-tertiary rounded-full" style="width: 65%"></div>
-</div>
-</div>
-</section>
-<!-- QR Management Card (Prominent) -->
-<section class="col-span-12 lg:col-span-5">
-<div class="grain-overlay bg-surface-container-highest p-8 rounded-xl h-full flex flex-col">
-<div class="mb-6">
-<h3 class="font-headline text-2xl font-bold text-primary mb-1" id="shop-active-stall-name">Select a Stall</h3>
-<p class="text-on-surface-variant text-sm" id="shop-active-stall-meta">Your QR link will appear here.</p>
-</div>
-<div class="flex-1 flex flex-col items-center justify-center py-6">
-<div class="relative group">
-<div class="absolute -inset-4 bg-primary/5 rounded-2xl blur-xl group-hover:bg-primary/10 transition-colors"></div>
-<div class="bg-white p-6 rounded-2xl shadow-xl relative">
-<div class="flex h-48 w-48 items-center justify-center" id="shop-qr-code">
-<span class="material-symbols-outlined text-6xl text-on-surface opacity-20">qr_code_2</span>
-</div>
-<div class="absolute inset-0 border-4 border-dashed border-primary-container/20 rounded-2xl"></div>
-</div>
-</div>
-<p class="mt-8 text-center text-sm text-on-surface-variant max-w-xs leading-relaxed">
-                                Customers scan this QR to access the survey linked to your stall and claim their reward.
-                            </p>
-</div>
-<div class="grid grid-cols-2 gap-3 mt-6">
-<button class="col-span-2 py-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/10 hover:scale-[1.02] transition-transform" id="download-qr-button" type="button">
-<span class="material-symbols-outlined" data-icon="download">download</span>
-                                Download QR
-                            </button>
-<button class="py-3 bg-white/50 border border-outline-variant/30 text-on-surface rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors" id="print-qr-button" type="button">
-<span class="material-symbols-outlined text-[18px]" data-icon="print">print</span>
-                                Print Poster
-                            </button>
-<button class="py-3 bg-white/50 border border-outline-variant/30 text-on-surface rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors" id="copy-link-button" type="button">
-<span class="material-symbols-outlined text-[18px]" data-icon="content_copy">content_copy</span>
-                                Copy Link
-                            </button>
-</div>
-</div>
-</section>
-<!-- Participation Trends & Recent Activity -->
-<div class="col-span-12 lg:col-span-7 space-y-8">
-<!-- Chart Card -->
-<div class="grain-overlay bg-surface-container p-8 rounded-xl">
-<div class="flex justify-between items-start mb-8">
-<div>
-<h3 class="font-headline text-2xl font-bold text-primary mb-1">Weekly Participation</h3>
-<p class="text-xs text-outline uppercase font-bold tracking-widest">Analytics Dashboard</p>
-</div>
-<div class="flex gap-4">
-<div class="flex items-center gap-1.5">
-<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-<span class="text-[10px] font-bold opacity-70 uppercase">Completions</span>
-</div>
-<div class="flex items-center gap-1.5">
-<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
-<span class="text-[10px] font-bold opacity-70 uppercase">Chai Claims</span>
-</div>
-</div>
-</div>
-<!-- Simplified Bar Chart Visual -->
-<div class="h-48 flex items-end justify-between gap-4 px-2">
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full flex flex-col justify-end gap-0.5 h-40">
-<div class="bg-secondary/40 w-full rounded-t-sm" style="height: 30%"></div>
-<div class="bg-primary w-full rounded-t-sm" style="height: 50%"></div>
-</div>
-<span class="text-[10px] text-outline mt-2">Mon</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full flex flex-col justify-end gap-0.5 h-40">
-<div class="bg-secondary/40 w-full rounded-t-sm" style="height: 40%"></div>
-<div class="bg-primary w-full rounded-t-sm" style="height: 65%"></div>
-</div>
-<span class="text-[10px] text-outline mt-2">Tue</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full flex flex-col justify-end gap-0.5 h-40">
-<div class="bg-secondary/40 w-full rounded-t-sm" style="height: 25%"></div>
-<div class="bg-primary w-full rounded-t-sm" style="height: 45%"></div>
-</div>
-<span class="text-[10px] text-outline mt-2">Wed</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full flex flex-col justify-end gap-0.5 h-40">
-<div class="bg-secondary/40 w-full rounded-t-sm" style="height: 55%"></div>
-<div class="bg-primary w-full rounded-t-sm" style="height: 80%"></div>
-</div>
-<span class="text-[10px] text-outline mt-2">Thu</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full flex flex-col justify-end gap-0.5 h-40">
-<div class="bg-secondary/40 w-full rounded-t-sm" style="height: 45%"></div>
-<div class="bg-primary w-full rounded-t-sm" style="height: 70%"></div>
-</div>
-<span class="text-[10px] text-outline mt-2">Fri</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full flex flex-col justify-end gap-0.5 h-40">
-<div class="bg-secondary/40 w-full rounded-t-sm" style="height: 20%"></div>
-<div class="bg-primary w-full rounded-t-sm" style="height: 35%"></div>
-</div>
-<span class="text-[10px] text-outline mt-2">Sat</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full flex flex-col justify-end gap-0.5 h-40">
-<div class="bg-secondary/40 w-full rounded-t-sm" style="height: 70%"></div>
-<div class="bg-primary w-full rounded-t-sm" style="height: 95%"></div>
-</div>
-<span class="text-[10px] font-bold text-primary mt-2">Sun</span>
-</div>
-</div>
-</div>
-<!-- Recent Activity Table -->
-<div class="bg-surface-container-low rounded-xl overflow-hidden">
-<div class="px-8 py-6 flex justify-between items-center border-b border-outline-variant/10">
-<h3 class="font-headline text-xl font-bold text-primary">Recent Participation</h3>
-<span class="text-xs font-bold text-secondary uppercase tracking-widest">Latest responses</span>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left">
-<thead class="bg-surface-container-high/50">
-<tr>
-<th class="px-8 py-4 text-[10px] font-bold text-outline uppercase tracking-widest">Customer ID</th>
-<th class="px-8 py-4 text-[10px] font-bold text-outline uppercase tracking-widest">Survey Name</th>
-<th class="px-8 py-4 text-[10px] font-bold text-outline uppercase tracking-widest">Status</th>
-<th class="px-8 py-4 text-[10px] font-bold text-outline uppercase tracking-widest">Time</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant/10" id="recent-responses-body">
-<tr>
-<td class="px-8 py-6 text-sm text-on-surface-variant" colspan="4">Loading responses...</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<!-- Footer Quick Insights Area -->
-<section class="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-8 mt-4 pb-12">
-<div class="flex gap-4 items-center p-6 bg-surface-container-low rounded-xl border-b-2 border-primary/20">
-<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
-</div>
-<div>
-<p class="text-[10px] font-bold text-outline uppercase tracking-widest">Best Time</p>
-<p class="font-headline text-lg font-bold text-primary" id="shop-best-time">Loading...</p>
-</div>
-</div>
-<div class="flex gap-4 items-center p-6 bg-surface-container-low rounded-xl border-b-2 border-secondary/20">
-<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
-</div>
-<div>
-<p class="text-[10px] font-bold text-outline uppercase tracking-widest">Most Active Day</p>
-<p class="font-headline text-lg font-bold text-primary" id="shop-best-day">Loading...</p>
-</div>
-</div>
-<div class="flex gap-4 items-center p-6 bg-surface-container-low rounded-xl border-b-2 border-tertiary/20">
-<div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
-<span class="material-symbols-outlined" data-icon="loyalty">loyalty</span>
-</div>
-<div>
-<p class="text-[10px] font-bold text-outline uppercase tracking-widest">Loyalty Status</p>
-<p class="font-headline text-lg font-bold text-primary" id="shop-loyalty-status">Loading...</p>
-</div>
-</div>
-</section>
-<section class="col-span-12 grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
-<div class="rounded-xl bg-surface-container-low p-8">
-<div class="mb-6 flex items-center justify-between">
-<h3 class="font-headline text-2xl font-bold text-primary">Your Stalls</h3>
-<span class="text-xs font-bold uppercase tracking-widest text-outline">Tap to switch</span>
-</div>
-<div class="space-y-3" id="owned-stalls-list"></div>
-<p class="mt-4 text-sm text-on-surface-variant" id="no-owned-stalls" hidden>No stalls registered yet. Add your first one to start collecting responses.</p>
-</div>
-<div class="rounded-xl bg-surface-container-low p-8">
-<h3 class="font-headline text-2xl font-bold text-primary">Add a Stall</h3>
-<p class="mt-2 text-sm text-on-surface-variant">Create a new partner stall, generate its QR, and start collecting local civic prompts.</p>
-<form class="mt-6 space-y-4" id="add-stall-form">
-<div>
-<label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="stall-name">Stall Name</label>
-<input class="w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="stall-name" name="stall-name" placeholder="Central Park Chai" type="text"/>
-</div>
-<div>
-<label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="stall-id">Unique Stall ID</label>
-<input class="w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="stall-id" name="stall-id" placeholder="central_park_01" type="text"/>
-</div>
-<div>
-<label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="stall-location">Location</label>
-<input class="w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="stall-location" name="stall-location" placeholder="Gate 4, Central Park" type="text"/>
-</div>
-<button class="w-full rounded-xl bg-gradient-to-r from-primary to-primary-container py-4 font-bold text-white" type="submit">Save Stall</button>
-<p class="hidden" id="add-stall-status"></p>
-</form>
-</div>
-</section>
-</div>
-<!-- Floating Action Button (FAB) -->
-</main>
-</div>
-<!-- Decorative Elements -->
-<div class="fixed top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2"></div>
-<div class="fixed bottom-0 left-0 w-80 h-80 bg-secondary/5 rounded-full blur-[100px] -z-10 -translate-x-1/2 translate-y-1/2"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script type="module" src="site.js"></script>
-<script type="module" src="auth.js"></script>
-<script type="module" src="shop.js"></script>
-</body></html>
+<body class="min-h-screen bg-background font-body text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed" data-requires-auth="true" data-role="shop">
+  <button class="fixed inset-0 z-40 hidden bg-[#1E1B17]/45 lg:hidden" id="shop-nav-backdrop" type="button" aria-label="Close navigation"></button>
+
+  <div class="min-h-screen lg:flex">
+    <aside class="fixed inset-y-0 left-0 z-50 flex h-screen w-[18rem] max-w-[85vw] -translate-x-full flex-col bg-[#F4EDE5] py-6 shadow-2xl shadow-[#1E1B17]/10 transition-transform duration-300 ease-out lg:translate-x-0 lg:rounded-r-[2rem] dark:bg-[#2F241F]" id="shop-sidebar">
+      <div class="mb-8 flex items-start justify-between px-6 lg:px-8">
+        <div>
+          <h1 class="font-headline text-2xl font-bold text-[#6F4627]">Chai The People</h1>
+          <p class="mt-1 text-xs font-medium uppercase tracking-widest text-outline opacity-70">Civic Hospitality</p>
+        </div>
+        <button class="rounded-full p-2 text-[#6F4627] transition-colors hover:bg-white/60 lg:hidden" data-shop-nav-close type="button" aria-label="Close navigation">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="mb-8 flex items-center gap-3 px-6 lg:px-8">
+        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-primary-container font-headline text-lg font-bold italic text-on-primary-container" data-user-initial>H</div>
+        <div class="min-w-0">
+          <p class="truncate font-headline text-sm font-bold text-[#6F4627]" data-user-name>Shop Owner</p>
+          <p class="text-[10px] text-outline">Partner dashboard</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 space-y-1">
+        <a class="flex items-center gap-3 rounded-r-full border-l-4 border-[#6F4627] bg-[#E8E1DA] px-6 py-4 font-bold text-[#6F4627] transition-all dark:bg-[#3E342E] dark:text-[#F4EDE5]" data-shop-nav-link href="shop_dashboard.html">
+          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <span>Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-6 py-4 text-[#8B5E3C] transition-all hover:translate-x-1 hover:text-[#6F4627] dark:text-[#D5C3B8] dark:hover:text-[#FFF8F1]" data-shop-nav-link href="index.html">
+          <span class="material-symbols-outlined" data-icon="store">store</span>
+          <span>Homepage</span>
+        </a>
+        <a class="flex items-center gap-3 px-6 py-4 text-[#8B5E3C] transition-all hover:translate-x-1 hover:text-[#6F4627] dark:text-[#D5C3B8] dark:hover:text-[#FFF8F1]" data-shop-nav-link href="how_it_works.html">
+          <span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+          <span>How It Works</span>
+        </a>
+        <button class="flex w-full items-center gap-3 px-6 py-4 text-left text-[#8B5E3C] transition-all hover:translate-x-1 hover:text-[#6F4627] dark:text-[#D5C3B8] dark:hover:text-[#FFF8F1]" data-logout data-shop-nav-close type="button">
+          <span class="material-symbols-outlined" data-icon="logout">logout</span>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="mt-auto px-6 pt-8 lg:px-8">
+        <div class="rounded-xl bg-surface-container-highest p-4 text-xs">
+          <p class="mb-1 font-bold text-primary">Need help?</p>
+          <p class="mb-2 leading-relaxed text-on-surface-variant">Contact the Chai Team for stall support.</p>
+          <a class="font-bold text-secondary hover:underline" href="mailto:support@chaithepeople.app">Get in touch →</a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="relative flex min-h-screen flex-1 flex-col lg:ml-72">
+      <header class="sticky top-0 z-30 border-b border-outline-variant/20 bg-[#FFF8F1]/90 px-4 py-4 backdrop-blur-md sm:px-6 lg:hidden">
+        <div class="flex items-center justify-between gap-4">
+          <button class="flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-high text-primary" data-shop-nav-open type="button" aria-label="Open navigation">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="min-w-0 flex-1">
+            <p class="text-[10px] font-bold uppercase tracking-[0.24em] text-outline">Partner dashboard</p>
+            <h1 class="truncate font-headline text-2xl font-bold text-primary">Chai The People</h1>
+          </div>
+          <div class="flex h-11 w-11 items-center justify-center rounded-full bg-primary-container font-headline text-lg font-bold italic text-on-primary-container" data-user-initial>H</div>
+        </div>
+      </header>
+
+      <main class="relative flex-1 px-4 pb-10 pt-6 sm:px-6 lg:px-12 lg:py-10">
+        <header class="mb-8 flex flex-col gap-6 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+          <div class="max-w-2xl">
+            <h2 class="mb-2 font-headline text-4xl font-extrabold tracking-tight text-primary sm:text-5xl">Namaste, <span data-user-name>Partner</span>!</h2>
+            <p class="text-base italic text-on-surface-variant lg:text-lg">Your stall is live and engaging.</p>
+          </div>
+          <div class="flex flex-col gap-4 rounded-2xl bg-surface-container-low p-4 sm:flex-row sm:items-end sm:justify-between lg:bg-transparent lg:p-0">
+            <div class="flex items-center gap-3">
+              <button class="rounded-full bg-surface-container-high p-3 text-primary transition-colors hover:bg-surface-container-highest" data-toast-message="Live notifications are not configured yet. Your latest activity is already visible below." type="button">
+                <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+              </button>
+              <div class="hidden h-10 w-px bg-outline-variant sm:block"></div>
+              <div class="hidden min-w-0 sm:block">
+                <p class="text-xs font-bold uppercase tracking-widest text-outline">Shop mode</p>
+                <p class="text-sm font-semibold text-primary">Owner controls active</p>
+              </div>
+            </div>
+            <div class="w-full sm:w-auto">
+              <label class="text-xs font-bold uppercase tracking-widest text-outline" for="active-stall-select">Active Stall</label>
+              <select class="mt-2 w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-sm font-bold text-primary sm:min-w-[15rem]" id="active-stall-select">
+                <option>Loading...</option>
+              </select>
+            </div>
+          </div>
+        </header>
+
+        <div class="grid grid-cols-1 gap-8">
+          <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5 xl:gap-6">
+            <div class="grain-overlay rounded-2xl bg-surface-container-low p-5 shadow-sm transition-shadow hover:shadow-md lg:p-6">
+              <p class="mb-4 text-xs font-bold uppercase tracking-wider text-outline">Survey Completions</p>
+              <div class="flex items-baseline gap-2">
+                <span class="font-headline text-3xl font-black text-primary" id="shop-total-responses">0</span>
+                <span class="flex items-center text-xs font-bold text-tertiary">
+                  <span class="material-symbols-outlined mr-0.5 text-[14px]" data-icon="trending_up">trending_up</span>
+                  Live
+                </span>
+              </div>
+              <p class="mt-2 text-[10px] text-on-surface-variant opacity-60">Across all your stalls</p>
+            </div>
+
+            <div class="grain-overlay rounded-2xl border-l-4 border-secondary bg-surface-container-low p-5 shadow-sm transition-shadow lg:p-6">
+              <p class="mb-4 text-xs font-bold uppercase tracking-wider text-outline">Today's Activity</p>
+              <div class="flex items-baseline gap-2">
+                <span class="font-headline text-3xl font-black text-primary" id="shop-today-responses">0</span>
+                <span class="rounded-full bg-secondary-fixed px-2 py-0.5 text-[10px] font-bold uppercase tracking-tighter text-on-secondary-fixed">Active Now</span>
+              </div>
+            </div>
+
+            <div class="grain-overlay rounded-2xl bg-surface-container-low p-5 shadow-sm transition-shadow lg:p-6">
+              <p class="mb-4 text-xs font-bold uppercase tracking-wider text-outline">Partner Stalls</p>
+              <div class="flex items-baseline gap-2">
+                <span class="font-headline text-3xl font-black text-primary" id="shop-stall-count">0</span>
+              </div>
+              <p class="mt-2 text-[10px] text-on-surface-variant opacity-60">Registered under your account</p>
+            </div>
+
+            <div class="grain-overlay rounded-2xl bg-surface-container-low p-5 shadow-sm transition-shadow lg:p-6">
+              <p class="mb-4 text-xs font-bold uppercase tracking-wider text-outline">Active Surveys</p>
+              <div class="flex items-baseline gap-2">
+                <span class="font-headline text-3xl font-black text-primary" id="shop-active-surveys">0</span>
+              </div>
+              <p class="mt-2 text-[10px] text-on-surface-variant opacity-60">Available at the active stall</p>
+            </div>
+
+            <div class="grain-overlay rounded-2xl bg-surface-container-low p-5 shadow-sm transition-shadow lg:p-6">
+              <p class="mb-4 text-xs font-bold uppercase tracking-wider text-outline">Repeat Visitors</p>
+              <div class="flex items-baseline gap-2">
+                <span class="font-headline text-3xl font-black text-primary" id="shop-repeat-visitors">0%</span>
+              </div>
+              <div class="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-surface-variant">
+                <div class="h-full rounded-full bg-tertiary" style="width: 65%"></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="grid grid-cols-1 gap-8 xl:grid-cols-12">
+            <section class="xl:col-span-5">
+              <div class="grain-overlay flex h-full flex-col rounded-2xl bg-surface-container-highest p-6 lg:p-8">
+                <div class="mb-6">
+                  <h3 class="mb-1 font-headline text-2xl font-bold text-primary" id="shop-active-stall-name">Select a Stall</h3>
+                  <p class="text-sm text-on-surface-variant" id="shop-active-stall-meta">Your QR link will appear here.</p>
+                </div>
+                <div class="flex flex-1 flex-col items-center justify-center py-4 lg:py-6">
+                  <div class="group relative">
+                    <div class="absolute -inset-4 rounded-2xl bg-primary/5 blur-xl transition-colors group-hover:bg-primary/10"></div>
+                    <div class="relative rounded-2xl bg-white p-5 shadow-xl lg:p-6">
+                      <div class="flex h-40 w-40 items-center justify-center sm:h-44 sm:w-44 lg:h-48 lg:w-48" id="shop-qr-code">
+                        <span class="material-symbols-outlined text-6xl text-on-surface opacity-20">qr_code_2</span>
+                      </div>
+                      <div class="absolute inset-0 rounded-2xl border-4 border-dashed border-primary-container/20"></div>
+                    </div>
+                  </div>
+                  <p class="mt-6 max-w-xs text-center text-sm leading-relaxed text-on-surface-variant lg:mt-8">
+                    Customers scan this QR to access the survey linked to your stall and claim their reward.
+                  </p>
+                </div>
+                <div class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <button class="sm:col-span-2 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-primary-container py-4 font-bold text-white shadow-lg shadow-primary/10 transition-transform hover:scale-[1.02]" id="download-qr-button" type="button">
+                    <span class="material-symbols-outlined" data-icon="download">download</span>
+                    Download QR
+                  </button>
+                  <button class="flex items-center justify-center gap-2 rounded-xl border border-outline-variant/30 bg-white/50 py-3 text-sm font-bold text-on-surface transition-colors hover:bg-white" id="print-qr-button" type="button">
+                    <span class="material-symbols-outlined text-[18px]" data-icon="print">print</span>
+                    Print Poster
+                  </button>
+                  <button class="flex items-center justify-center gap-2 rounded-xl border border-outline-variant/30 bg-white/50 py-3 text-sm font-bold text-on-surface transition-colors hover:bg-white" id="copy-link-button" type="button">
+                    <span class="material-symbols-outlined text-[18px]" data-icon="content_copy">content_copy</span>
+                    Copy Link
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <div class="space-y-8 xl:col-span-7">
+              <div class="grain-overlay rounded-2xl bg-surface-container p-6 lg:p-8">
+                <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h3 class="mb-1 font-headline text-2xl font-bold text-primary">Weekly Participation</h3>
+                    <p class="text-xs font-bold uppercase tracking-widest text-outline">Analytics Dashboard</p>
+                  </div>
+                  <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center gap-1.5">
+                      <div class="h-2.5 w-2.5 rounded-full bg-primary"></div>
+                      <span class="text-[10px] font-bold uppercase opacity-70">Completions</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <div class="h-2.5 w-2.5 rounded-full bg-secondary"></div>
+                      <span class="text-[10px] font-bold uppercase opacity-70">Chai Claims</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex h-44 items-end justify-between gap-2 px-1 sm:h-48 sm:gap-4 sm:px-2">
+                  <div class="group flex flex-1 flex-col items-center gap-1">
+                    <div class="flex h-36 w-full flex-col justify-end gap-0.5 sm:h-40">
+                      <div class="w-full rounded-t-sm bg-secondary/40" style="height: 30%"></div>
+                      <div class="w-full rounded-t-sm bg-primary" style="height: 50%"></div>
+                    </div>
+                    <span class="mt-2 text-[10px] text-outline">Mon</span>
+                  </div>
+                  <div class="group flex flex-1 flex-col items-center gap-1">
+                    <div class="flex h-36 w-full flex-col justify-end gap-0.5 sm:h-40">
+                      <div class="w-full rounded-t-sm bg-secondary/40" style="height: 40%"></div>
+                      <div class="w-full rounded-t-sm bg-primary" style="height: 65%"></div>
+                    </div>
+                    <span class="mt-2 text-[10px] text-outline">Tue</span>
+                  </div>
+                  <div class="group flex flex-1 flex-col items-center gap-1">
+                    <div class="flex h-36 w-full flex-col justify-end gap-0.5 sm:h-40">
+                      <div class="w-full rounded-t-sm bg-secondary/40" style="height: 25%"></div>
+                      <div class="w-full rounded-t-sm bg-primary" style="height: 45%"></div>
+                    </div>
+                    <span class="mt-2 text-[10px] text-outline">Wed</span>
+                  </div>
+                  <div class="group flex flex-1 flex-col items-center gap-1">
+                    <div class="flex h-36 w-full flex-col justify-end gap-0.5 sm:h-40">
+                      <div class="w-full rounded-t-sm bg-secondary/40" style="height: 55%"></div>
+                      <div class="w-full rounded-t-sm bg-primary" style="height: 80%"></div>
+                    </div>
+                    <span class="mt-2 text-[10px] text-outline">Thu</span>
+                  </div>
+                  <div class="group flex flex-1 flex-col items-center gap-1">
+                    <div class="flex h-36 w-full flex-col justify-end gap-0.5 sm:h-40">
+                      <div class="w-full rounded-t-sm bg-secondary/40" style="height: 45%"></div>
+                      <div class="w-full rounded-t-sm bg-primary" style="height: 70%"></div>
+                    </div>
+                    <span class="mt-2 text-[10px] text-outline">Fri</span>
+                  </div>
+                  <div class="group flex flex-1 flex-col items-center gap-1">
+                    <div class="flex h-36 w-full flex-col justify-end gap-0.5 sm:h-40">
+                      <div class="w-full rounded-t-sm bg-secondary/40" style="height: 20%"></div>
+                      <div class="w-full rounded-t-sm bg-primary" style="height: 35%"></div>
+                    </div>
+                    <span class="mt-2 text-[10px] text-outline">Sat</span>
+                  </div>
+                  <div class="group flex flex-1 flex-col items-center gap-1">
+                    <div class="flex h-36 w-full flex-col justify-end gap-0.5 sm:h-40">
+                      <div class="w-full rounded-t-sm bg-secondary/40" style="height: 70%"></div>
+                      <div class="w-full rounded-t-sm bg-primary" style="height: 95%"></div>
+                    </div>
+                    <span class="mt-2 text-[10px] font-bold text-primary">Sun</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="overflow-hidden rounded-2xl bg-surface-container-low">
+                <div class="flex flex-col gap-2 border-b border-outline-variant/10 px-5 py-5 sm:flex-row sm:items-center sm:justify-between lg:px-8 lg:py-6">
+                  <h3 class="font-headline text-xl font-bold text-primary">Recent Participation</h3>
+                  <span class="text-xs font-bold uppercase tracking-widest text-secondary">Latest responses</span>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="min-w-[640px] w-full text-left">
+                    <thead class="bg-surface-container-high/50">
+                      <tr>
+                        <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-outline sm:px-8">Customer ID</th>
+                        <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-outline sm:px-8">Survey Name</th>
+                        <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-outline sm:px-8">Status</th>
+                        <th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-outline sm:px-8">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/10" id="recent-responses-body">
+                      <tr>
+                        <td class="px-4 py-6 text-sm text-on-surface-variant sm:px-8" colspan="4">Loading responses...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
+            <div class="flex items-center gap-4 rounded-2xl border-b-2 border-primary/20 bg-surface-container-low p-5 lg:p-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-outline">Best Time</p>
+                <p class="font-headline text-lg font-bold text-primary" id="shop-best-time">Loading...</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 rounded-2xl border-b-2 border-secondary/20 bg-surface-container-low p-5 lg:p-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary/10 text-secondary">
+                <span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-outline">Most Active Day</p>
+                <p class="font-headline text-lg font-bold text-primary" id="shop-best-day">Loading...</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 rounded-2xl border-b-2 border-tertiary/20 bg-surface-container-low p-5 lg:p-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-full bg-tertiary/10 text-tertiary">
+                <span class="material-symbols-outlined" data-icon="loyalty">loyalty</span>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-outline">Loyalty Status</p>
+                <p class="font-headline text-lg font-bold text-primary" id="shop-loyalty-status">Loading...</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="grid grid-cols-1 gap-8 pb-12 xl:grid-cols-2">
+            <div class="rounded-2xl bg-surface-container-low p-6 lg:p-8">
+              <div class="mb-6 flex items-center justify-between gap-4">
+                <h3 class="font-headline text-2xl font-bold text-primary">Your Stalls</h3>
+                <span class="text-xs font-bold uppercase tracking-widest text-outline">Tap to switch</span>
+              </div>
+              <div class="space-y-3" id="owned-stalls-list"></div>
+              <p class="mt-4 text-sm text-on-surface-variant" hidden id="no-owned-stalls">No stalls registered yet. Add your first one to start collecting responses.</p>
+            </div>
+
+            <div class="rounded-2xl bg-surface-container-low p-6 lg:p-8">
+              <h3 class="font-headline text-2xl font-bold text-primary">Add a Stall</h3>
+              <p class="mt-2 text-sm text-on-surface-variant">Create a new partner stall, generate its QR, and start collecting local civic prompts.</p>
+              <form class="mt-6 space-y-4" id="add-stall-form">
+                <div>
+                  <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="stall-name">Stall Name</label>
+                  <input class="w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="stall-name" name="stall-name" placeholder="Central Park Chai" type="text"/>
+                </div>
+                <div>
+                  <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="stall-id">Unique Stall ID</label>
+                  <input class="w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="stall-id" name="stall-id" placeholder="central_park_01" type="text"/>
+                </div>
+                <div>
+                  <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-outline" for="stall-location">Location</label>
+                  <input class="w-full rounded-xl border border-outline-variant/20 bg-white px-4 py-3 text-on-surface" id="stall-location" name="stall-location" placeholder="Gate 4, Central Park" type="text"/>
+                </div>
+                <button class="w-full rounded-xl bg-gradient-to-r from-primary to-primary-container py-4 font-bold text-white" type="submit">Save Stall</button>
+                <p class="hidden" id="add-stall-status"></p>
+              </form>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="pointer-events-none fixed right-0 top-0 -z-10 h-96 w-96 translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[120px]"></div>
+  <div class="pointer-events-none fixed bottom-0 left-0 -z-10 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full bg-secondary/5 blur-[100px]"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script type="module" src="site.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="shop.js"></script>
+</body>
+</html>

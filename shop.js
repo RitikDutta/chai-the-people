@@ -32,6 +32,10 @@ const shopRepeatVisitors = document.getElementById("shop-repeat-visitors");
 const shopBestTime = document.getElementById("shop-best-time");
 const shopBestDay = document.getElementById("shop-best-day");
 const shopLoyaltyStatus = document.getElementById("shop-loyalty-status");
+const shopSidebar = document.getElementById("shop-sidebar");
+const shopNavBackdrop = document.getElementById("shop-nav-backdrop");
+const shopNavOpenButtons = document.querySelectorAll("[data-shop-nav-open]");
+const shopNavCloseButtons = document.querySelectorAll("[data-shop-nav-close]");
 
 let ownedStalls = [];
 let activeStall = null;
@@ -61,6 +65,28 @@ function buildSurveyLink(stallId) {
 
 function createShortUserLabel(userId) {
   return `User #${String(userId || "NA").slice(0, 6).toUpperCase()}`;
+}
+
+function isDesktopLayout() {
+  return window.matchMedia("(min-width: 1024px)").matches;
+}
+
+function setShopNavOpen(isOpen) {
+  if (!shopSidebar) {
+    return;
+  }
+
+  const desktop = isDesktopLayout();
+  const open = desktop ? true : isOpen;
+
+  shopSidebar.classList.toggle("-translate-x-full", !open);
+  shopSidebar.classList.toggle("translate-x-0", open);
+
+  if (shopNavBackdrop) {
+    shopNavBackdrop.classList.toggle("hidden", !isOpen || desktop);
+  }
+
+  document.body.classList.toggle("overflow-hidden", isOpen && !desktop);
 }
 
 function renderQrCode() {
@@ -275,7 +301,7 @@ async function renderRecentResponses(stallId) {
 
   if (rows.length === 0) {
     recentResponsesBody.innerHTML =
-      "<tr><td colspan=\"4\" class=\"px-8 py-6 text-sm text-on-surface-variant\">No recent responses for this stall yet.</td></tr>";
+      "<tr><td colspan=\"4\" class=\"px-4 py-6 text-sm text-on-surface-variant sm:px-8\">No recent responses for this stall yet.</td></tr>";
     return;
   }
 
@@ -287,12 +313,12 @@ async function renderRecentResponses(stallId) {
     const row = document.createElement("tr");
     row.className = "transition-colors hover:bg-surface-container-high";
     row.innerHTML = `
-      <td class="px-8 py-4 text-sm font-bold text-on-surface">${createShortUserLabel(response.userId)}</td>
-      <td class="px-8 py-4 text-sm text-on-surface-variant italic">${questionText}</td>
-      <td class="px-8 py-4">
+      <td class="px-4 py-4 text-sm font-bold text-on-surface sm:px-8">${createShortUserLabel(response.userId)}</td>
+      <td class="px-4 py-4 text-sm italic text-on-surface-variant sm:px-8">${questionText}</td>
+      <td class="px-4 py-4 sm:px-8">
         <span class="rounded-full bg-tertiary-fixed px-2.5 py-1 text-[10px] font-bold uppercase text-on-tertiary-fixed">Completed</span>
       </td>
-      <td class="px-8 py-4 text-xs text-outline">${timeLabel}</td>
+      <td class="px-4 py-4 text-xs text-outline sm:px-8">${timeLabel}</td>
     `;
     recentResponsesBody.appendChild(row);
   });
@@ -410,6 +436,39 @@ async function handleAddStallSubmit(event) {
 }
 
 function wireActions() {
+  if (shopSidebar && !shopSidebar.dataset.bound) {
+    shopNavOpenButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setShopNavOpen(true);
+      });
+    });
+
+    shopNavCloseButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setShopNavOpen(false);
+      });
+    });
+
+    if (shopNavBackdrop) {
+      shopNavBackdrop.addEventListener("click", () => {
+        setShopNavOpen(false);
+      });
+    }
+
+    window.addEventListener("resize", () => {
+      setShopNavOpen(false);
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setShopNavOpen(false);
+      }
+    });
+
+    shopSidebar.dataset.bound = "true";
+    setShopNavOpen(false);
+  }
+
   if (activeStallSelect && !activeStallSelect.dataset.bound) {
     activeStallSelect.addEventListener("change", (event) => {
       setActiveStall(event.target.value);
@@ -425,9 +484,11 @@ function wireActions() {
 
       try {
         await navigator.clipboard.writeText(activeSurveyLink);
-        copyLinkButton.textContent = "Copied";
+        copyLinkButton.innerHTML =
+          '<span class="material-symbols-outlined text-[18px]">check</span>Copied';
         window.setTimeout(() => {
-          copyLinkButton.textContent = "Copy Link";
+          copyLinkButton.innerHTML =
+            '<span class="material-symbols-outlined text-[18px]" data-icon="content_copy">content_copy</span>Copy Link';
         }, 1500);
       } catch (error) {
         console.error("Failed to copy link:", error);
