@@ -25,6 +25,23 @@ const emptyState = document.getElementById("dashboard-empty-state");
 const totalResponsesValue = document.getElementById("user-total-responses");
 const totalRewardsValue = document.getElementById("user-reward-count");
 
+function renderFeaturedMeta(optionCount, scopeLabel, iconName = "quiz") {
+  if (!featuredQuestionMeta) {
+    return;
+  }
+
+  featuredQuestionMeta.innerHTML = `
+    <span class="flex items-center gap-1.5">
+      <span class="material-symbols-outlined text-base text-primary">quiz</span>
+      ${optionCount}
+    </span>
+    <span class="flex items-center gap-1.5">
+      <span class="material-symbols-outlined text-base text-primary">${iconName}</span>
+      ${scopeLabel}
+    </span>
+  `;
+}
+
 function getRequestedStallId() {
   const params = new URLSearchParams(window.location.search);
   const fromQuery = normalizeStallId(params.get("stall"));
@@ -107,11 +124,10 @@ function renderFeaturedQuestion(question, stallId) {
       featuredQuestionDescription.textContent =
         "You have answered everything currently available in this context.";
     }
-    if (featuredQuestionMeta) {
-      featuredQuestionMeta.textContent = "Check back later for the next civic prompt.";
-    }
+    renderFeaturedMeta("Stay tuned", "Check back soon", "schedule");
     if (featuredQuestionPreview) {
-      featuredQuestionPreview.innerHTML = "<p class=\"text-sm text-on-surface-variant\">You are fully up to date.</p>";
+      featuredQuestionPreview.innerHTML =
+        "<p class=\"col-span-full text-sm text-on-surface-variant\">You are fully up to date.</p>";
     }
     if (featuredStartLink) {
       featuredStartLink.classList.add("pointer-events-none", "opacity-50");
@@ -129,10 +145,11 @@ function renderFeaturedQuestion(question, stallId) {
         ? "This prompt is tailored to the stall you are currently visiting."
         : "This prompt is open to everyone across the Chai network.";
   }
-  if (featuredQuestionMeta) {
-    const optionCount = Array.isArray(question.options) ? question.options.length : 0;
-    featuredQuestionMeta.textContent = `${optionCount} options • ${question.scope === "specific" ? "Stall specific" : "Global"}`;
-  }
+  renderFeaturedMeta(
+    `${Array.isArray(question.options) ? question.options.length : 0} options`,
+    question.scope === "specific" ? "Stall specific" : "Global",
+    question.scope === "specific" ? "location_on" : "public",
+  );
   if (featuredQuestionPreview) {
     const previewOptions = (question.options || [])
       .slice(0, 3)
@@ -156,9 +173,13 @@ function renderQuestionList(questions, stallId) {
 
   availableQuestionsList.innerHTML = "";
 
-  if (questions.length <= 1) {
+  if (questions.length === 0) {
+    return;
+  }
+
+  if (questions.length === 1) {
     availableQuestionsList.innerHTML =
-      "<div class=\"rounded-xl bg-surface-container-high p-4 text-sm text-on-surface-variant\">No additional prompts are waiting after the featured one.</div>";
+      "<div class=\"rounded-2xl border border-outline-variant/10 bg-surface-container-low p-4 text-sm text-on-surface-variant lg:p-5\">No additional prompts are waiting after the featured one.</div>";
     return;
   }
 
@@ -166,10 +187,10 @@ function renderQuestionList(questions, stallId) {
     const link = document.createElement("a");
     link.href = buildSurveyUrl(question.id, stallId);
     link.className =
-      "flex items-center justify-between rounded-lg bg-surface-container-high p-4 transition-colors hover:bg-surface-container";
+      "group flex items-center justify-between rounded-2xl border border-outline-variant/10 bg-surface-container-low p-4 transition-colors hover:bg-surface-container-high lg:p-5";
     link.innerHTML = `
       <div class="flex items-center gap-4">
-        <div class="rounded-lg bg-primary/10 p-2 text-primary">
+        <div class="rounded-xl bg-primary/10 p-2.5 text-primary transition-transform group-hover:scale-110">
           <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
         </div>
         <div>
@@ -179,7 +200,7 @@ function renderQuestionList(questions, stallId) {
           </span>
         </div>
       </div>
-      <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+      <span class="material-symbols-outlined text-on-surface-variant opacity-70 transition-all group-hover:translate-x-1 group-hover:opacity-100">chevron_right</span>
     `;
     availableQuestionsList.appendChild(link);
   });
@@ -205,7 +226,7 @@ async function loadDashboard(user) {
     totalRewardsValue.textContent = String(responseCount);
   }
   if (emptyState) {
-    emptyState.hidden = pendingQuestions.length > 0;
+    emptyState.hidden = pendingQuestions.length !== 0;
   }
 }
 
